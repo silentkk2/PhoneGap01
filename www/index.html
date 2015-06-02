@@ -27,9 +27,38 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" href="css/jquery.mobile-1.0.1.css" />
         <title>Hello World</title>
+    </head>
+    <body>
+        <div class="app">
+             
+            <div data-role="page" id="index">
+                <div data-role="header" data-theme="b"><h1>Map Header</h1></div>
+                <div data-role="content" style="padding:0;">
+                    <div id="map" style="width:100%;height:100%;"></div>
+                </div>
+                <div data-role="footer" data-theme="b"><h4>Map Footer</h4></div>
+            </div>
+            <h1>Tito Was Here</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+                <p id="info"> </p>
+            </div>
+            <div>
+                <p id="compass"></p>
+            </div>
+           
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript">
- 
+            app.initialize();
+            
             var map;
             var marker;
             var infowindow;
@@ -128,34 +157,6 @@
                   infowindow.open(map,marker);
                 }); 
             }
-        </script>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Tito Was Here</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-                <p id="info"> </p>
-            </div>
-            <div>
-                <p id="compass"></p>
-            </div>
-            
-            <div data-role="page" id="index">
-                <div data-role="header" data-theme="b"><h1>Map Header</h1></div>
-                <div data-role="content" style="padding:0;">
-                    <div id="map" style="width:100%;height:100%;"></div>
-                </div>
-                <div data-role="footer" data-theme="b"><h4>Map Footer</h4></div>
-            </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
-        <script type="text/javascript">
-            app.initialize();
         </script>
     </body>
 </html>
