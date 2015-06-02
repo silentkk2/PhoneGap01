@@ -38,6 +38,7 @@
             </div>
             <div data-role="footer" data-theme="b"><h4>Map Footer</h4></div>
         </div>
+        <button type="button" onclick="rotateMap()">Rotate Map</button>
         <div class="app">
             <h1>Tito Was Here</h1>
             <div id="deviceready" class="blink">
@@ -54,8 +55,13 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+        <script type="text/javascript" src="js/jquery-transform.js"></script>
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript">
+            function rotateMap(){
+                  $('#map').animate({rotate: '+=10deg'}, 0); 
+                }
+        
             app.initialize();
             
             var map;
