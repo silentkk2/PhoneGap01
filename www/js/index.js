@@ -50,5 +50,21 @@ var app = {
         $("#info").append(device.model + '<br>');
         $("#info").append(device.platform + ' ' + device.version + '<br>');
 
+
+        function onSuccessCompass(heading){
+            $("#compass").html('Hading: ' + Math.round(heading.magneticHeading) + ' Degrees');
+        };
+
+        function onErrorCompass(compassError){
+            alert('Compass error: ' + compassError.code);
+        };
+
+        var options = {frequency:50};
+
+        var watcher01 = navigator.compass.watchHeading(onSuccessCompass, onErrorCompass, options);
+
     }
+
+
+
 };
