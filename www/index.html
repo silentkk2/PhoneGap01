@@ -56,6 +56,9 @@ under the License.
 			<div>
 				<p id="compass"></p>
 				<a href="#mappage" data-transition="slide"> Map </a>
+                <a href="/secondpage.html" data-transition="slide"> Second 01 </a>
+                <a href="secondpage.html" data-transition="slide"> Second 02</a>
+
 			</div>
 		</div>
 		<div data-role="page" id="mappage">
@@ -94,10 +97,10 @@ under the License.
 			//PhoneGap is ready function
 			function onDeviceReady() {
 				$(window).unbind();
-				// $(window).bind('pageshow resize orientationchange', function(e) {
-					// max_height();
-				// });
-				//max_height();
+				$(window).bind('pageshow resize orientationchange', function(e) {
+				   max_height();
+				});
+				max_height();
 				google.load("maps", "3.8", {
 					"callback" : map,
 					other_params : "sensor=true&language=en"
