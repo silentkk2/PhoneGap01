@@ -16,6 +16,46 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var mapOrientation = 0;
+var lightstate = false;
+
+function rotateMapRight(){
+        mapOrientation += 10;
+      $('#map').animate({rotate: mapOrientation}, 0); 
+      window.plugins.toast.show('Current Map Orientation: ' + mapOrientation ,'short','center',false);
+}
+
+function rotateMapLeft(){
+        mapOrientation -= 10;
+      $('#map').animate({rotate: mapOrientation}, 0);
+      window.plugins.toast.show('Current Map Orientation: ' + mapOrientation ,'short','center',false); 
+}
+
+function flashlightToggle()
+{
+        //window.plugins.flashlight.switchOn(success,fail,false);
+        window.plugins.flashlight.toggle(success,fail,false);
+        //window.plugins.toast.show('flashlight toggled','short','center',false);   
+    if(lightstate)
+    {
+        window.plugins.toast.show('light off','short','center',false);
+        lightstate = false;
+    }else
+    {
+        window.plugins.toast.show('light on','short','center',false);
+        lightstate = true;
+    }
+}
+function success()
+{
+    console.log("Success");
+}
+function fail()
+{
+    console.log("Fail");
+}
+
+ 
 var app = {
     // Application Constructor
     initialize: function() {
@@ -63,7 +103,7 @@ var app = {
 
         var watcher01 = navigator.compass.watchHeading(onSuccessCompass, onErrorCompass, options);
 
-        
+
 
     }
 

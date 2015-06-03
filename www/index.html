@@ -41,67 +41,32 @@
         <div data-role="page" id="index" class="app">
             <div data-role="header"><h1>Tito Was Here</h1> </div>
             <button type="button" onclick="flashlightToggle()">FlashLight</button>
-            <div data-role="content" id="deviceready" class="blink">
+            <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
                 <p id="info"> </p>
             </div>
-            <div data-role="content" >
+            <div>
                 <p id="compass"></p>
                 <a href="#mappage" data-transition="slide"> Map </a>
             </div>
         </div>
         <div data-role="page" id="mappage">
-            <div data-role="header" data-theme="b">
+            <div data-role="header" data-theme="b" id="mapHeader">
                 <a href="#index" data-transition="slide" data-direction="reverse" data-icon="home"> Home </a>
                 <h1>Map Header</h1>
             </div>
             <button type="button" onclick="rotateMapRight()">Rotate Right</button>
             <button type="button" onclick="rotateMapLeft()">Rotate Left</button>
-            <div data-role="content" style="padding:0;">
-                <div id="map" style="width:700px;height:700px;"></div>
+            <div data-role="content" style="padding:0;" id="mapContent">
+                <div id="map" style="width:100%;height:100%;"></div>
             </div>
-            <div data-role="footer" data-theme="b" ><h4>Map Footer</h4></div>
+            <div data-role="footer" data-theme="b" id ="mapFooter"><h4>Map Footer</h4></div>
         </div>
       
         <script type="text/javascript">
-            var mapOrientation = 0;
 
-            function rotateMapRight(){
-                    mapOrientation += 10;
-                  $('#map').animate({rotate: mapOrientation}, 0); 
-                  window.plugins.toast.show('Current Map Orientation: ' + mapOrientation ,'short','center',false);
-            }
-
-            function rotateMapLeft(){
-                    mapOrientation -= 10;
-                  $('#map').animate({rotate: mapOrientation}, 0); 
-            }
             
-            function flashlightToggle()
-            {
-                    //window.plugins.flashlight.switchOn(success,fail,false);
-                    window.plugins.flashlight.toggle(success,fail,false);
-                    //window.plugins.toast.show('flashlight toggled','short','center',false);   
-                if(lightstate)
-                {
-                    window.plugins.toast.show('light off','short','center',false);
-                    lightstate = false;
-                }else
-                {
-                    window.plugins.toast.show('light on','short','center',false);
-                    lightstate = true;
-                }
-            }
-            function success()
-            {
-                console.log("Success");
-            }
-            function fail()
-            {
-                console.log("Fail");
-            }
-            var lightstate = false;
 
             app.initialize();
             
@@ -127,10 +92,10 @@
             }
              
             function max_height(){
-                var h = $('div[data-role="header"]').outerHeight(true);
-                var f = $('div[data-role="footer"]').outerHeight(true);
+                var h = $('#mapHeader').outerHeight(true);
+                var f = $('#mapFooter').outerHeight(true);
                 var w = $(window).height();
-                var c = $('div[data-role="content"]');
+                var c = $('#mapContent');
                 var c_h = c.height();
                 var c_oh = c.outerHeight(true);
                 var c_new = w - h - f - c_oh + c_h;
