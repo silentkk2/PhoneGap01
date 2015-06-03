@@ -38,18 +38,10 @@
         <title>Hello World</title>
     </head>
     <body>
-        <div data-role="page" id="index">
-            <div data-role="header" data-theme="b"><h1>Map Header</h1></div>
-            <button type="button" onclick="rotateMap()">Rotate Map</button>
-            <div data-role="content" style="padding:0;">
-                <div id="map" style="width:700px;height:700px;"></div>
-            </div>
-
-            <div data-role="footer" data-theme="b" onclick="rotateMap()" ><h4>Map Footer</h4></div>
-        </div>
         
-        <div class="app">
-            <h1>Tito Was Here</h1>
+        
+        <div data-role="page" id="index" class="app">
+            <div data-role="header"><h1>Tito Was Here</h1> </div>
             <button type="button" onclick="flashlightToggle()">FlashLight</button>
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
@@ -59,7 +51,24 @@
             <div>
                 <p id="compass"></p>
             </div>
+
+            <a href="#mappage" data-transition="slide"> Map </a>
            
+        </div>
+
+        <div data-role="page" id="mappage">
+            <div data-role="header" data-theme="b">
+                <a href="#index" data-transition="reverse" data-icon="home"> Home </a>
+                <h1>Map Header</h1>
+            </div>
+            <button type="button" onclick="rotateMap()">Rotate Map</button>
+            <div data-role="content" style="padding:0;">
+                <div id="map" style="width:700px;height:700px;"></div>
+            </div>
+            
+            
+
+            <div data-role="footer" data-theme="b" onclick="rotateMap()" ><h4>Map Footer</h4></div>
         </div>
       
         <script type="text/javascript">
