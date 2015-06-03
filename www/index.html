@@ -68,7 +68,15 @@
                 }
             
             function flashlightToggle(){
-                window.plugins.flashlight.toggle();
+                window.plugins.flashlight.toggle(successMessage, error, false);
+            }
+
+            function successMessage(s){
+                console.log("success");
+            }
+
+            function errorMessage (e){
+                console.log("error");
             }
 
             app.initialize();
