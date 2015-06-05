@@ -146,7 +146,7 @@ under the License.
                 }
                 
                 function createDB(tx){
-                    
+                    alert("trying to create");
                     tx.executeSql('DROP TABLE EF EXISTS DEMO');
                     tx.executeSql('CREATE TABE IF NOT EXISTS TEST1 (id unique, name, birthday, email, gender)');
                     
@@ -161,6 +161,7 @@ under the License.
                 }
                     
                 function insertDB(tx){
+                    
                     var name = $('[name="fullname"]').val();
                     var bday = $('[name="bday"]').val();
                     var email = $('[name="email"]').val();
