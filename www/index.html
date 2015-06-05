@@ -42,7 +42,7 @@ under the License.
                 <h1>Tito Was Here</h1>
             </div>
             <div data-role="content">
-                <form method="POST" onsubmit="return submitData()" data-ajax="false">
+                <form method="POST" onsubmit="return submitToDatabase()" data-ajax="false">
                     <div class="ui-field-contain">
                         <label for="fullname">Full name:</label>
                             <input type="text" name="fullname" id="fullname" data-clear-btn="true">       
@@ -135,9 +135,81 @@ under the License.
         </div>-->
 
         <script type="text/javascript">
-                 app.initialize();
+                app.initialize();
+                var database;
                  
-                 function submitData(){
+                document.addEventListener("deviceready", onDeviceReady, false);
+
+                function onDeviceReady() {
+                    database = window.openDatabase("Database", "1.0", "Test DB", 2*1024*1024);
+                    database.transaction(createDB, errorDB, successDB);
+                }
+                
+                function createDB(tx){
+                    
+                    tx.executeSql('DROP TABLE EF EXISTS DEMO');
+                    tx.executeSql('CREATE TABE IF NOT EXISTS TEST1 (id unique, name, birthday, email, gender)');
+                    
+                }
+                
+                function errorDB(err){
+                    alert("Error Processing SQL: " + err);
+                }
+                
+                function successDB(){
+                    alert("yey");
+                }
+                    
+                function insertDB(tx){
+                    var name = $('[name="fullname"]').val();
+                    var bday = $('[name="bday"]').val();
+                    var email = $('[name="email"]').val();
+                    var gender = $("#gender :radio:checked").val();
+                    
+                    var sql = 'INSERT INTO TEST1 (name, birthday, email, gender) VALUES (?,?,?,?)';
+                    
+                    tx.executeSql(sql,[name, bday, email, gender], queryDB, errorDB);
+                    
+                    
+                }
+                
+                function queryDB(tx){
+                    alert("about to query");
+                    
+                    tx.executeSql('SELECT * FROM TEST1', [], renderList, errorDB);
+                }
+                
+                function renderList(tx, results){
+                    
+                    var htmlString = '';
+                    
+                    var len = results.rows.length;
+                    
+                    for (var i = 0; i < len; i++){
+                        htmlString += "Full Name: " + results.rows.item(i).name + "<br>" +
+                            "Gender: " + results.rows.item(i).gender + "<br>" + 
+                            "Date of Birth: " + results.rows.item(i).birthday + "<br>" + 
+                            "Email: " + results.rows.item(i).email + '<hr/>';
+                    }
+                   
+                    
+                    $.mobile.changePage("#page2", {reverse: false, transition: "slide"});
+                    
+                    $('#output').html(htmlString);
+                }
+                
+                
+                
+                function submitToDatabase(){
+
+                    database.transaction(insertDB, errorDB);
+                  
+                    return false;
+                    
+                }
+                
+                 
+                function submitToLocal(){
                     var name = $('[name="fullname"]').val();
                     var bday = $('[name="bday"]').val();
                     var email = $('[name="email"]').val();
