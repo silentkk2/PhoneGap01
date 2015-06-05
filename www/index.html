@@ -61,6 +61,9 @@ under the License.
                     <br/>
                     <input type="submit" data-inline="true" value="Submit">
                 </form>
+            <button type="button" onclick="getXml()">
+                Get XML
+            </button>
             </div>
         </div>
         
@@ -121,6 +124,23 @@ under the License.
         </div>-->
 
         <script type="text/javascript">
+                
+                function getXml(){
+        			$.ajax({
+        				type: 'GET',
+        				url: "http://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination",
+        				data: {
+        				  lat1: "34.055223",
+        				  lon1: "-118.413264",
+        				  resultFormat: "xml"
+        				},
+        				dataType: "xml",
+        				success: function (xml){
+        				  var magnatic = $(xml).find('declination').first().text();
+        				  alert(magnatic);
+        				}   
+        			  });
+        		}
                 
                 var database;
                  
