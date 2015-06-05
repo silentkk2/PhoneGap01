@@ -153,8 +153,8 @@ under the License.
                     
                 }
                 
-                function errorCB(err){
-                    alert("Error Processing SQL: " + err);
+                function errorCB(error){
+                    alert('Error: ' + error.message + ' code: ' + error.code);
                 }
                 
                 function successCB(){
