@@ -36,38 +36,63 @@ under the License.
         <title>Hello World</title>
     </head>
     <body>
-
-        <div data-role="page" id="index" >
-            <div >
+        
+        <div data-role="page" id="index" data-theme="b">
+            <div data-role="header">
                 <h1>Tito Was Here</h1>
             </div>
-            <div class="ui-field-contain">
-                <label for="fullname">Full name:</label>
-                <input type="text" name="fullname" id="fullname" data-clear-btn="true">       
-                <label for="bday">Date of Birth:</label>
-                <input type="date" name="bday" id="bday">
-                <label for="email">E-mail:</label>
-                <input type="email" name="email" id="email" placeholder="Your email..">
-            </div>
-            <fieldset data-role="controlgroup" data-type="horizontal">
-                <legend>Choose your gender:</legend>
-                <label for="male">Male</label>
-                <input type="radio" name="gender" id="male" value="male">
-                <label for="female">Female</label>
-                <input type="radio" name="gender" id="female" value="female">	
-            </fieldset>
+            <div data-role="content">
+                <form method="POST" onsubmit="return submitData()" data-ajax="false">
+                    <div class="ui-field-contain">
+                        <label for="fullname">Full name:</label>
+                            <input type="text" name="fullname" id="fullname" data-clear-btn="true">       
+                        <label for="bday">Date of Birth:</label>
+                            <input type="date" name="bday" id="bday">
+                        <label for="email">E-mail:</label>
+                            <input type="email" name="email" id="email" placeholder="Your email..">
+                    </div>
+                    <fieldset data-role="controlgroup" data-type="horizontal" id="gender">
+                        <legend>Choose your gender:</legend>
+                        <label for="male">Male</label>
+                            <input type="radio" name="gender" id="male" value="male">
+                        <label for="female">Female</label>
+                            <input type="radio" name="gender" id="female" value="female">	
+                    </fieldset>
 
-            <fieldset data-role="controlgroup" data-type="horizontal">
-                <legend>Choose as many favorite colors as you'd like:</legend>
-                <label for="red">Red</label>
-                <input type="checkbox" name="favcolor" id="red" value="red">
-                <label for="green">Green</label>
-                <input type="checkbox" name="favcolor" id="green" value="green">
-                <label for="blue">Blue</label>
-                <input type="checkbox" name="favcolor" id="blue" value="blue">	
-            </fieldset>
-            <input type="submit" data-inline="true" value="Submit">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Choose as many favorite colors as you'd like:</legend>
+                        <label for="red">Red</label>
+                            <input type="checkbox" name="favcolor" id="red" value="red">
+                        <label for="green">Green</label>
+                            <input type="checkbox" name="favcolor" id="green" value="green">
+                        <label for="blue">Blue</label>
+                            <input type="checkbox" name="favcolor" id="blue" value="blue">	
+                    </fieldset>
+
+                    <label for="switch">Flip Toggle Switch:</label>
+                        <input type="checkbox" data-role="flipswitch" name="switch" id="switch">
+                    <br/>
+                    <input type="submit" data-inline="true" value="Submit">
+                </form>
+            </div>
         </div>
+        
+        
+        <div data-role="page" id="page2" data-theme="b">
+            <div data-role="header"  id="header">
+                <a href="#index" data-transition="slide" data-direction="reverse" data-icon="home"> Home </a>
+                <h1> Header</h1>
+            </div>
+            <div data-role="content"  id="content">
+                <div id="output">
+                    
+                </div>
+            </div>
+            <div data-role="footer" id ="footer">
+                <h4> Footer</h4>
+            </div>
+        </div>
+        
 <!--        <div data-role="page" id="index" class="app">
             <div >
                 <h1>Tito Was Here</h1>
@@ -110,7 +135,32 @@ under the License.
         </div>-->
 
         <script type="text/javascript">
-            app.initialize();
+                 app.initialize();
+                 
+                 function submitData(){
+                    var name = $('[name="fullname"]').val();
+                    var bday = $('[name="bday"]').val();
+                    var email = $('[name="email"]').val();
+                    var gender = $("#gender :radio:checked").val();
+                    
+                    window.localStorage.setItem("fullname", name);
+                    window.localStorage.setItem("birthday", bday);
+                    window.localStorage.setItem("email", email);
+                    window.localStorage.setItem("gender", gender);
+                    
+                    $.mobile.changePage("#page2", {reverse: false, transition: "slide"});
+                    
+                    $('#output').html("Full Name: " + window.localStorage.getItem("fullname") + "<br>" +
+                            "Gender: " + window.localStorage.getItem("gender") + "<br>" + 
+                            "Date of Birth: " + window.localStorage.getItem("birthday") + "<br>" + 
+                            "Email: " + window.localStorage.getItem("email"));
+                    
+                    return false;
+                 }
+                 
+        </script>
+        <script type="text/javascript">
+           
 
 //            var map;
 //            var marker;
