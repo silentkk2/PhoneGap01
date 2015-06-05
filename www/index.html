@@ -58,25 +58,11 @@ under the License.
                         <label for="female">Female</label>
                             <input type="radio" name="gender" id="female" value="female">	
                     </fieldset>
-
-                    <fieldset data-role="controlgroup" data-type="horizontal">
-                        <legend>Choose as many favorite colors as you'd like:</legend>
-                        <label for="red">Red</label>
-                            <input type="checkbox" name="favcolor" id="red" value="red">
-                        <label for="green">Green</label>
-                            <input type="checkbox" name="favcolor" id="green" value="green">
-                        <label for="blue">Blue</label>
-                            <input type="checkbox" name="favcolor" id="blue" value="blue">	
-                    </fieldset>
-
-                    <label for="switch">Flip Toggle Switch:</label>
-                        <input type="checkbox" data-role="flipswitch" name="switch" id="switch">
                     <br/>
                     <input type="submit" data-inline="true" value="Submit">
                 </form>
             </div>
         </div>
-        
         
         <div data-role="page" id="page2" data-theme="b">
             <div data-role="header"  id="header">
@@ -135,22 +121,18 @@ under the License.
         </div>-->
 
         <script type="text/javascript">
-                //app.initialize();
+                
                 var database;
                  
                 document.addEventListener("deviceready", onDeviceReady, false);
 
                 function onDeviceReady() {
-                    alert("Device Ready");
                     database = window.openDatabase("Database", "1.0", "Test DB", 2*1024*1024);
                     database.transaction(createDB, errorCB, successCB);
                 }
                 
                 function createDB(tx){
-                    alert("trying to create");
-                    tx.executeSql('DROP TABLE IF EXISTS DEMO');
                     tx.executeSql('CREATE TABLE IF NOT EXISTS TEST1 (id unique, name, birthday, email, gender)');
-                    
                 }
                 
                 function errorCB(error){
@@ -158,7 +140,7 @@ under the License.
                 }
                 
                 function successCB(){
-                    alert("yey");
+                    console.log("Database Successfully Created");
                 }
                     
                 function insertDB(tx){
@@ -171,13 +153,9 @@ under the License.
                     var sql = 'INSERT INTO TEST1 (name, birthday, email, gender) VALUES (?,?,?,?)';
                     
                     tx.executeSql(sql,[name, bday, email, gender], queryDB, errorCB);
-                    
-                    
                 }
                 
                 function queryDB(tx){
-                    alert("about to query");
-                    
                     tx.executeSql('SELECT * FROM TEST1', [], renderList, errorCB);
                 }
                 
@@ -193,7 +171,6 @@ under the License.
                             "Date of Birth: " + results.rows.item(i).birthday + "<br>" + 
                             "Email: " + results.rows.item(i).email + '<hr/>';
                     }
-                   
                     
                     $.mobile.changePage("#page2", {reverse: false, transition: "slide"});
                     
@@ -235,7 +212,7 @@ under the License.
         </script>
         <script type="text/javascript">
            
-
+//app.initialize();
 //            var map;
 //            var marker;
 //            var infowindow;
