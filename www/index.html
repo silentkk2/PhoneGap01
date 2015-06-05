@@ -149,7 +149,7 @@ under the License.
                 function createDB(tx){
                     alert("trying to create");
                     tx.executeSql('DROP TABLE EF EXISTS DEMO');
-                    tx.executeSql('CREATE TABE IF NOT EXISTS TEST1 (id unique, name, birthday, email, gender)');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS TEST1 (id unique, name, birthday, email, gender)');
                     
                 }
                 
