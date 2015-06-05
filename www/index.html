@@ -64,6 +64,8 @@ under the License.
             <button type="button" onclick="getXml()">
                 Get XML
             </button>
+            <br>
+            <a href="#googlePage" data-transition="slide"> Google </a>
             </div>
         </div>
         
@@ -81,6 +83,34 @@ under the License.
                 <h4> Footer</h4>
             </div>
         </div>
+        
+        <div data-role="page" id="googlePage">
+            <div data-role="header"  id="header">
+                <a href="#index" data-transition="slide" data-direction="reverse" data-icon="home"> Home </a>
+                <h1>Google Page</h1>
+            </div>
+            <div data-role="content"  id="content">
+				<form method="POST" onsubmit="return getMagnaticNorth()" data-ajax="false">
+					<label for="street">Street:</label>
+					<input type="text" name="street" id="street" data-clear-btn="true">  
+					<label for="city">City</label>
+					<input type="text" name="city" id="city" data-clear-btn="true">  
+					<label for="state">State:</label>
+					<input type="text" name="state" id="state" data-clear-btn="true">  
+					<label for="zip">Zip:</label>
+					<input type="text" name="zip" id="zip" data-clear-btn="true">  
+					<input type="submit" data-inline="true" value="Submit">
+				</form>
+				<hr/>
+                <div id="output">
+                </div>
+            </div>
+            <div data-role="footer" id ="footer">
+                <h4> Footer</h4>
+            </div>
+
+        </div>
+        
         
 <!--        <div data-role="page" id="index" class="app">
             <div >
@@ -124,6 +154,56 @@ under the License.
         </div>-->
 
         <script type="text/javascript">
+        
+            var geocoder = new google.maps.Geocoder();
+
+			function getLatLong(address) {
+				var geo = new google.maps.Geocoder;
+
+				geocoder.geocode({'address': address}, function (results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						alert("before");
+						var lat = results[0].geometry.location.lat();
+						var long = results[0].geometry.location.lng();
+						getMagXml(lat, long);
+					} else {
+						alert('Geocode was not successful for the following reason: ' + status);
+					}
+				});
+			}
+
+			function getMagXml(lat, long) {
+				$.ajax({
+					type: 'GET',
+					url: "http://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination",
+					data: {
+						lat1: lat,
+						lon1: long,
+						resultFormat: "xml"
+					},
+					dataType: "xml",
+					success: function (xml) {
+						var magnatic = $(xml).find('declination').first().text();
+						$('#output').html("Lat: " + lat + "<br>" +
+								"Long: " + long + "<br>" +
+								"Magnetic North: " + magnatic + "<br>");
+					}
+				});
+			}
+
+			function getMagnaticNorth() {
+
+				var street = $('[name="street"]').val();
+				var city = $('[name="city"]').val();
+				var state = $('[name="state"]').val();
+				var zip = $('[name="zip"]').val();
+
+				var address = street + city + state + zip;
+
+				getLatLong(address);
+
+				return false;
+			}
                 
                 function getXml(){
         			$.ajax({
