@@ -166,6 +166,7 @@ under the License.
 						alert("before");
 						var lat = results[0].geometry.location.lat();
 						var long = results[0].geometry.location.lng();
+						alert ("lat: " + lat + " Long: " + long);
 						getMagXml(lat, long);
 					} else {
 						alert('Geocode was not successful for the following reason: ' + status);
@@ -184,10 +185,11 @@ under the License.
 					},
 					dataType: "xml",
 					success: function (xml) {
-						var magnatic = $(xml).find('declination').first().text();
+						var Magnetic = $(xml).find('declination').first().text();
+						alert("Magnetic "  + Magnetic);
 						$('#output').html("Lat: " + lat + "<br>" +
 								"Long: " + long + "<br>" +
-								"Magnetic North: " + magnatic + "<br>");
+								"Magnetic North: " + Magnetic + "<br>");
 					}
 				});
 			}
