@@ -70,27 +70,27 @@ under the License.
             </div>
         </div>
         
-        <div data-role="page" id="page2" data-theme="b">
-            <div data-role="header"  id="header">
+        <div data-role="page" id="resultPage" data-theme="b">
+            <div data-role="header"  id="resultPageHeader">
                 <a href="#index" data-transition="slide" data-direction="reverse" data-icon="home"> Home </a>
                 <h1> Header</h1>
             </div>
-            <div data-role="content"  id="content">
-                <div id="output">
+            <div data-role="content"  id="resultPageContent">
+                <div id="resultPageOutput">
                     
                 </div>
             </div>
-            <div data-role="footer" id ="footer">
+            <div data-role="footer" id ="resultPageFooter">
                 <h4> Footer</h4>
             </div>
         </div>
         
         <div data-role="page" id="googlePage">
-            <div data-role="header"  id="header">
+            <div data-role="header"  id="googlePageHeader">
                 <a href="#index" data-transition="slide" data-direction="reverse" data-icon="home"> Home </a>
                 <h1>Google Page</h1>
             </div>
-            <div data-role="content"  id="content">
+            <div data-role="content"  id="googlePageContent">
 				<form method="POST" onsubmit="return getMagnaticNorth()" data-ajax="false">
 					<label for="street">Street:</label>
 					<input type="text" name="street" id="street" data-clear-btn="true">  
@@ -103,10 +103,10 @@ under the License.
 					<input type="submit" data-inline="true" value="Submit">
 				</form>
 				<hr/>
-                <div id="output">
+                <div id="googlePageOutput">
                 </div>
             </div>
-            <div data-role="footer" id ="footer">
+            <div data-role="footer" id ="googlePageFooter">
                 <h4> Footer</h4>
             </div>
 
@@ -187,7 +187,7 @@ under the License.
 					success: function (xml) {
 						var Magnetic = $(xml).find('declination').first().text();
 						alert("Magnetic "  + Magnetic);
-						$('#output').html("Lat: " + lat + "<br>" +
+						$('#googlePageOutput').html("Lat: " + lat + "<br>" +
 								"Long: " + long + "<br>" +
 								"Magnetic North: " + Magnetic + "<br>");
 					}
@@ -275,9 +275,9 @@ under the License.
                             "Email: " + results.rows.item(i).email + '<hr/>';
                     }
                     
-                    $.mobile.changePage("#page2", {reverse: false, transition: "slide"});
+                    $.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
                     
-                    $('#output').html(htmlString);
+                    $('#resultPageOutput').html(htmlString);
                 }
                 
                 
@@ -304,7 +304,7 @@ under the License.
                     
                     $.mobile.changePage("#page2", {reverse: false, transition: "slide"});
                     
-                    $('#output').html("Full Name: " + window.localStorage.getItem("fullname") + "<br>" +
+                    $('#resultPageOutput').html("Full Name: " + window.localStorage.getItem("fullname") + "<br>" +
                             "Gender: " + window.localStorage.getItem("gender") + "<br>" + 
                             "Date of Birth: " + window.localStorage.getItem("birthday") + "<br>" + 
                             "Email: " + window.localStorage.getItem("email"));
