@@ -62,18 +62,18 @@ under the License.
                     <br/>
                     <input type="submit" data-inline="true" value="Submit">
                 </form>
-            <button type="button" onclick="getXml()">
-                Get XML
-            </button>
-            <br>
-            <a href="#googlePage" data-transition="slide"> Google </a>
+                <button type="button" onclick="getXml()">
+                    Get XML
+                </button>
+                <br>
+                <a href="#googlePage" data-transition="slide"> Google </a>
             </div>
         </div>
         
         <div data-role="page" id="resultPage" data-theme="b">
             <div data-role="header"  id="resultPageHeader">
                 <a href="#index" data-transition="slide" data-direction="reverse" data-icon="home"> Home </a>
-                <h1> Header</h1>
+                <h1>Header</h1>
             </div>
             <div data-role="content"  id="resultPageContent">
                 <div id="resultPageOutput">
@@ -81,7 +81,7 @@ under the License.
                 </div>
             </div>
             <div data-role="footer" id ="resultPageFooter" data-position="fixed">
-                <h4> Footer</h4>
+                <h4>Footer</h4>
             </div>
         </div>
         
@@ -159,14 +159,12 @@ under the License.
             var geocoder = new google.maps.Geocoder();
 
 			function getLatLong(address) {
-				var geo = new google.maps.Geocoder;
-
 				geocoder.geocode({'address': address}, function (results, status) {
 					if (status == google.maps.GeocoderStatus.OK) {
-						alert("before");
+//						alert("before");
 						var lat = results[0].geometry.location.lat();
 						var long = results[0].geometry.location.lng();
-						alert ("lat: " + lat + " Long: " + long);
+//						alert ("lat: " + lat + " Long: " + long);
 						getMagXml(lat, long);
 					} else {
 						alert('Geocode was not successful for the following reason: ' + status);
@@ -186,7 +184,8 @@ under the License.
 					dataType: "xml",
 					success: function (xml) {
 						var Magnetic = $(xml).find('declination').first().text();
-						alert("Magnetic "  + Magnetic);
+                        
+//						alert("Magnetic "  + Magnetic);
 						$('#googlePageOutput').html("Lat: " + lat + "<br>" +
 								"Long: " + long + "<br>" +
 								"Magnetic North: " + Magnetic + "<br>");
@@ -195,122 +194,108 @@ under the License.
 			}
 
 			function getMagnaticNorth() {
-
 				var street = $('[name="street"]').val();
 				var city = $('[name="city"]').val();
 				var state = $('[name="state"]').val();
 				var zip = $('[name="zip"]').val();
-
 				var address = street + city + state + zip;
-
+                
 				getLatLong(address);
-
+                
 				return false;
 			}
                 
-                function getXml(){
-        			$.ajax({
-        				type: 'GET',
-        				url: "http://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination",
-        				data: {
-        				  lat1: "34.055223",
-        				  lon1: "-118.413264",
-        				  resultFormat: "xml"
-        				},
-        				dataType: "xml",
-        				success: function (xml){
-        				  var magnatic = $(xml).find('declination').first().text();
-        				  alert(magnatic);
-        				}   
-        			  });
-        		}
+            function getXml(){
+                $.ajax({
+                    type: 'GET',
+                    url: "http://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination",
+                    data: {
+                      lat1: "34.055223",
+                      lon1: "-118.413264",
+                      resultFormat: "xml"
+                    },
+                    dataType: "xml",
+                    success: function (xml){
+                      var magnatic = $(xml).find('declination').first().text();
+                      alert(magnatic);
+                    }   
+                  });
+            }
                 
-                var database;
-                 
-                document.addEventListener("deviceready", onDeviceReady, false);
+            var database;
+            document.addEventListener("deviceready", onDeviceReady, false);
 
-                function onDeviceReady() {
-                    database = window.openDatabase("Database", "1.0", "Test DB", 2*1024*1024);
-                    database.transaction(createDB, errorCB, successCB);
+            function onDeviceReady() {
+                database = window.openDatabase("Database", "1.0", "Test DB", 2*1024*1024);
+                database.transaction(createDB, errorCB, successCB);
+            }
+
+            function createDB(tx){
+                tx.executeSql('CREATE TABLE IF NOT EXISTS TEST1 (id unique, name, birthday, email, gender)');
+            }
+
+            function errorCB(error){
+                alert('Error: ' + error.message + ' code: ' + error.code);
+            }
+
+            function successCB(){
+                console.log("Database Successfully Created");
+            }
+
+            function insertDB(tx){
+                var name = $('[name="fullname"]').val();
+                var bday = $('[name="bday"]').val();
+                var email = $('[name="email"]').val();
+                var gender = $("#gender :radio:checked").val();
+                var sql = 'INSERT INTO TEST1 (name, birthday, email, gender) VALUES (?,?,?,?)';
+
+                tx.executeSql(sql,[name, bday, email, gender], queryDB, errorCB);
+            }
+
+            function queryDB(tx){
+                tx.executeSql('SELECT * FROM TEST1', [], renderList, errorCB);
+            }
+
+            function renderList(tx, results){
+                var htmlString = '';
+                var len = results.rows.length;
+
+                for (var i = 0; i < len; i++){
+                    htmlString += "Full Name: " + results.rows.item(i).name + "<br>" +
+                        "Gender: " + results.rows.item(i).gender + "<br>" + 
+                        "Date of Birth: " + results.rows.item(i).birthday + "<br>" + 
+                        "Email: " + results.rows.item(i).email + '<hr/>';
                 }
-                
-                function createDB(tx){
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS TEST1 (id unique, name, birthday, email, gender)');
-                }
-                
-                function errorCB(error){
-                    alert('Error: ' + error.message + ' code: ' + error.code);
-                }
-                
-                function successCB(){
-                    console.log("Database Successfully Created");
-                }
-                    
-                function insertDB(tx){
-                    
-                    var name = $('[name="fullname"]').val();
-                    var bday = $('[name="bday"]').val();
-                    var email = $('[name="email"]').val();
-                    var gender = $("#gender :radio:checked").val();
-                    
-                    var sql = 'INSERT INTO TEST1 (name, birthday, email, gender) VALUES (?,?,?,?)';
-                    
-                    tx.executeSql(sql,[name, bday, email, gender], queryDB, errorCB);
-                }
-                
-                function queryDB(tx){
-                    tx.executeSql('SELECT * FROM TEST1', [], renderList, errorCB);
-                }
-                
-                function renderList(tx, results){
-                    
-                    var htmlString = '';
-                    
-                    var len = results.rows.length;
-                    
-                    for (var i = 0; i < len; i++){
-                        htmlString += "Full Name: " + results.rows.item(i).name + "<br>" +
-                            "Gender: " + results.rows.item(i).gender + "<br>" + 
-                            "Date of Birth: " + results.rows.item(i).birthday + "<br>" + 
-                            "Email: " + results.rows.item(i).email + '<hr/>';
-                    }
-                    
-                    $.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
-                    
-                    $('#resultPageOutput').html(htmlString);
-                }
-                
-                
-                
-                function submitToDatabase(){
-                    
-                    database.transaction(insertDB, errorCB);
-                  
-                    return false;
-                    
-                }
-                
-                 
-                function submitToLocal(){
-                    var name = $('[name="fullname"]').val();
-                    var bday = $('[name="bday"]').val();
-                    var email = $('[name="email"]').val();
-                    var gender = $("#gender :radio:checked").val();
-                    
-                    window.localStorage.setItem("fullname", name);
-                    window.localStorage.setItem("birthday", bday);
-                    window.localStorage.setItem("email", email);
-                    window.localStorage.setItem("gender", gender);
-                    
-                    $.mobile.changePage("#page2", {reverse: false, transition: "slide"});
-                    
-                    $('#resultPageOutput').html("Full Name: " + window.localStorage.getItem("fullname") + "<br>" +
-                            "Gender: " + window.localStorage.getItem("gender") + "<br>" + 
-                            "Date of Birth: " + window.localStorage.getItem("birthday") + "<br>" + 
-                            "Email: " + window.localStorage.getItem("email"));
-                    
-                    return false;
-                 }
+                $.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
+                $('#resultPageOutput').html(htmlString);
+            }
+
+
+
+            function submitToDatabase(){
+                database.transaction(insertDB, errorCB);
+                return false;
+            }
+
+
+            function submitToLocal(){
+                var name = $('[name="fullname"]').val();
+                var bday = $('[name="bday"]').val();
+                var email = $('[name="email"]').val();
+                var gender = $("#gender :radio:checked").val();
+
+                window.localStorage.setItem("fullname", name);
+                window.localStorage.setItem("birthday", bday);
+                window.localStorage.setItem("email", email);
+                window.localStorage.setItem("gender", gender);
+                $.mobile.changePage("#page2", {reverse: false, transition: "slide"});
+                $('#resultPageOutput').html("Full Name: " + window.localStorage.getItem("fullname") + "<br>" +
+                        "Gender: " + window.localStorage.getItem("gender") + "<br>" + 
+                        "Date of Birth: " + window.localStorage.getItem("birthday") + "<br>" + 
+                        "Email: " + window.localStorage.getItem("email"));
+
+                return false;
+            }
                  
         </script>
         <script type="text/javascript">
