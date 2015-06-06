@@ -34,6 +34,20 @@ under the License.
         <script type="text/javascript" src="js/jquery-transform.js"></script>
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+        <style type="text/css">
+            
+            #map{ height: 100%}
+            
+            #mapContent{
+                padding: 0;
+                position: absolute !important;
+                top: 40px !important;
+                right: 0;
+                bottom: 40px !important;
+                left: 0 !important;
+            }
+            
+        </style>
         <title>Hello World</title>
     </head>
     <body>
@@ -107,7 +121,7 @@ under the License.
                 </div>
             </div>
             <div data-role="footer" id ="googlePageFooter" data-position="fixed">
-                <h4> Footer</h4>
+                <h4><a href="#" data-transition="slide" onclick="goToMapPage();"> Map </a></h4>
             </div>
 
         </div>
@@ -132,29 +146,54 @@ under the License.
             <div>
                 <p id="compass"></p>
                 <p><a href="mappage.html" data-transition="slide"> Map Page</a></p>
-                <a href="#mappage" data-transition="slide"> Map </a>
-            </div>
-        </div>-->
-<!--        <div data-role="page" id="mappage">
-            <div data-role="header" data-theme="b" id="mapHeader">
-                <a href="#index" data-transition="slide" data-direction="reverse" data-icon="home"> Home </a>
-                <h1>Map Header</h1>
-            </div>
-            <button type="button" onclick="rotateMapRight()">
-                Rotate Right
-            </button>
-            <button type="button" onclick="rotateMapLeft()">
-                Rotate Left
-            </button>
-            <div data-role="content" style="padding:0;" id="mapContent">
-                <div id="map" style="width:100%;height:100%;"></div>
-            </div>
-            <div data-role="footer" data-theme="b" id ="mapFooter">
-                <h4>Map Footer</h4>
             </div>
         </div>-->
 
+        <div data-role="page" id="mappage">
+            <div data-role="header" id="mapHeader" data-position="fixed">
+                <a href="#googlePage" data-transition="slide" data-direction="reverse" data-icon="home"> Google </a>
+                <h1>Map Header</h1>
+            </div>
+            <button type="button" onclick="rotateMapRight()" value="Rotate Right"></button>
+            <button type="button" onclick="rotateMapLeft()" value="Rotate Left"></button>
+            <div data-role="content" style="padding:0;" id="mapContent">
+                <div id="map" style="width:100%;height:100%;"></div>
+            </div>
+            <div data-role="footer" id ="mapFooter" data-position="fixed">
+                <h4>Map Footer</h4>
+            </div>
+        </div>
+
         <script type="text/javascript">
+            
+            var map;
+            var lat;
+            var long;
+            var mapOrientation = 0;
+            var lightstate = false;
+
+            
+
+            function goToMapPage(){
+                initializeMap(lat, long);
+                
+                $.mobile.changePage("#mappage", {reverse: false, transition: "slide"});
+                
+            }
+            
+            function initializeMap(lat, long){
+                var latlong = new google.maps.LatLng(lat, long);
+                
+                var mapOptions = {
+                    zoom: 20, 
+                    center: latlong,
+                    mapTypeId: google.maps.MapTypeId.HYBRID
+                };
+                
+                map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                
+            }
+            
         
             var geocoder = new google.maps.Geocoder();
 
@@ -162,10 +201,11 @@ under the License.
 				geocoder.geocode({'address': address}, function (results, status) {
 					if (status == google.maps.GeocoderStatus.OK) {
 //						alert("before");
-						var lat = results[0].geometry.location.lat();
-						var long = results[0].geometry.location.lng();
+						lat = results[0].geometry.location.lat();
+						long = results[0].geometry.location.lng();
 //						alert ("lat: " + lat + " Long: " + long);
-						getMagXml(lat, long);
+                        goToMapPage();
+						//getMagXml(lat, long);
 					} else {
 						alert('Geocode was not successful for the following reason: ' + status);
 					}
@@ -204,7 +244,27 @@ under the License.
                 
 				return false;
 			}
-                
+            
+            
+            
+            
+
+            function rotateMapRight() {
+                mapOrientation += 10;
+                $('#map').animate({
+                    rotate : mapOrientation
+                }, 0);
+                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+            }
+
+            function rotateMapLeft() {
+                mapOrientation -= 10;
+                $('#map').animate({
+                    rotate : mapOrientation
+                }, 0);
+                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+            }
+            
             function getXml(){
                 $.ajax({
                     type: 'GET',
