@@ -36,7 +36,6 @@ under the License.
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
         <style type="text/css">
             
-            /*#map{ height: 100%}*/
             #map{ 
                 width: 500px;
                 height: 500px;
@@ -55,14 +54,6 @@ under the License.
                 overflow: hidden;
                 float: left;
             }
-/*            #mapContent{
-                padding: 0;
-                position: absolute !important;
-                top: 40px !important;
-                right: 0;
-                bottom: 40px !important;
-                left: 0 !important;
-            }*/
             
         </style>
         <title>Hello World</title>
@@ -91,11 +82,11 @@ under the License.
                             <input type="radio" name="gender" id="female" value="female">	
                     </fieldset>
                     <br/>
-                    <input type="submit" data-inline="true" value="Submit">
+                    <input type="submit" data-inline="true" value="Submit To DB">
                 </form>
-                <button type="button" onclick="getXml()">
-                    Get XML
-                </button>
+                
+                <a href="#" onclick="getXml()">Get NOAA XML</a>
+                <a href="#" onclick="getNumberOfDays()">Number Of Days</a>
                 <br>
                 <a href="#googlePage" data-transition="slide"> Google </a>
             </div>
@@ -115,7 +106,7 @@ under the License.
                 <h4>Footer</h4>
             </div>
         </div>
-        
+
         <div data-role="page" id="googlePage">
             <div data-role="header"  id="googlePageHeader" data-position="fixed">
                 <a href="#index" data-transition="slide" data-direction="reverse" data-icon="home"> Home </a>
@@ -140,32 +131,8 @@ under the License.
             <div data-role="footer" id ="googlePageFooter" data-position="fixed">
                 <h4><a href="#" data-transition="slide" onclick="goToMapPage();"> Map </a></h4>
             </div>
-
         </div>
         
-        
-<!--        <div data-role="page" id="index" class="app">
-            <div >
-                <h1>Tito Was Here</h1>
-            </div>
-            <button type="button" onclick="flashlightToggle()">
-                FlashLight
-            </button>
-            <div id="deviceready" class="blink">
-                <p class="event listening">
-                    Connecting to Device
-                </p>
-                <p class="event received">
-                    Device is Ready
-                </p>
-                <p id="info"></p>
-            </div>
-            <div>
-                <p id="compass"></p>
-                <p><a href="mappage.html" data-transition="slide"> Map Page</a></p>
-            </div>
-        </div>-->
-
         <div data-role="page" id="mappage">
             <div data-role="header" id="mapHeader" data-position="fixed">
                 <a href="#googlePage" data-transition="slide" data-direction="reverse" data-icon="home"> Google </a>
@@ -192,6 +159,23 @@ under the License.
             var long;
             var mapOrientation = 0;
             var lightstate = false;
+            
+            var date01 = "2015-07-04";
+
+            function getNumberOfDays(){
+                alert(daydiff(parseDate($('#bday').val()),parseDate(date01)));
+                
+            }
+
+            function parseDate(str) {
+                var mdy = str.split('-');
+                //alert(mdy[0] +  mdy[1]-1 +  mdy[2]);
+                return new Date(mdy[0], mdy[1]-1, mdy[2]);
+            }
+
+            function daydiff(first, second) {
+                return (second-first)/(1000*60*60*24);
+            }
 
             
 
@@ -249,7 +233,7 @@ under the License.
 					dataType: "xml",
 					success: function (xml) {
 						var Magnetic = $(xml).find('declination').first().text();
-                        
+
 //						alert("Magnetic "  + Magnetic);
 						$('#googlePageOutput').html("Lat: " + lat + "<br>" +
 								"Long: " + long + "<br>" +
@@ -352,6 +336,10 @@ under the License.
             function queryDB(tx){
                 tx.executeSql('SELECT * FROM TEST1', [], renderList, errorCB);
             }
+            
+            function getTables(tx){
+                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table'", [], renderTables, errorCB);
+            }
 
             function renderList(tx, results){
                 var htmlString = '';
@@ -366,11 +354,28 @@ under the License.
                 $.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
                 $('#resultPageOutput').html(htmlString);
             }
+            
+            
+            function renderList(tx, results){
+                var htmlString = '';
+                var len = results.rows.length;
+
+                for (var i = 0; i < len; i++){
+                    htmlString += "Name: " + results.rows.item(i).name + "<br>" + '<hr/>';
+                }
+                $.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
+                $('#resultPageOutput').html(htmlString);
+            }
 
 
 
             function submitToDatabase(){
                 database.transaction(insertDB, errorCB);
+                return false;
+            }
+            
+            function getAllTables(){
+                database.transaction(getTables, errorCB);
                 return false;
             }
 
@@ -394,116 +399,6 @@ under the License.
                 return false;
             }
                  
-        </script>
-        <script type="text/javascript">
-           
-//app.initialize();
-//            var map;
-//            var marker;
-//            var infowindow;
-//            var watchID;
-//
-//            $(document).ready(function () {
-//                document.addEventListener("deviceready", onDeviceReady, false);
-//                //for testing in Chrome browser uncomment
-//                //onDeviceReady();
-//            });
-//
-//            //PhoneGap is ready function
-//            function onDeviceReady() {
-//                $(window).unbind();
-//                $(window).bind('pageshow resize orientationchange', function (e) {
-//                    max_height();
-//                });
-//                max_height();
-//                google.load("maps", "3.8", {
-//                    "callback": map,
-//                    other_params: "sensor=true&language=en"
-//                });
-//            }
-//
-//            function max_height() {
-//                var h = $('div[data-role="header"]').outerHeight(true);
-//                var f = $('div[data-role="footer"]').outerHeight(true);
-//                var w = $(window).height();
-//                var c = $('div[data-role="content"]');
-//                var c_h = c.height();
-//                var c_oh = c.outerHeight(true);
-//                var c_new = w - h - f - c_oh + c_h;
-//                var total = h + f + c_oh;
-//                if (c_h < c.get(0).scrollHeight) {
-//                    c.height(c.get(0).scrollHeight);
-//                } else {
-//                    c.height(c_new);
-//                }
-//            }
-//
-//            function map() {
-//                var latlng = new google.maps.LatLng(55.17, 23.76);
-//                var myOptions = {
-//                    zoom: 6,
-//                    center: latlng,
-//                    streetViewControl: true,
-//                    mapTypeId: google.maps.MapTypeId.ROADMAP,
-//                    zoomControl: true
-//                };
-//                map = new google.maps.Map(document.getElementById("map"), myOptions);
-//
-//                google.maps.event.addListenerOnce(map, 'tilesloaded', function () {
-//                    //get geoposition once
-//                    //navigator.geolocation.getCurrentPosition(geo_success, geo_error, { maximumAge: 5000, timeout: 5000, enableHighAccuracy: true });
-//                    //watch for geoposition change
-//                    watchID = navigator.geolocation.watchPosition(geo_success, geo_error, {
-//                        maximumAge: 5000,
-//                        timeout: 5000,
-//                        enableHighAccuracy: true
-//                    });
-//                });
-//            }
-//
-//            function geo_error(error) {
-//                //comment
-//                alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
-//            }
-//
-//            function geo_success(position) {
-//
-//                map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-//                map.setZoom(15);
-//
-//                var info = (
-//                        'Latitude: ' + position.coords.latitude + '<br>' + 
-//                        'Longitude: ' + position.coords.longitude + '<br>' + 
-//                        'Altitude: ' + position.coords.altitude + '<br>' + 
-//                        'Accuracy: ' + position.coords.accuracy + '<br>' + 
-//                        'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '<br>' + 
-//                        'Heading: ' + position.coords.heading + '<br>' + 
-//                        'Speed: ' + position.coords.speed + '<br>' + 
-//                        'Timestamp: ' + new Date(position.timestamp)
-//                        );
-//
-//                var point = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-//                if (!marker) {
-//                    //create marker
-//                    marker = new google.maps.Marker({
-//                        position: point,
-//                        map: map
-//                    });
-//                } else {
-//                    //move marker to new position
-//                    marker.setPosition(point);
-//                }
-//                if (!infowindow) {
-//                    infowindow = new google.maps.InfoWindow({
-//                        content: info
-//                    });
-//                } else {
-//                    infowindow.setContent(info);
-//                }
-//                google.maps.event.addListener(marker, 'click', function () {
-//                    infowindow.open(map, marker);
-//                });
-//            }
         </script>
     </body>
 </html>
