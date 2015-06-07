@@ -154,13 +154,13 @@ under the License.
                 <a href="#googlePage" data-transition="slide" data-direction="reverse" data-icon="home"> Google </a>
                 <h1>Map Header</h1>
             </div>
-            <button type="button" onclick="rotateMapRight()" value="Rotate Right"></button>
-            <button type="button" onclick="rotateMapLeft()" value="Rotate Left"></button>
             <div data-role="content" style="padding:0;" id="mapContent">
                 <div id="map" style="width:100%;height:100%;"></div>
             </div>
             <div data-role="footer" id ="mapFooter" data-position="fixed">
-                <h4>Map Footer</h4>
+                <button type="button" onclick="rotateMapRight()" value="Rotate Right"></button>
+                <button type="button" onclick="lockMap()" value="Lock"></button>
+                <button type="button" onclick="rotateMapLeft()" value="Rotate Left"></button>
             </div>
         </div>
 
@@ -179,6 +179,10 @@ under the License.
                 
                 $.mobile.changePage("#mappage", {reverse: false, transition: "slide"});
                 
+            }
+            
+            function lockMap(){
+                map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
             }
             
             function initializeMap(lat, long){
