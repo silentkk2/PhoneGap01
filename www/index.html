@@ -177,9 +177,11 @@ under the License.
                 </div>
             </div>
             <div data-role="footer" id ="mapFooter" data-position="fixed">
-                <button type="button" onclick="rotateMapRight()" value="Rotate Right"></button>
+                <button type="button" onclick="rotateMapRight10()" value="10 Right"></button>
+                <button type="button" onclick="rotateMapRight5()" value="5 Right"></button>
                 <button type="button" onclick="lockMap()" value="Lock"></button>
-                <button type="button" onclick="rotateMapLeft()" value="Rotate Left"></button>
+                <button type="button" onclick="rotateMapLeft5()" value="5 Left"></button>
+                <button type="button" onclick="rotateMapLeft10()" value="10 Left"></button>
             </div>
         </div>
 
@@ -267,12 +269,16 @@ under the License.
                 
 				return false;
 			}
-            
-            
-            
-            
 
-            function rotateMapRight() {
+            function rotateMapRight5() {
+                mapOrientation += 5;
+                $('#map').animate({
+                    rotate : mapOrientation
+                }, 0);
+                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+            }
+            
+            function rotateMapRight10() {
                 mapOrientation += 10;
                 $('#map').animate({
                     rotate : mapOrientation
@@ -280,7 +286,15 @@ under the License.
                 window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
             }
 
-            function rotateMapLeft() {
+            function rotateMapLeft5() {
+                mapOrientation -= 5;
+                $('#map').animate({
+                    rotate : mapOrientation
+                }, 0);
+                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+            }
+            
+            function rotateMapLeft10() {
                 mapOrientation -= 10;
                 $('#map').animate({
                     rotate : mapOrientation
