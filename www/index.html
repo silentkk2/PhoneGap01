@@ -318,7 +318,7 @@ under the License.
 			}
 			
 			function test1Exists(tx, results) {				
-				if (results.rows.item(0).name == 'TEST1'){
+				if (results.rows.length > 0){
 					alert('Found Test1');
 				}
 				else{
@@ -329,8 +329,7 @@ under the License.
 			}
 			
 			function dayExists(tx, results) {	
-				alert("Day Result: " + results.rows.length);
-				if (results.rows.item(0).name == 'DAY'){
+				if (results.rows.length > 0){
 					alert('Found DAY');
 				}
 				else{
