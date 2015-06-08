@@ -313,16 +313,41 @@ under the License.
 			}
 
 			function createDB(tx) {
-				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='TEST1'", [], tableResults, errorCB);
+				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='TEST1'", [], test1Exists, errorCB);
+				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DAY'", [], dayExists, errorCB);
 			}
 			
-			function tableResults(tx, results) {				
+			function test1Exists(tx, results) {				
 				if (results.rows.item(0).name == 'TEST1'){
-					alert('Found table');
+					alert('Found Test1');
 				}
 				else{
-					alert('No Table found... Creating new table');
+					alert('Test1 not found... Creating new table');
 					tx.executeSql('CREATE TABLE IF NOT EXISTS TEST1 (id unique, name, birthday, email, gender)');
+				}
+				
+			}
+			
+			function dayExists(tx, results) {				
+				if (results.rows.item(0).name == 'DAY'){
+					alert('Found DAY');
+				}
+				else{
+					alert('DAY not found... Creating new table');
+					tx.executeSql('CREATE TABLE IF NOT EXISTS DAY (id, number, day)');
+					
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (0,0,'Monday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,0,'Wednesday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,0,'Thursday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,0,'Friday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,1,'Monday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,1,'Wednesday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (0,1,'Thursday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,1,'Friday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,2,'Monday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,2,'Wednesday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (0,2,'Thursday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,2,'Friday')");
 				}
 				
 			}
