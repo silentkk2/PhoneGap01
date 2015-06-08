@@ -328,7 +328,8 @@ under the License.
 				
 			}
 			
-			function dayExists(tx, results) {				
+			function dayExists(tx, results) {	
+				alert("Day Result: " + results.rows.length);
 				if (results.rows.item(0).name == 'DAY'){
 					alert('Found DAY');
 				}
