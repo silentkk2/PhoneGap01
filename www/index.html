@@ -154,58 +154,58 @@ under the License.
         </div>
 
         <script type="text/javascript">
-            
-            var map;
-            var lat;
-            var long;
-            var mapOrientation = 0;
-            var lightstate = false;
-            
-            var date01 = "2015-07-04";
 
-            function getNumberOfDays(){
-                alert(daydiff(parseDate($('#bday').val()),parseDate(date01)));
-                
-            }
+			var map;
+			var lat;
+			var long;
+			var mapOrientation = 0;
+			var lightstate = false;
 
-            function parseDate(str) {
-                var mdy = str.split('-');
-                //alert(mdy[0] +  mdy[1]-1 +  mdy[2]);
-                return new Date(mdy[0], mdy[1]-1, mdy[2]);
-            }
+			var date01 = "2015-07-04";
 
-            function daydiff(first, second) {
-                return (second-first)/(1000*60*60*24);
-            }
+			function getNumberOfDays() {
+				alert(daydiff(parseDate($('#bday').val()), parseDate(date01)));
 
-            
+			}
 
-            function goToMapPage(){
-                initializeMap(lat, long);
-                
-                $.mobile.changePage("#mappage", {reverse: false, transition: "slide"});
-                
-            }
-            
-            function lockMap(){
-                map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
-            }
-            
-            function initializeMap(lat, long){
-                var latlong = new google.maps.LatLng(lat, long);
-                
-                var mapOptions = {
-                    zoom: 20, 
-                    center: latlong,
-                    mapTypeId: google.maps.MapTypeId.HYBRID
-                };
-                
-                map = new google.maps.Map(document.getElementById("map"), mapOptions);
-                
-            }
-            
-        
-            var geocoder = new google.maps.Geocoder();
+			function parseDate(str) {
+				var mdy = str.split('-');
+				//alert(mdy[0] +  mdy[1]-1 +  mdy[2]);
+				return new Date(mdy[0], mdy[1] - 1, mdy[2]);
+			}
+
+			function daydiff(first, second) {
+				return (second - first) / (1000 * 60 * 60 * 24);
+			}
+
+
+
+			function goToMapPage() {
+				initializeMap(lat, long);
+
+				$.mobile.changePage("#mappage", {reverse: false, transition: "slide"});
+
+			}
+
+			function lockMap() {
+				map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
+			}
+
+			function initializeMap(lat, long) {
+				var latlong = new google.maps.LatLng(lat, long);
+
+				var mapOptions = {
+					zoom: 20,
+					center: latlong,
+					mapTypeId: google.maps.MapTypeId.HYBRID
+				};
+
+				map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+			}
+
+
+			var geocoder = new google.maps.Geocoder();
 
 			function getLatLong(address) {
 				geocoder.geocode({'address': address}, function (results, status) {
@@ -214,7 +214,7 @@ under the License.
 						lat = results[0].geometry.location.lat();
 						long = results[0].geometry.location.lng();
 //						alert ("lat: " + lat + " Long: " + long);
-                        goToMapPage();
+						goToMapPage();
 						//getMagXml(lat, long);
 					} else {
 						alert('Geocode was not successful for the following reason: ' + status);
@@ -249,157 +249,172 @@ under the License.
 				var state = $('[name="state"]').val();
 				var zip = $('[name="zip"]').val();
 				var address = street + city + state + zip;
-                
+
 				getLatLong(address);
-                
+
 				return false;
 			}
 
-            function rotateMapRight5() {
-                mapOrientation += 5;
-                $('#map').animate({
-                    rotate : mapOrientation
-                }, 0);
-                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
-            }
-            
-            function rotateMapRight10() {
-                mapOrientation += 10;
-                $('#map').animate({
-                    rotate : mapOrientation
-                }, 0);
-                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
-            }
+			function rotateMapRight5() {
+				mapOrientation += 5;
+				$('#map').animate({
+					rotate: mapOrientation
+				}, 0);
+				window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+			}
 
-            function rotateMapLeft5() {
-                mapOrientation -= 5;
-                $('#map').animate({
-                    rotate : mapOrientation
-                }, 0);
-                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
-            }
-            
-            function rotateMapLeft10() {
-                mapOrientation -= 10;
-                $('#map').animate({
-                    rotate : mapOrientation
-                }, 0);
-                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
-            }
-            
-            function getXml(){
-                $.ajax({
-                    type: 'GET',
-                    url: "http://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination",
-                    data: {
-                      lat1: "34.055223",
-                      lon1: "-118.413264",
-                      resultFormat: "xml"
-                    },
-                    dataType: "xml",
-                    success: function (xml){
-                      var magnatic = $(xml).find('declination').first().text();
-                      alert(magnatic);
-                    }   
-                  });
-            }
-                
-            var database;
-            document.addEventListener("deviceready", onDeviceReady, false);
+			function rotateMapRight10() {
+				mapOrientation += 10;
+				$('#map').animate({
+					rotate: mapOrientation
+				}, 0);
+				window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+			}
 
-            function onDeviceReady() {
-                database = window.openDatabase("Database", "1.0", "Test DB", 2*1024*1024);
-                database.transaction(createDB, errorCB, successCB);
-            }
+			function rotateMapLeft5() {
+				mapOrientation -= 5;
+				$('#map').animate({
+					rotate: mapOrientation
+				}, 0);
+				window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+			}
 
-            function createDB(tx){
-                tx.executeSql('CREATE TABLE IF NOT EXISTS TEST1 (id unique, name, birthday, email, gender)');
-            }
+			function rotateMapLeft10() {
+				mapOrientation -= 10;
+				$('#map').animate({
+					rotate: mapOrientation
+				}, 0);
+				window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+			}
 
-            function errorCB(error){
-                alert('Error: ' + error.message + ' code: ' + error.code);
-            }
+			function getXml() {
+				$.ajax({
+					type: 'GET',
+					url: "http://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination",
+					data: {
+						lat1: "34.055223",
+						lon1: "-118.413264",
+						resultFormat: "xml"
+					},
+					dataType: "xml",
+					success: function (xml) {
+						var magnatic = $(xml).find('declination').first().text();
+						alert(magnatic);
+					}
+				});
+			}
 
-            function successCB(){
-                console.log("Database Successfully Created");
-            }
+			var database;
+			document.addEventListener("deviceready", onDeviceReady, false);
 
-            function insertDB(tx){
-                var name = $('[name="fullname"]').val();
-                var bday = $('[name="bday"]').val();
-                var email = $('[name="email"]').val();
-                var gender = $("#gender :radio:checked").val();
-                var sql = 'INSERT INTO TEST1 (name, birthday, email, gender) VALUES (?,?,?,?)';
+			function onDeviceReady() {
+				database = window.openDatabase("Database", "1.0", "Test DB", 2 * 1024 * 1024);
+				database.transaction(createDB, errorCB, successCB);
+			}
 
-                tx.executeSql(sql,[name, bday, email, gender], queryDB, errorCB);
-            }
+			function createDB(tx) {
+				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='TEST1'", [], tableResults, errorCB);
+			}
+			
+			function tableResults(tx, results) {				
+				if (results.rows.item(0).name == 'TEST1'){
+					alert('Found table');
+				}
+				else{
+					alert('No Table found... Creating new table');
+					tx.executeSql('CREATE TABLE IF NOT EXISTS TEST1 (id unique, name, birthday, email, gender)');
+				}
+				
+			}
+			
+			function getTables(tx) {
+				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table'", [], renderTables, errorCB);
+			}
 
-            function queryDB(tx){
-                tx.executeSql('SELECT * FROM TEST1', [], renderList, errorCB);
-            }
-            
-            function getTables(tx){
-                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table'", [], renderTables, errorCB);
-            }
+			function renderTables(tx, results) {
+				var htmlString = '';
+				var len = results.rows.length;
 
-            function renderList(tx, results){
-                var htmlString = '';
-                var len = results.rows.length;
+				for (var i = 0; i < len; i++) {
+					htmlString += "Name: " + results.rows.item(i).name + "<br>" + '<hr/>';
+				}
+				$.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
+				$('#resultPageOutput').html(htmlString);
+			}
 
-                for (var i = 0; i < len; i++){
-                    htmlString += "Full Name: " + results.rows.item(i).name + "<br>" +
-                        "Gender: " + results.rows.item(i).gender + "<br>" + 
-                        "Date of Birth: " + results.rows.item(i).birthday + "<br>" + 
-                        "Email: " + results.rows.item(i).email + '<hr/>';
-                }
-                $.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
-                $('#resultPageOutput').html(htmlString);
-            }
-            
-            
-            function renderTables(tx, results){
-                var htmlString = '';
-                var len = results.rows.length;
+			function errorCB(error) {
+				alert('Error: ' + error.message + ' code: ' + error.code);
+			}
 
-                for (var i = 0; i < len; i++){
-                    htmlString += "Name: " + results.rows.item(i).name + "<br>" + '<hr/>';
-                }
-                $.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
-                $('#resultPageOutput').html(htmlString);
-            }
+			function successCB() {
+				console.log("Database Successfully Created");
+			}
+
+			function insertDB(tx) {
+				var name = $('[name="fullname"]').val();
+				var bday = $('[name="bday"]').val();
+				var email = $('[name="email"]').val();
+				var gender = $("#gender :radio:checked").val();
+				var sql = 'INSERT INTO TEST1 (name, birthday, email, gender) VALUES (?,?,?,?)';
+
+				tx.executeSql(sql, [name, bday, email, gender], queryDB, errorCB);
+			}
+
+			function queryDB(tx) {
+				tx.executeSql('SELECT * FROM TEST1', [], renderList, errorCB);
+			}
+
+			
+
+			function renderList(tx, results) {
+				var htmlString = '';
+				var len = results.rows.length;
+
+				for (var i = 0; i < len; i++) {
+					htmlString += "Full Name: " + results.rows.item(i).name + "<br>" +
+							"Gender: " + results.rows.item(i).gender + "<br>" +
+							"Date of Birth: " + results.rows.item(i).birthday + "<br>" +
+							"Email: " + results.rows.item(i).email + '<hr/>';
+				}
+				$.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
+				$('#resultPageOutput').html(htmlString);
+			}
+
+
+			
 
 
 
-            function submitToDatabase(){
-                database.transaction(insertDB, errorCB);
-                return false;
-            }
-            
-            function getAllTables(){
-                database.transaction(getTables, errorCB);
-                return false;
-            }
+			function submitToDatabase() {
+				database.transaction(insertDB, errorCB);
+				return false;
+			}
+
+			function getAllTables() {
+				database.transaction(getTables, errorCB);
+				return false;
+			}
 
 
-            function submitToLocal(){
-                var name = $('[name="fullname"]').val();
-                var bday = $('[name="bday"]').val();
-                var email = $('[name="email"]').val();
-                var gender = $("#gender :radio:checked").val();
+			function submitToLocal() {
+				var name = $('[name="fullname"]').val();
+				var bday = $('[name="bday"]').val();
+				var email = $('[name="email"]').val();
+				var gender = $("#gender :radio:checked").val();
 
-                window.localStorage.setItem("fullname", name);
-                window.localStorage.setItem("birthday", bday);
-                window.localStorage.setItem("email", email);
-                window.localStorage.setItem("gender", gender);
-                $.mobile.changePage("#page2", {reverse: false, transition: "slide"});
-                $('#resultPageOutput').html("Full Name: " + window.localStorage.getItem("fullname") + "<br>" +
-                        "Gender: " + window.localStorage.getItem("gender") + "<br>" + 
-                        "Date of Birth: " + window.localStorage.getItem("birthday") + "<br>" + 
-                        "Email: " + window.localStorage.getItem("email"));
+				window.localStorage.setItem("fullname", name);
+				window.localStorage.setItem("birthday", bday);
+				window.localStorage.setItem("email", email);
+				window.localStorage.setItem("gender", gender);
+				$.mobile.changePage("#page2", {reverse: false, transition: "slide"});
+				$('#resultPageOutput').html("Full Name: " + window.localStorage.getItem("fullname") + "<br>" +
+						"Gender: " + window.localStorage.getItem("gender") + "<br>" +
+						"Date of Birth: " + window.localStorage.getItem("birthday") + "<br>" +
+						"Email: " + window.localStorage.getItem("email"));
 
-                return false;
-            }
-                 
+				return false;
+			}
+
         </script>
     </body>
 </html>
