@@ -433,7 +433,7 @@ under the License.
 				var offset = daydiff(parseDate(date01), parseDate($('#dayPagePicker').val())) % 4;
 				alert('number: ' + number);
 				alert('Offset: ' + offset);
-				tx.executeSql("SELECT day FROM day WHERE number = ? AND id = ?", [number, offset], renderDay, errorCB);
+				tx.executeSql("SELECT day FROM DAY WHERE number = ? AND id = ?", [number, offset], renderDay, errorCB);
 			}
 
 			function renderDay(tx, results) {
@@ -443,6 +443,7 @@ under the License.
 				}
 				else{
 					alert('No results found');
+					tx.executeSql('SELECT * FROM day', [], renderList, errorCB);
 				}
 			}
 
