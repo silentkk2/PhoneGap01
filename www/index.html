@@ -431,18 +431,18 @@ under the License.
 			function getDay(tx) {
 				var number = $('#number').val();
 				var offset = daydiff(parseDate(date01), parseDate($('#dayPagePicker').val())) % 4;
+				alert('number: ' + number);
 				alert('Offset: ' + offset);
 				tx.executeSql("SELECT day FROM day WHERE number = ? AND id = ?", [number, offset], renderDay, errorCB);
 			}
 
 			function renderDay(tx, results) {
-				var htmlString = '';
-				var len = results.rows.length;
-				if (len > 0){
-					alert('No results found');
+				alert('render day');
+				if (results.rows.length > 0){
+					$('#dayPageOutput').html("Day: " + results.rows.item(0).day + "<br>" + '<hr/>');
 				}
 				else{
-					$('#dayPageOutput').html("Day: " + results.rows.item(0).day + "<br>" + '<hr/>');
+					alert('No results found');
 				}
 			}
 
