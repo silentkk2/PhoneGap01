@@ -595,7 +595,7 @@ under the License.
 				var bday = $('#dayPagePicker').val().replace(/-/g, '').toString();
 				
 				alert('DOB: ' + bday);
-				var sql = "select sign from signs where signid = (select signid from DOBTOSIGN where " + number + " between datestart and dateend)";
+				var sql = "select sign from signs where signid = (select signid from DOBTOSIGN where " + bday + " between datestart and dateend)";
 				alert("SQL: " + sql);
 				tx.executeSql(sql, [], renderSign, errorCB);
 			}
