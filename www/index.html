@@ -411,8 +411,6 @@ under the License.
 				tx.executeSql('SELECT * FROM TEST1', [], renderList, errorCB);
 			}
 
-			
-
 			function renderList(tx, results) {
 				var htmlString = '';
 				var len = results.rows.length;
@@ -426,6 +424,20 @@ under the License.
 				$.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
 				$('#resultPageOutput').html(htmlString);
 			}
+			
+			function renderDayList(tx, results) {
+				var htmlString = '';
+				var len = results.rows.length;
+
+				for (var i = 0; i < len; i++) {
+					htmlString += "ID: " + results.rows.item(i).id + "<br>" +
+							"number: " + results.rows.item(i).number + "<br>" +
+							"Day: " + results.rows.item(i).birthday + "<br>" + '<hr/>';
+				}
+				$.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
+				$('#resultPageOutput').html(htmlString);
+			}
+
 			
 			
 			function getDay(tx) {
@@ -443,7 +455,7 @@ under the License.
 				}
 				else{
 					alert('No results found');
-					tx.executeSql('SELECT * FROM day', [], renderList, errorCB);
+					tx.executeSql('SELECT * FROM day', [], renderDayList, errorCB);
 				}
 			}
 
