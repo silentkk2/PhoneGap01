@@ -90,6 +90,7 @@ under the License.
                 <a href="#" onclick="getAllTables()">All Tables</a>
                 <br>
                 <a href="#googlePage" data-transition="slide"> Google </a>
+                <a href="#dayPage" data-transition="slide"> Day </a>
             </div>
         </div>
         
@@ -152,6 +153,27 @@ under the License.
                 <button type="button" onclick="rotateMapLeft10()" value="10 Left"></button>
             </div>
         </div>
+        
+        <div data-role="page" id="dayPage" >
+            <div data-role="header"  id="dayPageHeader" data-position="fixed">
+                <a href="#index" data-transition="slide" data-direction="reverse" data-icon="home"> Home </a>
+                <h1>Day Page</h1>
+            </div>
+            <div data-role="content"  id="dayPageContent">
+				<label for="number">Number:</label>
+                <input type="text" name="number" id="number">
+				<label for="dayPagePicker">Date:</label>
+                <input type="date" name="dayPagePicker" id="dayPagePicker">
+				<br/>
+                <input type="submit" data-inline="true" value="Calculate Day" onclick="calculateDay();">
+				<hr/>
+                <div id="dayPageOutput">
+                </div>
+            </div>
+            <div data-role="footer" id ="dayPageFooter" data-position="fixed">
+                <h4>Footer</h4>
+            </div>
+        </div>
 
         <script type="text/javascript">
 
@@ -161,7 +183,7 @@ under the License.
 			var mapOrientation = 0;
 			var lightstate = false;
 
-			var date01 = "2015-07-04";
+			var date01 = "2015-01-01";
 
 			function getNumberOfDays() {
 				alert(daydiff(parseDate($('#bday').val()), parseDate(date01)));
@@ -404,11 +426,30 @@ under the License.
 				$.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
 				$('#resultPageOutput').html(htmlString);
 			}
-
-
 			
+			
+			function getDay(tx) {
+				var number = $('#number').val();
+				var offset = daydiff(parseDate(date01), parseDate($('#dayPagePicker').val()));
+				alert('Offset: ' + offset);
+				tx.executeSql("SELECT day FROM day WHERE number = ? AND id = ?", [number, offset], renderTables, errorCB);
+			}
 
+			function renderTables(tx, results) {
+				var htmlString = '';
+				var len = results.rows.length;
+				if (len > 0){
+					alert('No results found');
+				}
+				else{
+					$('#dayPageOutput').html("Day: " + results.rows.item(0).day + "<br>" + '<hr/>');
+				}
+			}
 
+			function calculateDay(){
+				database.transaction(getDay, errorCB);
+			}
+			
 
 			function submitToDatabase() {
 				database.transaction(insertDB, errorCB);
