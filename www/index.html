@@ -432,7 +432,7 @@ under the License.
 				for (var i = 0; i < len; i++) {
 					htmlString += "ID: " + results.rows.item(i).id + "<br>" +
 							"number: " + results.rows.item(i).number + "<br>" +
-							"Day: " + results.rows.item(i).birthday + "<br>" + '<hr/>';
+							"Day: " + results.rows.item(i).day + "<br>" + '<hr/>';
 				}
 				$.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
 				$('#resultPageOutput').html(htmlString);
