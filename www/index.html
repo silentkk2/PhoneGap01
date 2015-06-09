@@ -445,7 +445,7 @@ under the License.
 				var offset = daydiff(parseDate(date01), parseDate($('#dayPagePicker').val())) % 4;
 				alert('number: ' + number);
 				alert('Offset: ' + offset);
-				tx.executeSql("SELECT day FROM DAY WHERE number = 1 AND id = 2", [], renderDay, errorCB);
+				tx.executeSql("SELECT day FROM DAY WHERE number = " + number + "AND id = " + offset , [], renderDay, errorCB);
 			}
 
 			function renderDay(tx, results) {
