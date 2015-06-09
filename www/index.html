@@ -432,10 +432,10 @@ under the License.
 				var number = $('#number').val();
 				var offset = daydiff(parseDate(date01), parseDate($('#dayPagePicker').val())) % 4;
 				alert('Offset: ' + offset);
-				tx.executeSql("SELECT day FROM day WHERE number = ? AND id = ?", [number, offset], renderTables, errorCB);
+				tx.executeSql("SELECT day FROM day WHERE number = ? AND id = ?", [number, offset], renderDay, errorCB);
 			}
 
-			function renderTables(tx, results) {
+			function renderDay(tx, results) {
 				var htmlString = '';
 				var len = results.rows.length;
 				if (len > 0){
