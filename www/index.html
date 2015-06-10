@@ -593,13 +593,12 @@ under the License.
                     userSignId = results.rows.item(0).signid;
                     userSignGroupId = results.rows.item(0).signgroupid;
                     userSign = results.rows.item(0).sign;
-                    alert("Sign ID: " + userSignId + " Sign Group ID: " + userSignGroupId + " Sign: " + userSign);
+                    var htmltxt = "Welcome " + userName + "<br>" + '<hr/>'+
+                            "Your Sign is: <br>" +
+                            "<img src='" + userSign + ".png' alt='" + userSign + "' >" + '<hr/>';
+                    alert(htmltxt);
                     $.mobile.changePage("#dayPage", {reverse: false, transition: "slide"});
-					$('#dayPageUserOutput').html("Welcome " + userName + "<br>" + '<hr/>'+
-                            "Your Sign ID: " + userSignId + "<br>" + '<hr/>' +
-                            "Your Sign Group ID: " + userSignGroupId + "<br>" + '<hr/>' +
-                            "Your Sign is: " + userSign + "<br>" + '<hr/>'
-                            );
+					$('#dayPageUserOutput').html(htmltxt);
 				}
 				else{
 					alert('No Signs found');
