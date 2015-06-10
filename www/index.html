@@ -203,13 +203,13 @@ under the License.
 			var date01 = "1900-01-01";
 
 			function getNumberOfDays() {
-				alert(daydiff(parseDate($('#bday').val()), parseDate(date01)));
+				//alert(daydiff(parseDate($('#bday').val()), parseDate(date01)));
 
 			}
 
 			function parseDate(str) {
 				var mdy = str.split('-');
-				//alert(mdy[0] +  mdy[1]-1 +  mdy[2]);
+				////alert(mdy[0] +  mdy[1]-1 +  mdy[2]);
 				return new Date(mdy[0], mdy[1] - 1, mdy[2]);
 			}
 
@@ -249,14 +249,14 @@ under the License.
 			function getLatLong(address) {
 				geocoder.geocode({'address': address}, function (results, status) {
 					if (status == google.maps.GeocoderStatus.OK) {
-//						alert("before");
+//						//alert("before");
 						lat = results[0].geometry.location.lat();
 						long = results[0].geometry.location.lng();
 //						alert ("lat: " + lat + " Long: " + long);
 						goToMapPage();
 						//getMagXml(lat, long);
 					} else {
-						alert('Geocode was not successful for the following reason: ' + status);
+						//alert('Geocode was not successful for the following reason: ' + status);
 					}
 				});
 			}
@@ -274,7 +274,7 @@ under the License.
 					success: function (xml) {
 						var Magnetic = $(xml).find('declination').first().text();
 
-//						alert("Magnetic "  + Magnetic);
+//						//alert("Magnetic "  + Magnetic);
 						$('#googlePageOutput').html("Lat: " + lat + "<br>" +
 								"Long: " + long + "<br>" +
 								"Magnetic North: " + Magnetic + "<br>");
@@ -338,7 +338,7 @@ under the License.
 					dataType: "xml",
 					success: function (xml) {
 						var magnatic = $(xml).find('declination').first().text();
-						alert(magnatic);
+						//alert(magnatic);
 					}
 				});
 			}
@@ -361,10 +361,10 @@ under the License.
 			
 			function usersExists(tx, results) {				
 				if (results.rows.length > 0){
-					alert('Found USERS');
+					//alert('Found USERS');
 				}
 				else{
-					alert('USERS not found... Creating new table');
+					//alert('USERS not found... Creating new table');
 					tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id unique, name, birthday, email, gender, signid)');
 				}
 				
@@ -373,10 +373,10 @@ under the License.
 			
 			function signsExists(tx, results) {	
 				if (results.rows.length > 0){
-					alert('Found SIGNS');
+					//alert('Found SIGNS');
 				}
 				else{
-					alert('SIGNS not found... Creating new table');
+					//alert('SIGNS not found... Creating new table');
 					tx.executeSql('CREATE TABLE IF NOT EXISTS SIGNS (signid, signgroupid, sign)');
 					
 					tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (0, 0, 'Rooster')");
@@ -397,10 +397,10 @@ under the License.
 			
 			function dobtosignExists(tx, results) {	
 				if (results.rows.length > 0){
-					alert('Found dobtosign');
+					//alert('Found dobtosign');
 				}
 				else{
-					alert('dobtosign not found... Creating new table');
+					//alert('dobtosign not found... Creating new table');
 					tx.executeSql('CREATE TABLE IF NOT EXISTS DOBTOSIGN (datestart, dateend, signid)');
 					
 					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19210208,19220127,0)");
@@ -520,10 +520,10 @@ under the License.
             
             function dayExists(tx, results) {	
 				if (results.rows.length > 0){
-					alert('Found DAY');
+					//alert('Found DAY');
 				}
 				else{
-					alert('DAY not found... Creating new table');
+					//alert('DAY not found... Creating new table');
 					tx.executeSql('CREATE TABLE IF NOT EXISTS DAY (id, number, day)');
 					
 					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (0,0,'Monday')");
@@ -552,7 +552,7 @@ under the License.
 			
             
 			function loadProfile(tx, results) {
-				alert('Loading Profile');
+				//alert('Loading Profile');
 				if (results.rows.length > 0){
                     //User Exists $('#resultPageOutput').html(htmlString);
                     userName = results.rows.item(0).name;
@@ -560,7 +560,7 @@ under the License.
                     database.transaction(getSign, errorCB);
 				}
 				else{
-					alert('No user found');
+					//alert('No user found');
                     $.mobile.changePage("#registerPage", {reverse: false, transition: "slide"});
 				}
 			}
@@ -571,7 +571,7 @@ under the License.
 			}
             
             function registerUser(tx) {
-                alert("atempting to register");
+                //alert("atempting to register");
 				var name = $('[name="fullname"]').val();
 				var bday = $('[name="bday"]').val().replace(/-/g, '').toString();
 				var email = $('[name="email"]').val();
@@ -581,19 +581,19 @@ under the License.
 			}
 
             function getSign(tx) {
-				alert('DOB: ' + userDOB);
+				//alert('DOB: ' + userDOB);
 				var sql = "select * from signs where signid = (select signid from DOBTOSIGN where " + userDOB + " between datestart and dateend)";
-				alert("SQL: " + sql);
+				//alert("SQL: " + sql);
 				tx.executeSql(sql, [], loadSign, errorCB);
 			}
             
 			function loadSign(tx, results) {
-				alert('loadSign ');
+				//alert('loadSign ');
 				if (results.rows.length > 0){
                     userSignId = results.rows.item(0).signid;
                     userSignGroupId = results.rows.item(0).signgroupid;
                     userSign = results.rows.item(0).sign;
-                    alert("Sign ID: " + userSignId + " Sign Group ID: " + userSignGroupId + " Sign: " + userSign);
+                    //alert("Sign ID: " + userSignId + " Sign Group ID: " + userSignGroupId + " Sign: " + userSign);
                     $.mobile.changePage("#dayPage", {reverse: false, transition: "slide"});
 					$('#dayPageUserOutput').html("Welcome " + userName + "<br>" + '<hr/>'+
                             "Your Sign ID: " + userSignId + "<br>" + '<hr/>' +
@@ -602,7 +602,7 @@ under the License.
                             );
 				}
 				else{
-					alert('No Signs found');
+					//alert('No Signs found');
 				}
 			}
 
@@ -639,22 +639,22 @@ under the License.
 
 			
 			function getDay(tx) {
-				var number = $('#number').val();
+//				var number = $('#number').val();
 				var offset = daydiff(parseDate(date01), parseDate($('#dayPagePicker').val())) % 4;
-				alert('number: ' + number);
-				alert('Offset: ' + offset);
+//				//alert('number: ' + number);
+				//alert('Offset: ' + offset);
 				var sql = "SELECT * FROM DAY WHERE number = " + offset + " AND id = " + userSignGroupId;
-				alert("SQL: " + sql);
+				//alert("SQL: " + sql);
 				tx.executeSql(sql, [], renderDay, errorCB);
 			}
 
 			function renderDay(tx, results) {
-				alert('render day');
+				//alert('render day');
 				if (results.rows.length > 0){
 					$('#dayPageOutput').html("Your Day Is: " + results.rows.item(0).day + "<br>" + '<hr/>');
 				}
 				else{
-					alert('No results found');
+					//alert('No results found');
 					tx.executeSql('SELECT * FROM day', [], renderDayList, errorCB);
 				}
 			}
@@ -676,16 +676,13 @@ under the License.
 			}
 
 			function errorCB(error) {
-				alert('Error: ' + error.message + ' code: ' + error.code);
+				//alert('Error: ' + error.message + ' code: ' + error.code);
 			}
 
 			function successCB() {
 				console.log("Database Successfully Created");
 			}
 
-			
-			
-			
 			function determineSign(){
 				database.transaction(getSign, errorCB);
 			}
