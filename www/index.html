@@ -581,11 +581,12 @@ under the License.
 			}
             
             function registerUser(tx) {
+                alert("atempting to register");
 				var name = $('[name="fullname"]').val();
 				var bday = $('[name="bday"]').val().replace(/-/g, '').toString();
 				var email = $('[name="email"]').val();
 				var gender = $("#gender :radio:checked").val();
-				var sql = 'INSERT INTO USERS (name, birthday, email, gender) VALUES (?,?,?,?,?)';
+				var sql = 'INSERT INTO USERS (name, birthday, email, gender) VALUES (?,?,?,?)';
 				tx.executeSql(sql, [name, bday, email, gender], loadUserProfile, errorCB);
 			}
 
