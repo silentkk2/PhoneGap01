@@ -176,8 +176,6 @@ under the License.
                 <input type="date" name="dayPagePicker" id="dayPagePicker">
 				<br/>
                 <input type="submit" data-inline="true" value="Calculate Day" onclick="calculateDay();">
-				<br/>
-				<input type="submit" data-inline="true" value="Sign" onclick="determineSign();">
 				<hr/>
                 <div id="dayPageOutput">
                 </div>
@@ -645,7 +643,7 @@ under the License.
 				var offset = daydiff(parseDate(date01), parseDate($('#dayPagePicker').val())) % 4;
 				alert('number: ' + number);
 				alert('Offset: ' + offset);
-				var sql = "SELECT * FROM DAY WHERE number = " + signid + " AND id = " + offset;
+				var sql = "SELECT * FROM DAY WHERE number = " + offset + " AND id = " + userSignGroupId;
 				alert("SQL: " + sql);
 				tx.executeSql(sql, [], renderDay, errorCB);
 			}
@@ -653,7 +651,7 @@ under the License.
 			function renderDay(tx, results) {
 				alert('render day');
 				if (results.rows.length > 0){
-					$('#dayPageOutput').html("Day: " + results.rows.item(0).day + "<br>" + '<hr/>');
+					$('#dayPageOutput').html("Your Day Is: " + results.rows.item(0).day + "<br>" + '<hr/>');
 				}
 				else{
 					alert('No results found');
