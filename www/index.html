@@ -595,7 +595,7 @@ under the License.
                     userSign = results.rows.item(0).sign;
                     var htmltxt = "Welcome " + userName + "<br>" + '<hr/>'+
                             "Your Sign is: <br>" +
-                            "<img src='" + userSign + ".png' alt='" + userSign + "' >" + '<hr/>';
+                            "<img src='img/" + userSign + ".png' alt='" + userSign + "' >" + '<hr/>';
                     alert(htmltxt);
                     $.mobile.changePage("#dayPage", {reverse: false, transition: "slide"});
 					$('#dayPageUserOutput').html(htmltxt);
