@@ -65,7 +65,22 @@ under the License.
                 <h1>Tito Was Here</h1>
             </div>
             <div data-role="content">
-                <form method="POST" onsubmit="return submitToDatabase()" data-ajax="false">
+                Welcome
+                <a href="#" onclick="getXml()">Get NOAA XML</a>
+                <a href="#" onclick="getNumberOfDays()">Number Of Days</a>
+                <a href="#" onclick="getAllTables()">All Tables</a>
+                <br>
+                <a href="#googlePage" data-transition="slide"> Google </a>
+                <a href="#dayPage" data-transition="slide"> Day </a>
+            </div>
+        </div>
+        
+        <div data-role="page" id="registerPage" >
+            <div data-role="header" data-position="fixed">
+                <h1>Please Register</h1>
+            </div>
+            <div data-role="content">
+                <form method="POST" onsubmit="return register()" data-ajax="false">
                     <div class="ui-field-contain">
                         <label for="fullname">Full name:</label>
                             <input type="text" name="fullname" id="fullname" data-clear-btn="true">       
@@ -84,13 +99,6 @@ under the License.
                     <br/>
                     <input type="submit" data-inline="true" value="Submit To DB">
                 </form>
-                
-                <a href="#" onclick="getXml()">Get NOAA XML</a>
-                <a href="#" onclick="getNumberOfDays()">Number Of Days</a>
-                <a href="#" onclick="getAllTables()">All Tables</a>
-                <br>
-                <a href="#googlePage" data-transition="slide"> Google </a>
-                <a href="#dayPage" data-transition="slide"> Day </a>
             </div>
         </div>
         
@@ -160,6 +168,8 @@ under the License.
                 <h1>Day Page</h1>
             </div>
             <div data-role="content"  id="dayPageContent">
+                <div id="dayPageUserOutput">
+                </div>
 				<label for="number">Number:</label>
                 <input type="text" name="number" id="number">
 				<label for="dayPagePicker">Date:</label>
@@ -184,6 +194,13 @@ under the License.
 			var long;
 			var mapOrientation = 0;
 			var lightstate = false;
+            var userName;
+            var userDOB;
+            var userSign;
+            var userSignId;
+            var userSignGroupId;
+            
+            var signid;
 
 			var date01 = "1900-01-01";
 
@@ -332,51 +349,29 @@ under the License.
 			document.addEventListener("deviceready", onDeviceReady, false);
 
 			function onDeviceReady() {
-				database = window.openDatabase("Database", "1.0", "Test DB", 2 * 1024 * 1024);
+				database = window.openDatabase("Database", "1.0", "PhoneGap01 DB", 10 * 1024 * 1024);
 				database.transaction(createDB, errorCB, successCB);
+                database.transaction(loadUserProfile, errorCB);
 			}
 
 			function createDB(tx) {
-				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='TEST1'", [], test1Exists, errorCB);
-				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DAY'", [], dayExists, errorCB);
+				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='USERS'", [], usersExists, errorCB);
 				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='SIGNS'", [], signsExists, errorCB);
 				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DOBTOSIGN'", [], dobtosignExists, errorCB);
+				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DAY'", [], dayExists, errorCB);
 			}
 			
-			function test1Exists(tx, results) {				
+			function usersExists(tx, results) {				
 				if (results.rows.length > 0){
-					alert('Found Test1');
+					alert('Found USERS');
 				}
 				else{
-					alert('Test1 not found... Creating new table');
-					tx.executeSql('CREATE TABLE IF NOT EXISTS TEST1 (id unique, name, birthday, email, gender)');
+					alert('USERS not found... Creating new table');
+					tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id unique, name, birthday, email, gender, signid)');
 				}
 				
 			}
 			
-			function dayExists(tx, results) {	
-				if (results.rows.length > 0){
-					alert('Found DAY');
-				}
-				else{
-					alert('DAY not found... Creating new table');
-					tx.executeSql('CREATE TABLE IF NOT EXISTS DAY (id, number, day)');
-					
-					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (0,0,'Monday')");
-					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,0,'Wednesday')");
-					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,0,'Thursday')");
-					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,0,'Friday')");
-					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,1,'Monday')");
-					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,1,'Wednesday')");
-					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (0,1,'Thursday')");
-					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,1,'Friday')");
-					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,2,'Monday')");
-					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,2,'Wednesday')");
-					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (0,2,'Thursday')");
-					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,2,'Friday')");
-				}
-				
-			}
 			
 			function signsExists(tx, results) {	
 				if (results.rows.length > 0){
@@ -384,20 +379,20 @@ under the License.
 				}
 				else{
 					alert('SIGNS not found... Creating new table');
-					tx.executeSql('CREATE TABLE IF NOT EXISTS SIGNS (signid, sign)');
+					tx.executeSql('CREATE TABLE IF NOT EXISTS SIGNS (signid, signgroupid, sign)');
 					
-					tx.executeSql("INSERT INTO SIGNS (signid, sign) values (0, 'Rooster')");
-					tx.executeSql("INSERT INTO SIGNS (signid, sign) values (1, 'Dog')");
-					tx.executeSql("INSERT INTO SIGNS (signid, sign) values (2, 'Pig')");
-					tx.executeSql("INSERT INTO SIGNS (signid, sign) values (3, 'Rat')");
-					tx.executeSql("INSERT INTO SIGNS (signid, sign) values (4, 'Ox')");
-					tx.executeSql("INSERT INTO SIGNS (signid, sign) values (5, 'Tiger')");
-					tx.executeSql("INSERT INTO SIGNS (signid, sign) values (6, 'Rabbit')");
-					tx.executeSql("INSERT INTO SIGNS (signid, sign) values (7, 'Dragon')");
-					tx.executeSql("INSERT INTO SIGNS (signid, sign) values (8, 'Snake')");
-					tx.executeSql("INSERT INTO SIGNS (signid, sign) values (9, 'Horse')");
-					tx.executeSql("INSERT INTO SIGNS (signid, sign) values (10, 'Ram')");
-					tx.executeSql("INSERT INTO SIGNS (signid, sign) values (11, 'Monkey')");
+					tx.executeSql("INSERT INTO SIGNS (signid, signgroupi, sign) values (0, 0, 'Rooster')");
+					tx.executeSql("INSERT INTO SIGNS (signid, signgroupi, sign) values (1, 0, 'Dog')");
+					tx.executeSql("INSERT INTO SIGNS (signid, signgroupi, sign) values (2, 0, 'Pig')");
+					tx.executeSql("INSERT INTO SIGNS (signid, signgroupi, sign) values (3, 1, 'Rat')");
+					tx.executeSql("INSERT INTO SIGNS (signid, signgroupi, sign) values (4, 1, 'Ox')");
+					tx.executeSql("INSERT INTO SIGNS (signid, signgroupi, sign) values (5, 1, 'Tiger')");
+					tx.executeSql("INSERT INTO SIGNS (signid, signgroupi, sign) values (6, 2, 'Rabbit')");
+					tx.executeSql("INSERT INTO SIGNS (signid, signgroupi, sign) values (7, 2, 'Dragon')");
+					tx.executeSql("INSERT INTO SIGNS (signid, signgroupi, sign) values (8, 2, 'Snake')");
+					tx.executeSql("INSERT INTO SIGNS (signid, signgroupi, sign) values (9, 3, 'Horse')");
+					tx.executeSql("INSERT INTO SIGNS (signid, signgroupi, sign) values (10, 3, 'Ram')");
+					tx.executeSql("INSERT INTO SIGNS (signid, signgroupi, sign) values (11, 3, 'Monkey')");
 				}
 				
 			}
@@ -524,8 +519,149 @@ under the License.
 				}
 				
 			}
+            
+            function dayExists(tx, results) {	
+				if (results.rows.length > 0){
+					alert('Found DAY');
+				}
+				else{
+					alert('DAY not found... Creating new table');
+					tx.executeSql('CREATE TABLE IF NOT EXISTS DAY (id, number, day)');
+					
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (0,0,'Monday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,0,'Wednesday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,0,'Thursday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,0,'Friday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,1,'Monday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,1,'Wednesday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (0,1,'Thursday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,1,'Friday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,2,'Monday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,2,'Wednesday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (0,2,'Thursday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,2,'Friday')");
+                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,3,'Monday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,3,'Wednesday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,3,'Thursday')");
+					tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,3,'Friday')");
+				}
+				
+			}
 			
+			function loadUserProfile(tx) {
+				tx.executeSql("SELECT * FROM USERS", [], loadProfile, errorCB);
+			}
 			
+            
+			function loadProfile(tx, results) {
+				alert('Loading Profile');
+				if (results.rows.length > 0){
+                    //User Exists $('#resultPageOutput').html(htmlString);
+                    userName = results.rows.item(0).name;
+                    userDOB = results.rows.item(0).birthday;
+                    
+                    database.transaction(getSign, errorCB);
+                    
+                    $.mobile.changePage("#dayPage", {reverse: false, transition: "slide"});
+					$('#dayPageUserOutput').html("Welcome " + userName + "<br>" + '<hr/>'+
+                            "Your Sign ID: " + userSignId + "<br>" + '<hr/>' +
+                            "Your Sign Group ID: " + userSignGroupId + "<br>" + '<hr/>' +
+                            "Your Sign is: " + userSign + "<br>" + '<hr/>'
+                            );
+				}
+				else{
+					alert('No user found');
+                    $.mobile.changePage("#registerPage", {reverse: false, transition: "slide"});
+				}
+			}
+			
+            function register() {
+				database.transaction(registerUser, errorCB);
+				return false;
+			}
+            
+            function registerUser(tx) {
+				var name = $('[name="fullname"]').val();
+				var bday = $('[name="bday"]').val().replace(/-/g, '').toString();
+				var email = $('[name="email"]').val();
+				var gender = $("#gender :radio:checked").val();
+				var sql = 'INSERT INTO USERS (name, birthday, email, gender) VALUES (?,?,?,?,?)';
+				tx.executeSql(sql, [name, bday, email, gender], loadUserProfile, errorCB);
+			}
+
+            function getSign(tx) {
+				alert('DOB: ' + userDOB);
+				var sql = "select * from signs where signid = (select signid from DOBTOSIGN where " + userDOB + " between datestart and dateend)";
+				alert("SQL: " + sql);
+				tx.executeSql(sql, [], loadSign, errorCB);
+			}
+            
+			function loadSign(tx, results) {
+				alert('loadSign ');
+				if (results.rows.length > 0){
+                    userSignId = results.rows.item(0).signid;
+                    userSignGroupId = results.rows.item(0).signgroupid;
+                    userSign = results.rows.item(0).sign;
+				}
+				else{
+					alert('No Signs found');
+				}
+			}
+
+			function queryDB(tx) {
+				tx.executeSql('SELECT * FROM USERS', [], renderList, errorCB);
+			}
+
+			function renderList(tx, results) {
+				var htmlString = '';
+				var len = results.rows.length;
+
+				for (var i = 0; i < len; i++) {
+					htmlString += "Full Name: " + results.rows.item(i).name + "<br>" +
+							"Gender: " + results.rows.item(i).gender + "<br>" +
+							"Date of Birth: " + results.rows.item(i).birthday + "<br>" +
+							"Email: " + results.rows.item(i).email + '<hr/>';
+				}
+				$.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
+				$('#resultPageOutput').html(htmlString);
+			}
+            
+			function renderDayList(tx, results) {
+				var htmlString = '';
+				var len = results.rows.length;
+
+				for (var i = 0; i < len; i++) {
+					htmlString += "ID: " + results.rows.item(i).id + "<br>" +
+							"number: " + results.rows.item(i).number + "<br>" +
+							"Day: " + results.rows.item(i).day + "<br>" + '<hr/>';
+				}
+				$.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
+				$('#resultPageOutput').html(htmlString);
+			}
+
+			
+			function getDay(tx) {
+				var number = $('#number').val();
+				var offset = daydiff(parseDate(date01), parseDate($('#dayPagePicker').val())) % 4;
+				alert('number: ' + number);
+				alert('Offset: ' + offset);
+				var sql = "SELECT * FROM DAY WHERE number = " + signid + " AND id = " + offset;
+				alert("SQL: " + sql);
+				tx.executeSql(sql, [], renderDay, errorCB);
+			}
+
+			function renderDay(tx, results) {
+				alert('render day');
+				if (results.rows.length > 0){
+					$('#dayPageOutput').html("Day: " + results.rows.item(0).day + "<br>" + '<hr/>');
+				}
+				else{
+					alert('No results found');
+					tx.executeSql('SELECT * FROM day', [], renderDayList, errorCB);
+				}
+			}
+			
+            
 			function getTables(tx) {
 				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table'", [], renderTables, errorCB);
 			}
@@ -549,88 +685,8 @@ under the License.
 				console.log("Database Successfully Created");
 			}
 
-			function insertDB(tx) {
-				var name = $('[name="fullname"]').val();
-				var bday = $('[name="bday"]').val();
-				var email = $('[name="email"]').val();
-				var gender = $("#gender :radio:checked").val();
-				var sql = 'INSERT INTO TEST1 (name, birthday, email, gender) VALUES (?,?,?,?)';
-
-				tx.executeSql(sql, [name, bday, email, gender], queryDB, errorCB);
-			}
-
-			function queryDB(tx) {
-				tx.executeSql('SELECT * FROM TEST1', [], renderList, errorCB);
-			}
-
-			function renderList(tx, results) {
-				var htmlString = '';
-				var len = results.rows.length;
-
-				for (var i = 0; i < len; i++) {
-					htmlString += "Full Name: " + results.rows.item(i).name + "<br>" +
-							"Gender: " + results.rows.item(i).gender + "<br>" +
-							"Date of Birth: " + results.rows.item(i).birthday + "<br>" +
-							"Email: " + results.rows.item(i).email + '<hr/>';
-				}
-				$.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
-				$('#resultPageOutput').html(htmlString);
-			}
 			
-			function renderDayList(tx, results) {
-				var htmlString = '';
-				var len = results.rows.length;
-
-				for (var i = 0; i < len; i++) {
-					htmlString += "ID: " + results.rows.item(i).id + "<br>" +
-							"number: " + results.rows.item(i).number + "<br>" +
-							"Day: " + results.rows.item(i).day + "<br>" + '<hr/>';
-				}
-				$.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
-				$('#resultPageOutput').html(htmlString);
-			}
-
 			
-			function getSign(tx) {
-				var bday = $('#dayPagePicker').val().replace(/-/g, '').toString();
-				
-				alert('DOB: ' + bday);
-				var sql = "select sign from signs where signid = (select signid from DOBTOSIGN where " + bday + " between datestart and dateend)";
-				alert("SQL: " + sql);
-				tx.executeSql(sql, [], renderSign, errorCB);
-			}
-			
-			function getDay(tx) {
-				var number = $('#number').val();
-				var offset = daydiff(parseDate(date01), parseDate($('#dayPagePicker').val())) % 4;
-				alert('number: ' + number);
-				alert('Offset: ' + offset);
-				var sql = "SELECT day FROM DAY WHERE number = " + number + " AND id = " + offset;
-				alert("SQL: " + sql);
-				tx.executeSql(sql, [], renderDay, errorCB);
-			}
-
-			function renderDay(tx, results) {
-				alert('render day');
-				if (results.rows.length > 0){
-					$('#dayPageOutput').html("Day: " + results.rows.item(0).day + "<br>" + '<hr/>');
-				}
-				else{
-					alert('No results found');
-					tx.executeSql('SELECT * FROM day', [], renderDayList, errorCB);
-				}
-			}
-			
-			function renderSign(tx, results) {
-				alert('render sign');
-				if (results.rows.length > 0){
-					$('#dayPageOutput').html("SIGN: " + results.rows.item(0).sign + "<br>" + '<hr/>');
-				}
-				else{
-					alert('No results found');
-					tx.executeSql('SELECT * FROM SIGNS', [], renderDayList, errorCB);
-				}
-			}
 			
 			function determineSign(){
 				database.transaction(getSign, errorCB);
@@ -641,10 +697,7 @@ under the License.
 			}
 			
 
-			function submitToDatabase() {
-				database.transaction(insertDB, errorCB);
-				return false;
-			}
+			
 
 			function getAllTables() {
 				database.transaction(getTables, errorCB);
