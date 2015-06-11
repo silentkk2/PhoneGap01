@@ -529,6 +529,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 			}
 			
 			function loadUserProfile(tx) {
+				alert('Load user profile:');
 				tx.executeSql("SELECT * FROM USERS", [], loadProfile, errorCB);
 			}
 			
@@ -553,7 +554,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 			}
             
             function registerUser(tx) {
-                //alert("atempting to register");
+                alert("atempting to register");
 				var name = $('[name="fullname"]').val();
 				var bday = $('[name="bday"]').val().replace(/-/g, '').toString();
 				var email = $('[name="email"]').val();
@@ -588,6 +589,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 			}
 
 			function deleteUser(tx){
+				alert('deleting user profile');
 				tx.executeSql('DELETE FROM USERS', loadUserProfile, errorCB);
 			}
 
