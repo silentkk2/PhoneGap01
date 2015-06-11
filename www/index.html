@@ -534,7 +534,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 			
             
 			function loadProfile(tx, results) {
-				//alert('Loading Profile');
+				alert('Loading Profile');
 				if (results.rows.length > 0){
                     //User Exists $('#resultPageOutput').html(htmlString);
                     userName = results.rows.item(0).name;
@@ -661,7 +661,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 			}
 
 			function errorCB(error) {
-				//alert('Error: ' + error.message + ' code: ' + error.code);
+				alert('Error: ' + error.message + ' code: ' + error.code);
 			}
 
 			function successCB() {
