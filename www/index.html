@@ -17,7 +17,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
         <style type="text/css">
-            
+
             #map{ 
                 width: 500px;
                 height: 500px;
@@ -27,7 +27,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 margin-top: -250px;
                 margin-left: -250px;
             }
-            
+
             #mapContent{
                 width: 300px;
                 height: 300px;
@@ -36,12 +36,12 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 overflow: hidden;
                 float: left;
             }
-            
+
         </style>
         <title>Hello World</title>
     </head>
     <body>
-        
+
         <div data-role="page" id="index" >
             <div data-role="header" data-position="fixed">
                 <h1>Tito Was Here</h1>
@@ -56,7 +56,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 <a href="#dayPage" data-transition="slide"> Day </a>
             </div>
         </div>
-        
+
         <div data-role="page" id="registerPage" >
             <div data-role="header" data-position="fixed">
                 <h1></h1>
@@ -66,31 +66,30 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     <form method="POST" onsubmit="return register()" data-ajax="false">
                         <div class="ui-field-contain">
                             <!--<label for="fullname">Full name:</label>-->
-                                <!--<input type="text" name="fullname" id="fullname" data-clear-btn="true">-->              
-                                <!--<input type="hidden" name="fullname" id="fullname" data-clear-btn="true">-->       
+                            <!--<input type="text" name="fullname" id="fullname" data-clear-btn="true">-->              
+                            <!--<input type="hidden" name="fullname" id="fullname" data-clear-btn="true">-->       
                             <h2>David Cho's Zodiac Guide</h2>
                             <h1>What the Luck?</h1>
                             <br/>
                             <h3>Enter your date of birth to know the strength of your luck FOREVER!</h3>
-                                <input type="date" name="bday" id="bday">
-    <!--                        <label for="email">E-mail:</label>
-                                <input type="email" name="email" id="email" placeholder="Your email..">-->
+                            <input type="date" name="bday" id="bday">
+                            <!--                        <label for="email">E-mail:</label>
+                                                        <input type="email" name="email" id="email" placeholder="Your email..">-->
                         </div>
-    <!--                    <fieldset data-role="controlgroup" data-type="horizontal" id="gender">
-                            <legend>Choose your gender:</legend>
-                            <label for="male">Male</label>
-                                <input type="radio" name="gender" id="male" value="male">
-                            <label for="female">Female</label>
-                                <input type="radio" name="gender" id="female" value="female">	
-                        </fieldset>-->
+                        <!--                    <fieldset data-role="controlgroup" data-type="horizontal" id="gender">
+                                                <legend>Choose your gender:</legend>
+                                                <label for="male">Male</label>
+                                                    <input type="radio" name="gender" id="male" value="male">
+                                                <label for="female">Female</label>
+                                                    <input type="radio" name="gender" id="female" value="female">	
+                                            </fieldset>-->
                         <br/>
                         <input type="submit" data-inline="true" value="Submit To DB">
                     </form>
-                    
                 </center>
             </div>
         </div>
-        
+
         <div data-role="page" id="resultPage" data-theme="b">
             <div data-role="header"  id="resultPageHeader" data-position="fixed">
                 <a href="#index" data-transition="slide" data-direction="reverse" data-icon="home"> Home </a>
@@ -98,7 +97,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             </div>
             <div data-role="content"  id="resultPageContent">
                 <div id="resultPageOutput">
-                    
+
                 </div>
             </div>
             <div data-role="footer" id ="resultPageFooter" data-position="fixed">
@@ -112,18 +111,18 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 <h1>Google Page</h1>
             </div>
             <div data-role="content"  id="googlePageContent">
-				<form method="POST" onsubmit="return getMagnaticNorth()" data-ajax="false">
-					<label for="street">Street:</label>
-					<input type="text" name="street" id="street" data-clear-btn="true">  
-					<label for="city">City</label>
-					<input type="text" name="city" id="city" data-clear-btn="true">  
-					<label for="state">State:</label>
-					<input type="text" name="state" id="state" data-clear-btn="true">  
-					<label for="zip">Zip:</label>
-					<input type="text" name="zip" id="zip" data-clear-btn="true">  
-					<input type="submit" data-inline="true" value="Submit">
-				</form>
-				<hr/>
+                <form method="POST" onsubmit="return getMagnaticNorth()" data-ajax="false">
+                    <label for="street">Street:</label>
+                    <input type="text" name="street" id="street" data-clear-btn="true">  
+                    <label for="city">City</label>
+                    <input type="text" name="city" id="city" data-clear-btn="true">  
+                    <label for="state">State:</label>
+                    <input type="text" name="state" id="state" data-clear-btn="true">  
+                    <label for="zip">Zip:</label>
+                    <input type="text" name="zip" id="zip" data-clear-btn="true">  
+                    <input type="submit" data-inline="true" value="Submit">
+                </form>
+                <hr/>
                 <div id="googlePageOutput">
                 </div>
             </div>
@@ -131,7 +130,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 <h4><a href="#" data-transition="slide" onclick="goToMapPage();"> Map </a></h4>
             </div>
         </div>
-        
+
         <div data-role="page" id="mappage">
             <div data-role="header" id="mapHeader" data-position="fixed">
                 <a href="#googlePage" data-transition="slide" data-direction="reverse" data-icon="home"> Google </a>
@@ -150,372 +149,375 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 <button type="button" onclick="rotateMapLeft10()" value="10 Left"></button>
             </div>
         </div>
-        
+
         <div data-role="page" id="dayPage" >
             <div data-role="header"  id="dayPageHeader" data-position="fixed">
-                
+
                 <h1>David Cho's Zodiac Guide</h1>
             </div>
             <div data-role="content"  id="dayPageContent">
-                <div id="dayPageUserOutput">
-                </div>
-                <h3>LUCK of the DAY</h3>
-		<!-- 		<label for="number">Number:</label>
-                <input type="text" name="number" id="number">	 -->
-				<label for="dayPagePicker">Date:</label>
-                <input type="date" name="dayPagePicker" id="dayPagePicker">
-				<br/>
-                <input type="submit" data-inline="true" value="Calculate Day" onclick="calculateDay();">
-				<hr/>
-                <div id="dayPageOutput">
-                </div>
+                <center>
+                    <div id="dayPageUserOutput">
+                    </div>
+                    <h1>LUCK of the DAY</h1>
+                    <!-- 		<label for="number">Number:</label>
+                    <input type="text" name="number" id="number">	 -->
+                    <!--                                    <label for="dayPagePicker">Date:</label>-->
+                    <div id="todayLuck"></div>
+                    <input type="date" name="dayPagePicker" id="dayPagePicker">
+                    <br/>
+                    <input type="submit" data-inline="true" value="Calculate Day" onclick="calculateDay();">
+                    <hr/>
+                    <div id="dayPageOutput">
+                    </div>
+                </center>
             </div>
             <div data-role="footer" id ="dayPageFooter" data-position="fixed">
-                <h4><a href="#" data-transition="slide" data-direction="reverse" data-icon="home" onclick="newUser();"> Reset </a></h4>
+                <a href="#" data-transition="slide" data-direction="reverse" onclick="newUser();"> Reset </a>
             </div>
         </div>
 
         <script type="text/javascript">
 
-			var map;
-			var lat;
-			var long;
-			var mapOrientation = 0;
-			var lightstate = false;
+            var map;
+            var lat;
+            var long;
+            var mapOrientation = 0;
+            var lightstate = false;
             var userName;
             var userDOB;
             var userSign;
             var userSignId;
             var userSignGroupId;
-            
+
             var signid;
 
-			var date01 = "1900-01-01";
+            var date01 = "1900-01-01";
 
-			function getNumberOfDays() {
-				alert(daydiff(parseDate($('#bday').val()), parseDate(date01)));
+            function getNumberOfDays() {
+                alert(daydiff(parseDate($('#bday').val()), parseDate(date01)));
 
-			}
+            }
 
-			function parseDate(str) {
-				var mdy = str.split('-');
-				////alert(mdy[0] +  mdy[1]-1 +  mdy[2]);
-				return new Date(mdy[0], mdy[1] - 1, mdy[2]);
-			}
+            function parseDate(str) {
+                var mdy = str.split('-');
+                ////alert(mdy[0] +  mdy[1]-1 +  mdy[2]);
+                return new Date(mdy[0], mdy[1] - 1, mdy[2]);
+            }
 
-			function daydiff(first, second) {
-				return Math.ceil(Math.abs((second.getTime() - first.getTime())) / (1000 * 60 * 60 * 24));
-			}
-
-
-
-			function goToMapPage() {
-				initializeMap(lat, long);
-
-				$.mobile.changePage("#mappage", {reverse: false, transition: "slide"});
-
-			}
-
-			function lockMap() {
-				map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
-			}
-
-			function initializeMap(lat, long) {
-				var latlong = new google.maps.LatLng(lat, long);
-
-				var mapOptions = {
-					zoom: 20,
-					center: latlong,
-					mapTypeId: google.maps.MapTypeId.HYBRID
-				};
-
-				map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-			}
+            function daydiff(first, second) {
+                return Math.ceil(Math.abs((second.getTime() - first.getTime())) / (1000 * 60 * 60 * 24));
+            }
 
 
-			var geocoder = new google.maps.Geocoder();
 
-			function getLatLong(address) {
-				geocoder.geocode({'address': address}, function (results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
+            function goToMapPage() {
+                initializeMap(lat, long);
+
+                $.mobile.changePage("#mappage", {reverse: false, transition: "slide"});
+
+            }
+
+            function lockMap() {
+                map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
+            }
+
+            function initializeMap(lat, long) {
+                var latlong = new google.maps.LatLng(lat, long);
+
+                var mapOptions = {
+                    zoom: 20,
+                    center: latlong,
+                    mapTypeId: google.maps.MapTypeId.HYBRID
+                };
+
+                map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+            }
+
+
+            var geocoder = new google.maps.Geocoder();
+
+            function getLatLong(address) {
+                geocoder.geocode({'address': address}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
 //						//alert("before");
-						lat = results[0].geometry.location.lat();
-						long = results[0].geometry.location.lng();
+                        lat = results[0].geometry.location.lat();
+                        long = results[0].geometry.location.lng();
 //						alert ("lat: " + lat + " Long: " + long);
-						goToMapPage();
-						//getMagXml(lat, long);
-					} else {
-						//alert('Geocode was not successful for the following reason: ' + status);
-					}
-				});
-			}
+                        goToMapPage();
+                        //getMagXml(lat, long);
+                    } else {
+                        //alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            }
 
-			function getMagXml(lat, long) {
-				$.ajax({
-					type: 'GET',
-					url: "http://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination",
-					data: {
-						lat1: lat,
-						lon1: long,
-						resultFormat: "xml"
-					},
-					dataType: "xml",
-					success: function (xml) {
-						var Magnetic = $(xml).find('declination').first().text();
+            function getMagXml(lat, long) {
+                $.ajax({
+                    type: 'GET',
+                    url: "http://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination",
+                    data: {
+                        lat1: lat,
+                        lon1: long,
+                        resultFormat: "xml"
+                    },
+                    dataType: "xml",
+                    success: function(xml) {
+                        var Magnetic = $(xml).find('declination').first().text();
 
 //						//alert("Magnetic "  + Magnetic);
-						$('#googlePageOutput').html("Lat: " + lat + "<br>" +
-								"Long: " + long + "<br>" +
-								"Magnetic North: " + Magnetic + "<br>");
-					}
-				});
-			}
+                        $('#googlePageOutput').html("Lat: " + lat + "<br>" +
+                                "Long: " + long + "<br>" +
+                                "Magnetic North: " + Magnetic + "<br>");
+                    }
+                });
+            }
 
-			function getMagnaticNorth() {
-				var street = $('[name="street"]').val();
-				var city = $('[name="city"]').val();
-				var state = $('[name="state"]').val();
-				var zip = $('[name="zip"]').val();
-				var address = street + city + state + zip;
+            function getMagnaticNorth() {
+                var street = $('[name="street"]').val();
+                var city = $('[name="city"]').val();
+                var state = $('[name="state"]').val();
+                var zip = $('[name="zip"]').val();
+                var address = street + city + state + zip;
 
-				getLatLong(address);
+                getLatLong(address);
 
-				return false;
-			}
+                return false;
+            }
 
-			function rotateMapRight5() {
-				mapOrientation += 5;
-				$('#map').animate({
-					rotate: mapOrientation
-				}, 0);
-				window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
-			}
+            function rotateMapRight5() {
+                mapOrientation += 5;
+                $('#map').animate({
+                    rotate: mapOrientation
+                }, 0);
+                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+            }
 
-			function rotateMapRight10() {
-				mapOrientation += 10;
-				$('#map').animate({
-					rotate: mapOrientation
-				}, 0);
-				window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
-			}
+            function rotateMapRight10() {
+                mapOrientation += 10;
+                $('#map').animate({
+                    rotate: mapOrientation
+                }, 0);
+                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+            }
 
-			function rotateMapLeft5() {
-				mapOrientation -= 5;
-				$('#map').animate({
-					rotate: mapOrientation
-				}, 0);
-				window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
-			}
+            function rotateMapLeft5() {
+                mapOrientation -= 5;
+                $('#map').animate({
+                    rotate: mapOrientation
+                }, 0);
+                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+            }
 
-			function rotateMapLeft10() {
-				mapOrientation -= 10;
-				$('#map').animate({
-					rotate: mapOrientation
-				}, 0);
-				window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
-			}
+            function rotateMapLeft10() {
+                mapOrientation -= 10;
+                $('#map').animate({
+                    rotate: mapOrientation
+                }, 0);
+                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+            }
 
-			function getXml() {
-				$.ajax({
-					type: 'GET',
-					url: "http://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination",
-					data: {
-						lat1: "34.055223",
-						lon1: "-118.413264",
-						resultFormat: "xml"
-					},
-					dataType: "xml",
-					success: function (xml) {
-						var magnatic = $(xml).find('declination').first().text();
-						//alert(magnatic);
-					}
-				});
-			}
+            function getXml() {
+                $.ajax({
+                    type: 'GET',
+                    url: "http://www.ngdc.noaa.gov/geomag-web/calculators/calculateDeclination",
+                    data: {
+                        lat1: "34.055223",
+                        lon1: "-118.413264",
+                        resultFormat: "xml"
+                    },
+                    dataType: "xml",
+                    success: function(xml) {
+                        var magnatic = $(xml).find('declination').first().text();
+                        //alert(magnatic);
+                    }
+                });
+            }
 
-			var database;
-			document.addEventListener("deviceready", onDeviceReady, false);
+            var database;
+            document.addEventListener("deviceready", onDeviceReady, false);
 
-			function onDeviceReady() {
-				database = window.openDatabase("Database", "1.0", "PhoneGap01 DB", 10 * 1024 * 1024);
-				database.transaction(createDB, errorCB, successCB);
+            function onDeviceReady() {
+                database = window.openDatabase("Database", "1.0", "PhoneGap01 DB", 10 * 1024 * 1024);
+                database.transaction(createDB, errorCB, successCB);
                 database.transaction(loadUserProfile, errorCB);
-			}
+            }
 
-			function createDB(tx) {
-				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='USERS'", [], usersExists, errorCB);
-				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='SIGNS'", [], signsExists, errorCB);
-				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DOBTOSIGN'", [], dobtosignExists, errorCB);
-				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DAY'", [], dayExists, errorCB);
-			}
-			
-			function usersExists(tx, results) {				
-				if (results.rows.length > 0){
-					//alert('Found USERS');
-				}
-				else{
-					//alert('USERS not found... Creating new table');
-					tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id unique, name, birthday, email, gender, signid)');
-				}
-				
-			}
-			
-			
-			function signsExists(tx, results) {	
-				if (results.rows.length > 0){
-					//alert('Found SIGNS');
-				}
-				else{
-					//alert('SIGNS not found... Creating new table');
-					tx.executeSql('CREATE TABLE IF NOT EXISTS SIGNS (signid, signgroupid, sign)');
-					
-					tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (1, 2, 'Rooster')");
-					tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (2, 3, 'Dog')");
-					tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (3, 4, 'Pig')");
-					tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (4, 1, 'Rat')");
-					tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (5, 2, 'Ox')");
-					tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (6, 3, 'Tiger')");
-					tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (7, 4, 'Rabbit')");
-					tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (8, 1, 'Dragon')");
-					tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (9, 2, 'Snake')");
-					tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (10, 3, 'Horse')");
-					tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (11, 4, 'Goat')");
-					tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (12, 1, 'Monkey')");
-				}
-				
-			}
-			
-			function dobtosignExists(tx, results) {	
-				if (results.rows.length > 0){
-					//alert('Found dobtosign');
-				}
-				else{
-					//alert('dobtosign not found... Creating new table');
-					tx.executeSql('CREATE TABLE IF NOT EXISTS DOBTOSIGN (datestart, dateend, signid)');
-					
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19210208,19220127,1)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19220128,19240204,2)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19240205,19250124,4)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19250125,19260212,5)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19260213,19270201,6)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19270202,19280122,7)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19280123,19299218,8)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19299219,19300129,9)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19300130,19310216,10)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19310217,19320205,11)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19320206,19330125,12)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19330126,19340213,1)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19340214,19350203,2)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19350204,19360123,3)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19360124,19370210,4)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19370211,19380130,5)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19380131,19390218,6)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19390219,19400207,7)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19400208,19410126,8)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19410127,19420214,9)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19420215,19430204,10)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19430205,19440124,11)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19440125,19450212,12)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19450213,19460201,1)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19460202,19470121,2)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19470122,19480209,4)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19480210,19490128,4)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19490129,19500216,5)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19500217,19510205,6)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19510206,19520126,7)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19520127,19530213,8)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19530214,19540202,9)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19540203,19550123,10)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19550124,19560211,11)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19560212,19570130,12)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19570131,19580217,1)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19580218,19590207,2)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19590208,19600127,3)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19600128,19610214,4)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19610215,19620204,5)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19620205,19630124,6)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19630125,19640212,7)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19640213,19650201,8)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19650202,19660120,9)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19660121,19670208,10)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19670209,19680129,11)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19680130,19690216,12)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19690217,19700205,1)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19700206,19710126,2)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19710127,19720214,3)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19720215,19730202,4)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19730203,19740122,5)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19740123,19750210,6)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19750211,19760130,7)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19760131,19770217,8)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19770218,19780206,9)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19780207,19790127,10)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19790128,19800215,11)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19800216,19810204,12)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19810205,19820124,1)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19820125,19830112,2)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19830113,19840201,3)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19840202,19850219,4)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19850220,19860208,5)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19860209,19870128,6)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19870129,19880216,7)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19880217,19890205,8)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19890206,19900126,9)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19900127,19910214,10)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19910215,19920203,11)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19920204,19930122,12)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19930123,19940209,1)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19940210,19950130,2)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19950131,19960218,3)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19960219,19970206,4)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19970207,19980127,5)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19980128,19990215,6)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19990216,20000204,7)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20000205,20010123,8)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20010124,20020211,9)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20020212,20030131,10)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20030201,20040121,11)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20040122,20050208,12)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20050209,20060128,1)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20060129,20070217,2)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20070218,20080206,3)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20080207,20090125,4)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20090126,20100213,5)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20100214,20110202,6)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20110203,20120122,7)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20120123,20130209,8)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20130210,20140130,9)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20140131,20150218,10)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20150219,20160207,11)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20160208,20170127,12)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20170128,20180215,1)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20180216,20190204,2)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20190205,20200124,3)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20200125,20210211,4)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20210212,20200131,5)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20220201,20210211,6)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20210212,20220131,7)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20220201,20230121,6)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20230122,20240209,7)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20240210,20250128,8)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20250129,20260216,9)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20260217,20270205,10)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20270206,20280125,11)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20280126,20290212,12)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20290213,20300201,1)");
-					tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20300202,20310122,2)");
-				}
-				
-			}
-            
-            function dayExists(tx, results) {	
-				if (results.rows.length > 0){
-					//alert('Found DAY');
-				}
-				else{
-					//alert('DAY not found... Creating new table');
-					tx.executeSql('CREATE TABLE IF NOT EXISTS DAY (id, number, day)');
-					
+            function createDB(tx) {
+                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='USERS'", [], usersExists, errorCB);
+                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='SIGNS'", [], signsExists, errorCB);
+                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DOBTOSIGN'", [], dobtosignExists, errorCB);
+                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DAY'", [], dayExists, errorCB);
+            }
+
+            function usersExists(tx, results) {
+                if (results.rows.length > 0) {
+                    //alert('Found USERS');
+                }
+                else {
+                    //alert('USERS not found... Creating new table');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id unique, name, birthday, email, gender, signid)');
+                }
+
+            }
+
+
+            function signsExists(tx, results) {
+                if (results.rows.length > 0) {
+                    //alert('Found SIGNS');
+                }
+                else {
+                    //alert('SIGNS not found... Creating new table');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS SIGNS (signid, signgroupid, sign)');
+
+                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (1, 2, 'Rooster')");
+                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (2, 3, 'Dog')");
+                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (3, 4, 'Pig')");
+                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (4, 1, 'Rat')");
+                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (5, 2, 'Ox')");
+                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (6, 3, 'Tiger')");
+                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (7, 4, 'Rabbit')");
+                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (8, 1, 'Dragon')");
+                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (9, 2, 'Snake')");
+                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (10, 3, 'Horse')");
+                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (11, 4, 'Goat')");
+                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (12, 1, 'Monkey')");
+                }
+
+            }
+
+            function dobtosignExists(tx, results) {
+                if (results.rows.length > 0) {
+                    //alert('Found dobtosign');
+                }
+                else {
+                    //alert('dobtosign not found... Creating new table');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS DOBTOSIGN (datestart, dateend, signid)');
+
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19210208,19220127,1)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19220128,19240204,2)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19240205,19250124,4)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19250125,19260212,5)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19260213,19270201,6)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19270202,19280122,7)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19280123,19299218,8)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19299219,19300129,9)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19300130,19310216,10)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19310217,19320205,11)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19320206,19330125,12)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19330126,19340213,1)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19340214,19350203,2)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19350204,19360123,3)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19360124,19370210,4)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19370211,19380130,5)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19380131,19390218,6)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19390219,19400207,7)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19400208,19410126,8)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19410127,19420214,9)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19420215,19430204,10)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19430205,19440124,11)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19440125,19450212,12)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19450213,19460201,1)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19460202,19470121,2)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19470122,19480209,4)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19480210,19490128,4)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19490129,19500216,5)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19500217,19510205,6)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19510206,19520126,7)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19520127,19530213,8)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19530214,19540202,9)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19540203,19550123,10)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19550124,19560211,11)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19560212,19570130,12)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19570131,19580217,1)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19580218,19590207,2)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19590208,19600127,3)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19600128,19610214,4)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19610215,19620204,5)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19620205,19630124,6)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19630125,19640212,7)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19640213,19650201,8)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19650202,19660120,9)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19660121,19670208,10)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19670209,19680129,11)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19680130,19690216,12)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19690217,19700205,1)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19700206,19710126,2)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19710127,19720214,3)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19720215,19730202,4)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19730203,19740122,5)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19740123,19750210,6)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19750211,19760130,7)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19760131,19770217,8)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19770218,19780206,9)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19780207,19790127,10)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19790128,19800215,11)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19800216,19810204,12)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19810205,19820124,1)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19820125,19830112,2)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19830113,19840201,3)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19840202,19850219,4)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19850220,19860208,5)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19860209,19870128,6)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19870129,19880216,7)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19880217,19890205,8)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19890206,19900126,9)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19900127,19910214,10)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19910215,19920203,11)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19920204,19930122,12)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19930123,19940209,1)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19940210,19950130,2)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19950131,19960218,3)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19960219,19970206,4)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19970207,19980127,5)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19980128,19990215,6)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19990216,20000204,7)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20000205,20010123,8)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20010124,20020211,9)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20020212,20030131,10)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20030201,20040121,11)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20040122,20050208,12)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20050209,20060128,1)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20060129,20070217,2)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20070218,20080206,3)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20080207,20090125,4)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20090126,20100213,5)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20100214,20110202,6)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20110203,20120122,7)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20120123,20130209,8)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20130210,20140130,9)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20140131,20150218,10)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20150219,20160207,11)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20160208,20170127,12)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20170128,20180215,1)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20180216,20190204,2)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20190205,20200124,3)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20200125,20210211,4)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20210212,20200131,5)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20220201,20210211,6)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20210212,20220131,7)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20220201,20230121,6)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20230122,20240209,7)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20240210,20250128,8)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20250129,20260216,9)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20260217,20270205,10)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20270206,20280125,11)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20280126,20290212,12)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20290213,20300201,1)");
+                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20300202,20310122,2)");
+                }
+
+            }
+
+            function dayExists(tx, results) {
+                if (results.rows.length > 0) {
+                    //alert('Found DAY');
+                }
+                else {
+                    //alert('DAY not found... Creating new table');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS DAY (id, number, day)');
+
                     tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,0,'Monday')");
                     tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,1,'Tuesday')");
                     tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,2,'Wednesday')");
@@ -532,191 +534,220 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (4,1,'Monday')");
                     tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (4,2,'Tuesday')");
                     tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (4,3,'Wednesday')");
-				}
-				
-			}
-			
-			function loadUserProfile(tx) {
-				//alert('Load user profile:');
-				tx.executeSql("SELECT * FROM USERS", [], loadProfile, errorCB);
-			}
-			
-            
-			function loadProfile(tx, results) {
-				//alert('Loading Profile');
-				if (results.rows.length > 0){
+                }
+
+            }
+
+            function loadUserProfile(tx) {
+                //alert('Load user profile:');
+                tx.executeSql("SELECT * FROM USERS", [], loadProfile, errorCB);
+            }
+
+
+            function loadProfile(tx, results) {
+                //alert('Loading Profile');
+                if (results.rows.length > 0) {
                     //User Exists $('#resultPageOutput').html(htmlString);
                     userName = results.rows.item(0).name;
                     userDOB = results.rows.item(0).birthday;
                     database.transaction(getSign, errorCB);
-				}
-				else{
-					//alert('No user found');
+                }
+                else {
+                    //alert('No user found');
                     $.mobile.changePage("#registerPage", {reverse: true, transition: "slide"});
-				}
-			}
-			
+                }
+            }
+
             function register() {
-				database.transaction(registerUser, errorCB);
-				return false;
-			}
-            
+                database.transaction(registerUser, errorCB);
+                return false;
+            }
+
             function registerUser(tx) {
                 //alert("atempting to register");
-				var name = $('[name="fullname"]').val();
-				var bday = $('[name="bday"]').val().replace(/-/g, '').toString();
-				var email = $('[name="email"]').val();
-				var gender = $("#gender :radio:checked").val();
-				var sql = 'INSERT INTO USERS (name, birthday, email, gender) VALUES (?,?,?,?)';
-				tx.executeSql(sql, [name, bday, email, gender], loadUserProfile, errorCB);
-			}
+                var name = $('[name="fullname"]').val();
+                var bday = $('[name="bday"]').val().replace(/-/g, '').toString();
+                var email = $('[name="email"]').val();
+                var gender = $("#gender :radio:checked").val();
+                var sql = 'INSERT INTO USERS (name, birthday, email, gender) VALUES (?,?,?,?)';
+                tx.executeSql(sql, [name, bday, email, gender], loadUserProfile, errorCB);
+            }
 
             function getSign(tx) {
-				//alert('DOB: ' + userDOB);
-				var sql = "select * from signs where signid = (select signid from DOBTOSIGN where " + userDOB + " between datestart and dateend)";
-				//alert("SQL: " + sql);
-				tx.executeSql(sql, [], loadSign, errorCB);
-			}
-            
-			function loadSign(tx, results) {
-				//alert('loadSign ');
-				if (results.rows.length > 0){
+                //alert('DOB: ' + userDOB);
+                var sql = "select * from signs where signid = (select signid from DOBTOSIGN where " + userDOB + " between datestart and dateend)";
+                //alert("SQL: " + sql);
+                tx.executeSql(sql, [], loadSign, errorCB);
+            }
+
+            function loadSign(tx, results) {
+                //alert('loadSign ');
+                if (results.rows.length > 0) {
                     userSignId = results.rows.item(0).signid;
                     userSignGroupId = results.rows.item(0).signgroupid;
                     userSign = results.rows.item(0).sign;
-                    var htmltxt = "<h2>You're a " + userSign+ "</h2> <br>" +
-                            "<img src='img/" + userSign + ".png' alt='" + userSign + "' >" + '<hr/>';
+                    var htmltxt = "<h2>You're a " + userSign + "</h2> <br>" +
+                            "<img src='img/" + userSign + ".png' alt='" + userSign + "' >";
 //                     var htmltxt = "Welcome " + userName + "<br>" + '<hr/>'+
 //                            "Your Sign is: <br>" +
 //                            "<img src='img/" + userSign + ".png' alt='" + userSign + "' >" + '<hr/>';
                     //alert(htmltxt);
                     $.mobile.changePage("#dayPage", {reverse: false, transition: "slide"});
-					$('#dayPageUserOutput').html(htmltxt);
-				}
-				else{
-					//alert('No Signs found');
-				}
-			}
+                    $('#dayPageUserOutput').html(htmltxt);
+                  
 
-			function deleteUser(tx){
-				//alert('deleting user profile');
-				tx.executeSql('DELETE FROM USERS;', [], loadUserProfile, errorCB);
-			}
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth()+1; //January is 0!
+                    var yyyy = today.getFullYear();
+                    if(dd<10){
+                        dd='0'+dd;
+                    } 
+                    
+                    if(mm<10){
+                        mm='0'+mm;
+                    } 
+                    $('#dayPagePicker').val(yyyy + "-" + mm + "-" + dd);
+                    
+                    //today = mm+'/'+dd+'/'+yyyy;
+                    var offset = daydiff(parseDate(date01), today) % 4;
+                    var sql = "SELECT * FROM DAY WHERE number = " + offset + " AND id = " + userSignGroupId;
+                    tx.executeSql(sql, [], renderDay, errorCB);
+                }
+                else {
+                    //alert('No Signs found');
+                }
+            }
 
-			function queryDB(tx) {
-				tx.executeSql('SELECT * FROM USERS', [], renderList, errorCB);
-			}
+            function renderToday(tx, results) {
+                //alert('render day');
+                if (results.rows.length > 0) {
+                    $('#todayLuck').html("Your Day Is: " + results.rows.item(0).day + "<br>" + '<hr/>');
+                }
+                else {
+                    //alert('No results found');
+                    tx.executeSql('SELECT * FROM day', [], renderDayList, errorCB);
+                }
+            }
 
-			function renderList(tx, results) {
-				var htmlString = '';
-				var len = results.rows.length;
+            function deleteUser(tx) {
+                //alert('deleting user profile');
+                tx.executeSql('DELETE FROM USERS;', [], loadUserProfile, errorCB);
+            }
 
-				for (var i = 0; i < len; i++) {
-					htmlString += "Full Name: " + results.rows.item(i).name + "<br>" +
-							"Gender: " + results.rows.item(i).gender + "<br>" +
-							"Date of Birth: " + results.rows.item(i).birthday + "<br>" +
-							"Email: " + results.rows.item(i).email + '<hr/>';
-				}
-				$.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
-				$('#resultPageOutput').html(htmlString);
-			}
-            
-			function renderDayList(tx, results) {
-				var htmlString = '';
-				var len = results.rows.length;
+            function queryDB(tx) {
+                tx.executeSql('SELECT * FROM USERS', [], renderList, errorCB);
+            }
 
-				for (var i = 0; i < len; i++) {
-					htmlString += "ID: " + results.rows.item(i).id + "<br>" +
-							"number: " + results.rows.item(i).number + "<br>" +
-							"Day: " + results.rows.item(i).day + "<br>" + '<hr/>';
-				}
-				$.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
-				$('#resultPageOutput').html(htmlString);
-			}
+            function renderList(tx, results) {
+                var htmlString = '';
+                var len = results.rows.length;
 
-			
-			function getDay(tx) {
+                for (var i = 0; i < len; i++) {
+                    htmlString += "Full Name: " + results.rows.item(i).name + "<br>" +
+                            "Gender: " + results.rows.item(i).gender + "<br>" +
+                            "Date of Birth: " + results.rows.item(i).birthday + "<br>" +
+                            "Email: " + results.rows.item(i).email + '<hr/>';
+                }
+                $.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
+                $('#resultPageOutput').html(htmlString);
+            }
+
+            function renderDayList(tx, results) {
+                var htmlString = '';
+                var len = results.rows.length;
+
+                for (var i = 0; i < len; i++) {
+                    htmlString += "ID: " + results.rows.item(i).id + "<br>" +
+                            "number: " + results.rows.item(i).number + "<br>" +
+                            "Day: " + results.rows.item(i).day + "<br>" + '<hr/>';
+                }
+                $.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
+                $('#resultPageOutput').html(htmlString);
+            }
+
+            function getDay(tx) {
 //				var number = $('#number').val();
-				var offset = daydiff(parseDate(date01), parseDate($('#dayPagePicker').val())) % 4;
+                var offset = daydiff(parseDate(date01), parseDate($('#dayPagePicker').val())) % 4;
 //				//alert('number: ' + number);
-				//alert('Offset: ' + offset);
-				var sql = "SELECT * FROM DAY WHERE number = " + offset + " AND id = " + userSignGroupId;
-				//alert("SQL: " + sql);
-				tx.executeSql(sql, [], renderDay, errorCB);
-			}
+                //alert('Offset: ' + offset);
+                var sql = "SELECT * FROM DAY WHERE number = " + offset + " AND id = " + userSignGroupId;
+                //alert("SQL: " + sql);
+                tx.executeSql(sql, [], renderDay, errorCB);
+            }
 
-			function renderDay(tx, results) {
-				//alert('render day');
-				if (results.rows.length > 0){
-					$('#dayPageOutput').html("Your Day Is: " + results.rows.item(0).day + "<br>" + '<hr/>');
-				}
-				else{
-					//alert('No results found');
-					tx.executeSql('SELECT * FROM day', [], renderDayList, errorCB);
-				}
-			}
-			
-            
-			function getTables(tx) {
-				tx.executeSql("SELECT name FROM sqlite_master WHERE type='table'", [], renderTables, errorCB);
-			}
-
-			function renderTables(tx, results) {
-				var htmlString = '';
-				var len = results.rows.length;
-
-				for (var i = 0; i < len; i++) {
-					htmlString += "Name: " + results.rows.item(i).name + "<br>" + '<hr/>';
-				}
-				$.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
-				$('#resultPageOutput').html(htmlString);
-			}
-
-			function errorCB(error) {
-				alert('Error: ' + error.message + ' code: ' + error.code);
-			}
-
-			function successCB() {
-				console.log("Database Successfully Created");
-			}
-
-			function determineSign(){
-				database.transaction(getSign, errorCB);
-			}
-
-			function calculateDay(){
-				database.transaction(getDay, errorCB);
-			}
-			
-			function newUser(){
-				database.transaction(deleteUser, errorCB);
-			}
-			
-
-			function getAllTables() {
-				database.transaction(getTables, errorCB);
-				return false;
-			}
+            function renderDay(tx, results) {
+                //alert('render day');
+                if (results.rows.length > 0) {
+                    $('#dayPageOutput').html("<h1>" + results.rows.item(0).day + "</h1>" + '<hr/>');
+                }
+                else {
+                    //alert('No results found');
+                    tx.executeSql('SELECT * FROM day', [], renderDayList, errorCB);
+                }
+            }
 
 
-			function submitToLocal() {
-				var name = $('[name="fullname"]').val();
-				var bday = $('[name="bday"]').val();
-				var email = $('[name="email"]').val();
-				var gender = $("#gender :radio:checked").val();
+            function getTables(tx) {
+                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table'", [], renderTables, errorCB);
+            }
 
-				window.localStorage.setItem("fullname", name);
-				window.localStorage.setItem("birthday", bday);
-				window.localStorage.setItem("email", email);
-				window.localStorage.setItem("gender", gender);
-				$.mobile.changePage("#page2", {reverse: false, transition: "slide"});
-				$('#resultPageOutput').html("Full Name: " + window.localStorage.getItem("fullname") + "<br>" +
-						"Gender: " + window.localStorage.getItem("gender") + "<br>" +
-						"Date of Birth: " + window.localStorage.getItem("birthday") + "<br>" +
-						"Email: " + window.localStorage.getItem("email"));
+            function renderTables(tx, results) {
+                var htmlString = '';
+                var len = results.rows.length;
 
-				return false;
-			}
+                for (var i = 0; i < len; i++) {
+                    htmlString += "Name: " + results.rows.item(i).name + "<br>" + '<hr/>';
+                }
+                $.mobile.changePage("#resultPage", {reverse: false, transition: "slide"});
+                $('#resultPageOutput').html(htmlString);
+            }
+
+            function errorCB(error) {
+                alert('Error: ' + error.message + ' code: ' + error.code);
+            }
+
+            function successCB() {
+                console.log("Database Successfully Created");
+            }
+
+            function determineSign() {
+                database.transaction(getSign, errorCB);
+            }
+
+            function calculateDay() {
+                database.transaction(getDay, errorCB);
+            }
+
+            function newUser() {
+                database.transaction(deleteUser, errorCB);
+            }
+
+
+            function getAllTables() {
+                database.transaction(getTables, errorCB);
+                return false;
+            }
+
+
+            function submitToLocal() {
+                var name = $('[name="fullname"]').val();
+                var bday = $('[name="bday"]').val();
+                var email = $('[name="email"]').val();
+                var gender = $("#gender :radio:checked").val();
+
+                window.localStorage.setItem("fullname", name);
+                window.localStorage.setItem("birthday", bday);
+                window.localStorage.setItem("email", email);
+                window.localStorage.setItem("gender", gender);
+                $.mobile.changePage("#page2", {reverse: false, transition: "slide"});
+                $('#resultPageOutput').html("Full Name: " + window.localStorage.getItem("fullname") + "<br>" +
+                        "Gender: " + window.localStorage.getItem("gender") + "<br>" +
+                        "Date of Birth: " + window.localStorage.getItem("birthday") + "<br>" +
+                        "Email: " + window.localStorage.getItem("email"));
+
+                return false;
+            }
 
         </script>
     </body>
