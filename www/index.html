@@ -163,7 +163,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             <div data-role="content"  id="dayPageContent">
                 <center>
                     <img src="img/Clover.png" alt="clover" style="width: 70px;"/>
-                    <div id="dayPageUserOutput" style="font-size: 18px;">
+                    <div id="dayPageUserOutput" style="font-size: 25px;">
                     </div>
                     <h2>LUCK of the DAY</h2>
                     <!-- 		<label for="number">Number:</label>
@@ -171,7 +171,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     <!--                                    <label for="dayPagePicker">Date:</label>-->
                     <div id="todayLuck"></div>
                     <input type="date" name="dayPagePicker" id="dayPagePicker">
-                    <input type="submit" data-inline="true" value="Calculate Day" onclick="calculateDay();">
+                    <!--<input type="submit" data-inline="true" value="Calculate Day" onclick="calculateDay();">-->
                     <hr/>
                     <div id="dayPageOutput" style="  font-size:30px;">
                     </div>
@@ -198,6 +198,11 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             var signid;
 
             var date01 = "1900-01-01";
+            
+            $("#dayPagePicker").change(function(event){
+              calculateDay();
+            });
+            
 
             function getNumberOfDays() {
                 alert(daydiff(parseDate($('#bday').val()), parseDate(date01)));
