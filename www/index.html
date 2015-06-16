@@ -632,6 +632,8 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     setDate(today);
                     //today = mm+'/'+dd+'/'+yyyy;
                     var offset = daydiff(parseDate(date01), today) % 4;
+                    alert('Offset: ' + offset);
+                    alert('Sign Group: ' + userSignGroupId);
                     var sql = "SELECT * FROM DAY WHERE number = " + offset + " AND id = " + userSignGroupId;
                     tx.executeSql(sql, [], renderDay, errorCB);
                 }
