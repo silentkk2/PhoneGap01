@@ -163,7 +163,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             <div data-role="content"  id="dayPageContent">
                 <center>
                     <img src="img/Clover.png" alt="clover" style="width: 70px;"/>
-                    <div id="dayPageUserOutput">
+                    <div id="dayPageUserOutput" style="font-size: 18px;">
                     </div>
                     <h2>LUCK of the DAY</h2>
                     <!-- 		<label for="number">Number:</label>
@@ -171,10 +171,9 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     <!--                                    <label for="dayPagePicker">Date:</label>-->
                     <div id="todayLuck"></div>
                     <input type="date" name="dayPagePicker" id="dayPagePicker">
-                    <br/>
                     <input type="submit" data-inline="true" value="Calculate Day" onclick="calculateDay();">
                     <hr/>
-                    <div id="dayPageOutput">
+                    <div id="dayPageOutput" style="  font-size:30px;">
                     </div>
                 </center>
             </div>
@@ -597,8 +596,8 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     userSignId = results.rows.item(0).signid;
                     userSignGroupId = results.rows.item(0).signgroupid;
                     userSign = results.rows.item(0).sign;
-                    var htmltxt = "<h2>You're a " + userSign + "</h2> <br>" +
-                            "<img src='img/" + userSign + ".png' alt='" + userSign + "' >";
+                    var htmltxt = "You're a " + userSign + "<br>" +
+                            "<img src='img/" + userSign + ".png' alt='" + userSign + "' style='height: 120px;'>";
 //                     var htmltxt = "Welcome " + userName + "<br>" + '<hr/>'+
 //                            "Your Sign is: <br>" +
 //                            "<img src='img/" + userSign + ".png' alt='" + userSign + "' >" + '<hr/>';
@@ -690,7 +689,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             function renderDay(tx, results) {
                 //alert('render day');
                 if (results.rows.length > 0) {
-                    $('#dayPageOutput').html("<h2>" + results.rows.item(0).day + "</h2>" + '<hr/>');
+                    $('#dayPageOutput').html("" + results.rows.item(0).day + "" + '<hr/>');
                 }
                 else {
                     //alert('No results found');
