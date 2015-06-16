@@ -153,12 +153,13 @@ Copyright (c) 2012-2014 Aminur Rahman-->
         
         <div data-role="page" id="dayPage" >
             <div data-role="header"  id="dayPageHeader" data-position="fixed">
-                <a href="#" data-transition="slide" data-direction="reverse" data-icon="home" onclick="newUser();"> New User </a>
-                <h1>Day Page</h1>
+                
+                <h1>David Cho's Zodiac Guide</h1>
             </div>
             <div data-role="content"  id="dayPageContent">
                 <div id="dayPageUserOutput">
                 </div>
+                <h3>LUCK of the DAY</h3>
 		<!-- 		<label for="number">Number:</label>
                 <input type="text" name="number" id="number">	 -->
 				<label for="dayPagePicker">Date:</label>
@@ -170,7 +171,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 </div>
             </div>
             <div data-role="footer" id ="dayPageFooter" data-position="fixed">
-                <h4>Footer</h4>
+                <h4><a href="#" data-transition="slide" data-direction="reverse" data-icon="home" onclick="newUser();"> Reset </a></h4>
             </div>
         </div>
 
@@ -583,9 +584,11 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     userSignId = results.rows.item(0).signid;
                     userSignGroupId = results.rows.item(0).signgroupid;
                     userSign = results.rows.item(0).sign;
-                    var htmltxt = "Welcome " + userName + "<br>" + '<hr/>'+
-                            "Your Sign is: <br>" +
+                    var htmltxt = "<h2>You're a " + userSign+ "</h2> <br>" +
                             "<img src='img/" + userSign + ".png' alt='" + userSign + "' >" + '<hr/>';
+//                     var htmltxt = "Welcome " + userName + "<br>" + '<hr/>'+
+//                            "Your Sign is: <br>" +
+//                            "<img src='img/" + userSign + ".png' alt='" + userSign + "' >" + '<hr/>';
                     //alert(htmltxt);
                     $.mobile.changePage("#dayPage", {reverse: false, transition: "slide"});
 					$('#dayPageUserOutput').html(htmltxt);
