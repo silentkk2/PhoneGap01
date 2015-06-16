@@ -57,38 +57,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             </div>
         </div>
 
-        <div data-role="page" id="registerPage" >
-            <div data-role="header" data-position="fixed">
-                <h1></h1>
-            </div>
-            <div data-role="content">
-                <center>
-                    <form method="POST" onsubmit="return register()" data-ajax="false">
-                        <div class="ui-field-contain">
-                            <!--<label for="fullname">Full name:</label>-->
-                            <!--<input type="text" name="fullname" id="fullname" data-clear-btn="true">-->              
-                            <!--<input type="hidden" name="fullname" id="fullname" data-clear-btn="true">-->       
-                            <h2>David Cho's Zodiac Guide</h2>
-                            <h1>What the Luck?</h1>
-                            <br/>
-                            <h3>Enter your date of birth to know the strength of your luck FOREVER!</h3>
-                            <input type="date" name="bday" id="bday">
-                            <!--                        <label for="email">E-mail:</label>
-                                                        <input type="email" name="email" id="email" placeholder="Your email..">-->
-                        </div>
-                        <!--                    <fieldset data-role="controlgroup" data-type="horizontal" id="gender">
-                                                <legend>Choose your gender:</legend>
-                                                <label for="male">Male</label>
-                                                    <input type="radio" name="gender" id="male" value="male">
-                                                <label for="female">Female</label>
-                                                    <input type="radio" name="gender" id="female" value="female">	
-                                            </fieldset>-->
-                        <br/>
-                        <input type="submit" data-inline="true" value="Submit To DB">
-                    </form>
-                </center>
-            </div>
-        </div>
+        
 
         <div data-role="page" id="resultPage" data-theme="b">
             <div data-role="header"  id="resultPageHeader" data-position="fixed">
@@ -150,16 +119,53 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             </div>
         </div>
 
+        <div data-role="page" id="registerPage" >
+            <div data-role="header" data-position="fixed">
+                <h1></h1>
+            </div>
+            <div data-role="content">
+                <center>
+                    <form method="POST" onsubmit="return register()" data-ajax="false">
+                        <div class="ui-field-contain">
+                            <!--<label for="fullname">Full name:</label>-->
+                            <!--<input type="text" name="fullname" id="fullname" data-clear-btn="true">-->              
+                            <!--<input type="hidden" name="fullname" id="fullname" data-clear-btn="true">-->  
+                            <img src="img/Clover.png" alt="clover" style="width: 150px;"/>
+                            <h2>David Cho's Zodiac Guide</h2>
+                            <h1>What the Luck?</h1>
+                            <br/>
+                            <h3>Enter your date of birth to know the strength of your luck FOREVER!</h3>
+                            <input type="date" name="bday" id="bday">
+                            <!--                        <label for="email">E-mail:</label>
+                                                        <input type="email" name="email" id="email" placeholder="Your email..">-->
+                        </div>
+                        <!--                    <fieldset data-role="controlgroup" data-type="horizontal" id="gender">
+                                                <legend>Choose your gender:</legend>
+                                                <label for="male">Male</label>
+                                                    <input type="radio" name="gender" id="male" value="male">
+                                                <label for="female">Female</label>
+                                                    <input type="radio" name="gender" id="female" value="female">	
+                                            </fieldset>-->
+                        <br/>
+                        <input type="submit" data-inline="true" value="Submit To DB">
+                    </form>
+                </center>
+            </div>
+        </div>
+        
+        
+        
         <div data-role="page" id="dayPage" >
             <div data-role="header"  id="dayPageHeader" data-position="fixed">
 
-                <h1>David Cho's Zodiac Guide</h1>
+                <h1 style="overflow: visible;">David Cho's Zodiac Guide</h1>
             </div>
             <div data-role="content"  id="dayPageContent">
                 <center>
+                    <img src="img/Clover.png" alt="clover" style="width: 70px;"/>
                     <div id="dayPageUserOutput">
                     </div>
-                    <h1>LUCK of the DAY</h1>
+                    <h2>LUCK of the DAY</h2>
                     <!-- 		<label for="number">Number:</label>
                     <input type="text" name="number" id="number">	 -->
                     <!--                                    <label for="dayPagePicker">Date:</label>-->
@@ -684,7 +690,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             function renderDay(tx, results) {
                 //alert('render day');
                 if (results.rows.length > 0) {
-                    $('#dayPageOutput').html("<h1>" + results.rows.item(0).day + "</h1>" + '<hr/>');
+                    $('#dayPageOutput').html("<h2>" + results.rows.item(0).day + "</h2>" + '<hr/>');
                 }
                 else {
                     //alert('No results found');
