@@ -339,9 +339,14 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             document.addEventListener("deviceready", onDeviceReady, false);
 
             function onDeviceReady() {
+                document.addEventListener("backbutton", onBackKeyDown, false);
                 database = window.openDatabase("Database", "1.0", "PhoneGap01 DB", 10 * 1024 * 1024);
                 database.transaction(createDB, errorCB, successCB);
                 database.transaction(loadUserProfile, errorCB);
+            }
+            
+            function onBackKeyDown(){
+                window.plugins.toast.show('back button', 'short', 'center', false);
             }
 
             function createDB(tx) {
