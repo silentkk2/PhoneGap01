@@ -109,13 +109,15 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 <div  style="padding:0;" id="mapContent">
                     <div id="map" ></div>
                 </div>
+                <div id="mapPageOutput">
+                </div>
             </div>
             <div data-role="footer" id ="mapFooter" data-position="fixed">
-                <button type="button" onclick="rotateMapRight10()" value="10 Right"></button>
-                <button type="button" onclick="rotateMapRight5()" value="5 Right"></button>
-                <button type="button" onclick="lockMap()" value="Lock"></button>
-                <button type="button" onclick="rotateMapLeft5()" value="5 Left"></button>
                 <button type="button" onclick="rotateMapLeft10()" value="10 Left"></button>
+                <button type="button" onclick="rotateMapLeft5()" value="5 Left"></button>
+                <button type="button" onclick="lockMap()" value="Lock"></button>
+                <button type="button" onclick="rotateMapRight5()" value="5 Right"></button>
+                <button type="button" onclick="rotateMapRight10()" value="10 Right"></button>
             </div>
         </div>
 
@@ -191,6 +193,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             var lat;
             var long;
             var mapOrientation = 0;
+            var magneticDeclination;
             var lightstate = false;
             var userName;
             var userDOB;
@@ -259,7 +262,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                         long = results[0].geometry.location.lng();
 //						alert ("lat: " + lat + " Long: " + long);
                         goToMapPage();
-                        //getMagXml(lat, long);
+                        getMagXml(lat, long);
                     } else {
                         //alert('Geocode was not successful for the following reason: ' + status);
                     }
@@ -277,12 +280,12 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     },
                     dataType: "xml",
                     success: function(xml) {
-                        var Magnetic = $(xml).find('declination').first().text();
+                        magneticDeclination = $(xml).find('declination').first().text();
 
 //						//alert("Magnetic "  + Magnetic);
-                        $('#googlePageOutput').html("Lat: " + lat + "<br>" +
+                        $('#mapPageOutput').html("Lat: " + lat + "<br>" +
                                 "Long: " + long + "<br>" +
-                                "Magnetic North: " + Magnetic + "<br>");
+                                "Magnetic North: " + magneticDeclination + "<br>");
                     }
                 });
             }
