@@ -167,6 +167,12 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     <img src="img/Clover.png" alt="clover" style="width: 70px;"/>
                     <div id="dayPageUserOutput" style="font-size: 25px;">
                     </div>
+                    <div id="timeofday">
+                        <input type="time" name="timePicker" id="timePicker">
+                    </div>
+                    <hr/>
+                    <div id="timeOutput" style="font-size:30px;">
+                    </div>
                     <h2>LUCK of the DAY</h2>
                     <!-- 		<label for="number">Number:</label>
                     <input type="text" name="number" id="number">	 -->
@@ -180,6 +186,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     <div data-role="controlgroup" data-type="horizontal">
                         <button type="button" onclick="newUser();" value="Back"></button>
                         <button type="button" onclick="setDate(new Date());calculateDay();" value="Reset"></button>
+                        <!--<button type="button" onclick="calculateTime();" value="Now"></button>-->
                     </div>
                 </center>
             </div>
@@ -207,6 +214,10 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             
             $("#dayPagePicker").change(function(event){
               calculateDay();
+            });
+            
+            $("#timePicker").change(function(event){
+              calculateTime();
             });
             
 
@@ -370,6 +381,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='SIGNS'", [], signsExists, errorCB);
                 tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DOBTOSIGN'", [], dobtosignExists, errorCB);
                 tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DAY'", [], dayExists, errorCB);
+                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='SIGNTIME'", [], signtimeExists, errorCB);
             }
 
             function usersExists(tx, results) {
@@ -558,6 +570,66 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 }
 
             }
+            
+            function signtimeExists(tx, results) {
+                if (results.rows.length > 0) {
+                    //alert('Found Sign Time');
+                }
+                else {
+                    //alert('DAY not found... Creating new table');
+                    tx.executeSql("CREATE TABLE IF NOT EXISTS SIGNTIME (signgroupid, starttime, endtime, status);");
+                    
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,300,500,'Wednesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,1100,1300,'Wednesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,1900,2100,'Wednesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,100,300,'Tuesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,900,1100,'Tuesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,1700,1900,'Tuesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,500,700,'Thursday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,1300,1500,'Thursday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,2100,2300,'Thursday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,700,900,'Monday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,1500,1700,'Monday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,2300,100,'Monday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,500,700,'Wednesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,1300,1500,'Wednesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,2100,2300,'Wednesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,300,500,'Tuesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,1100,1300,'Tuesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,1900,2100,'Tuesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,2300,100,'Thursday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,700,900,'Thursday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,1500,1700,'Thursday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,100,300,'Monday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,900,1100,'Monday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,1700,1900,'Monday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,2300,100,'Wednesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,700,900,'Wednesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,1500,1700,'Wednesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,500,700,'Tuesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,1300,1500,'Tuesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,2100,2300,'Tuesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,100,300,'Thursday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,900,1100,'Thursday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,1700,1900,'Thursday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,300,500,'Monday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,1100,1300,'Monday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,1900,2100,'Monday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,100,300,'Wednesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,900,1100,'Wednesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,1700,1900,'Wednesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,2300,100,'Tuesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,700,900,'Tuesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,1500,1700,'Tuesday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,300,500,'Thursday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,1100,1300,'Thursday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,1900,2100,'Thursday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,500,700,'Monday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,1300,1500,'Monday');");
+                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,2100,2300,'Monday');");
+                }
+
+            }
 
             function loadUserProfile(tx) {
                 //alert('Load user profile:');
@@ -614,6 +686,25 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 } 
                 $('#dayPagePicker').val(yyyy + "-" + mm + "-" + dd);
             }
+            
+            function setTime(time){
+                var hour;
+                var minutes;
+                if (time.getHours() < 10){
+                    hour = '0' + time.getHours();
+                }
+                else {
+                    hour = time.getHours();
+                }
+                if (time.getMinutes() < 10){
+                    minutes = '0' + time.getMinutes();
+                }
+                else {
+                    minutes = time.getMinutes();
+                }
+                $('#timepicker').val(hour + ":" + minutes);
+                alert('time: ' + $('#timepicker').val());
+            }
 
             function loadSign(tx, results) {
                 //alert('loadSign ');
@@ -633,12 +724,18 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
                     var today = new Date();
                     setDate(today);
-                    //today = mm+'/'+dd+'/'+yyyy;
-                    var offset = daydiff(parseDate(date01), parseDate($('#dayPagePicker').val())) % 4;
-                    //alert('Offset: ' + offset);
-                    //alert('Sign Group: ' + userSignGroupId);
-                    var sql = "SELECT * FROM DAY WHERE number = " + offset + " AND id = " + userSignGroupId;
-                    tx.executeSql(sql, [], renderDay, errorCB);
+                    calculateDay();
+                    setTime(today);
+                    calculateTime();
+                    
+//                    //today = mm+'/'+dd+'/'+yyyy;
+//                    var offset = daydiff(parseDate(date01), parseDate($('#dayPagePicker').val())) % 4;
+//                    //alert('Offset: ' + offset);
+//                    //alert('Sign Group: ' + userSignGroupId);
+//                    var sql = "SELECT * FROM DAY WHERE number = " + offset + " AND id = " + userSignGroupId;
+//                    tx.executeSql(sql, [], renderDay, errorCB);
+//                    setTime(today);
+//                    database.transaction(getTime, errorCB);
                 }
                 else {
                     //alert('No Signs found');
@@ -702,6 +799,22 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 tx.executeSql(sql, [], renderDay, errorCB);
             }
 
+            function getTime(tx) {
+                var time = $("#timePicker").val().split(":");
+                //alert('Hours: ' + time[0] + ' Minutes: ' + time[1]);
+                time[0] = time[0] * 100;
+                if(time[0] == 2300 || time[0] == 0){
+                    var sql = "select * from signtime where signgroupid = " + userSignGroupId + " and starttime = 2300;" ;
+                    //alert("SQL: " + sql);
+                    tx.executeSql(sql, [], renderTime, errorCB);
+                }
+                else{
+                    var sql = "select * from signtime where signgroupid = " + userSignGroupId + " and starttime <= " + time[0] + " and endtime > " + time[0] + ";" ;
+                    //alert("SQL: " + sql);
+                    tx.executeSql(sql, [], renderTime, errorCB);
+                }
+            }
+
             function renderDay(tx, results) {
                 //alert('render day');
                 if (results.rows.length > 0) {
@@ -713,6 +826,16 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 }
             }
 
+            function renderTime(tx, results) {
+                //alert('render day');
+                if (results.rows.length > 0) {
+                    $('#timeOutput').html("" + results.rows.item(0).status + "" + '<hr/>');
+                }
+                else {
+                    //alert('No results found');
+                    tx.executeSql('SELECT * FROM signtime', [], renderDayList, errorCB);
+                }
+            }
 
             function getTables(tx) {
                 tx.executeSql("SELECT name FROM sqlite_master WHERE type='table'", [], renderTables, errorCB);
@@ -743,6 +866,10 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
             function calculateDay() {
                 database.transaction(getDay, errorCB);
+            }
+
+            function calculateTime() {
+                database.transaction(getTime, errorCB);
             }
 
             function newUser() {
