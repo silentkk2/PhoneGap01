@@ -168,7 +168,33 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     <div id="dayPageUserOutput" style="font-size: 25px;">
                     </div>
                     <div id="timeofday">
-                        <input type="time" name="timePicker" id="timePicker">
+                        <!--<input type="time" name="timePicker" id="timePicker">-->
+                        <select id="timePicker" name="timePicker" size="1">
+                            <option value="000">12:00 AM</option>
+                            <option value="100">1:00 AM</option>
+                            <option value="200">2:00 AM</option>
+                            <option value="300">3:00 AM</option>
+                            <option value="400">4:00 AM</option>
+                            <option value="500">5:00 AM</option>
+                            <option value="600">6:00 AM</option>
+                            <option value="700">7:00 AM</option>
+                            <option value="800">8:00 AM</option>
+                            <option value="900">9:00 AM</option>
+                            <option value="1000">10:00 AM</option>
+                            <option value="1100">11:00 AM</option>
+                            <option value="1200">12:00 PM</option>
+                            <option value="1300">1:00 PM</option>
+                            <option value="1400">2:00 PM</option>
+                            <option value="1500">3:00 PM</option>
+                            <option value="1600">4:00 PM</option>
+                            <option value="1700">5:00 PM</option>
+                            <option value="1800">6:00 PM</option>
+                            <option value="1900">7:00 PM</option>
+                            <option value="2000">8:00 PM</option>
+                            <option value="2100">9:00 PM</option>
+                            <option value="2200">10:00 PM</option>
+                            <option value="2300">11:00 PM</option>
+                        </select>
                     </div>
                     <hr/>
                     <div id="timeOutput" style="font-size:30px;">
@@ -186,7 +212,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     <div data-role="controlgroup" data-type="horizontal">
                         <button type="button" onclick="newUser();" value="Back"></button>
                         <button type="button" onclick="setDate(new Date());calculateDay();" value="Reset"></button>
-                        <!--<button type="button" onclick="calculateTime();" value="Now"></button>-->
+                        <button type="button" onclick="setTime(new Date());" value="Now"></button>
                     </div>
                 </center>
             </div>
@@ -217,7 +243,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             });
             
             $("#timePicker").change(function(event){
-              calculateTime();
+             // calculateTime();
             });
             
 
@@ -690,20 +716,22 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             function setTime(time){
                 var hour;
                 var minutes;
-                if (time.getHours() < 10){
-                    hour = '0' + time.getHours();
-                }
-                else {
-                    hour = time.getHours();
-                }
-                if (time.getMinutes() < 10){
-                    minutes = '0' + time.getMinutes();
-                }
-                else {
-                    minutes = time.getMinutes();
-                }
-                $('#timepicker').val(hour + ":" + minutes);
-                //alert('time: ' + $('#timepicker').val());
+//                if (time.getHours() < 10){
+//                    hour = '0' + time.getHours();
+//                }
+//                else {
+//                    hour = time.getHours();
+//                }
+//                if (time.getMinutes() < 10){
+//                    minutes = '0' + time.getMinutes();
+//                }
+//                else {
+//                    minutes = time.getMinutes();
+//                }
+                hour = time.getHours() + "00";
+                alert('hour: ' + hour);
+                $('#timePicker').val(hour);
+                alert('time: ' + $('#timePicker').val());
             }
 
             function loadSign(tx, results) {
