@@ -133,8 +133,8 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                             <!--<label for="fullname">Full name:</label>-->
                             <!--<input type="text" name="fullname" id="fullname" data-clear-btn="true">-->              
                             <!--<input type="hidden" name="fullname" id="fullname" data-clear-btn="true">-->  
-                            <img src="img/Clover.png" alt="clover" style="width: 180px;"/>
-                            <h2>David Cho's Zodiac Guide</h2>
+                            <img src="img/Clover.png" alt="clover" style="width: 150px;"/>
+                            <h3>David Cho's Zodiac Guide</h3>
                             <h1>What the Luck?</h1>
                             <h3>Enter your date of birth to know the strength of your luck FOREVER!</h3>
                             <input type="date" name="bday" id="bday">
@@ -159,8 +159,10 @@ Copyright (c) 2012-2014 Aminur Rahman-->
         
         <div data-role="page" id="dayPage" >
             <div data-role="header"  id="dayPageHeader" data-position="fixed">
-
-                <h1 style="overflow: visible;">David Cho's Zodiac Guide</h1>
+                <!--<a href="#" data-transition="slide" data-direction="reverse" data-icon="info" class="ui-btn-right"> Help </a>-->
+                <button type="button" onclick="newUser();" value="Back" data-icon="back"></button>
+                <button type="button" onclick="resetDateAndTime();" value="Reset" data-icon="refresh"></button>
+                <h1>Zodiac Guide</h1>
             </div>
             <div data-role="content"  id="dayPageContent">
                 <center>
@@ -168,6 +170,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     <div id="dayPageUserOutput" style="font-size: 25px;">
                     </div>
                     <div id="timeofday">
+                        <h2>LUCK of the HOUR</h2>
                         <!--<input type="time" name="timePicker" id="timePicker">-->
                         <select id="timePicker" name="timePicker" size="1">
                             <option value="000">12:00 AM</option>
@@ -196,7 +199,6 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                             <option value="2300">11:00 PM</option>
                         </select>
                     </div>
-                    <hr/>
                     <div id="timeOutput" style="font-size:30px;">
                     </div>
                     <h2>LUCK of the DAY</h2>
@@ -206,13 +208,11 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     <div id="todayLuck"></div>
                     <input type="date" name="dayPagePicker" id="dayPagePicker">
                     <!--<input type="submit" data-inline="true" value="Calculate Day" onclick="calculateDay();">-->
-                    <hr/>
                     <div id="dayPageOutput" style="  font-size:30px;">
                     </div>
                     <div data-role="controlgroup" data-type="horizontal">
-                        <button type="button" onclick="newUser();" value="Back"></button>
-                        <button type="button" onclick="setDate(new Date());calculateDay();" value="Reset"></button>
-                        <button type="button" onclick="setTime(new Date());" value="Now"></button>
+                        
+                        <!--<button type="button" onclick="" value="Now"></button>-->
                     </div>
                 </center>
             </div>
@@ -243,7 +243,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             });
             
             $("#timePicker").change(function(event){
-             // calculateTime();
+              calculateTime();
             });
             
 
@@ -729,9 +729,11 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 //                    minutes = time.getMinutes();
 //                }
                 hour = time.getHours() + "00";
-                alert('hour: ' + hour);
-                $('#timePicker').val(hour);
-                alert('time: ' + $('#timePicker').val());
+                //alert('hour: ' + hour);
+                $("#timePicker option[value='"+hour+"']").attr('selected', 'selected');
+                $('#timePicker').selectmenu('refresh');
+                //$('#timePicker').val(hour);
+                //alert('time: ' + $('#timePicker').val());
             }
 
             function loadSign(tx, results) {
@@ -740,8 +742,8 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     userSignId = results.rows.item(0).signid;
                     userSignGroupId = results.rows.item(0).signgroupid;
                     userSign = results.rows.item(0).sign;
-                    var htmltxt = "You're a " + userSign + "<br>" +
-                            "<img src='img/" + userSign + ".png' alt='" + userSign + "' style='height: 150px;'>";
+                    var htmltxt = "You're a " + userSign + "<br>";// +
+                            //"<img src='img/" + userSign + ".png' alt='" + userSign + "' style='height: 150px;'>";
 //                     var htmltxt = "Welcome " + userName + "<br>" + '<hr/>'+
 //                            "Your Sign is: <br>" +
 //                            "<img src='img/" + userSign + ".png' alt='" + userSign + "' >" + '<hr/>';
@@ -828,16 +830,14 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             }
 
             function getTime(tx) {
-                var time = $("#timePicker").val().split(":");
-                //alert('Hours: ' + time[0] + ' Minutes: ' + time[1]);
-                time[0] = time[0] * 100;
-                if(time[0] == 2300 || time[0] == 0){
+                var time = $("#timePicker").val();
+                if(time == '2300' || time == '000'){
                     var sql = "select * from signtime where signgroupid = " + userSignGroupId + " and starttime = 2300;" ;
                     //alert("SQL: " + sql);
                     tx.executeSql(sql, [], renderTime, errorCB);
                 }
                 else{
-                    var sql = "select * from signtime where signgroupid = " + userSignGroupId + " and starttime <= " + time[0] + " and endtime > " + time[0] + ";" ;
+                    var sql = "select * from signtime where signgroupid = " + userSignGroupId + " and starttime <= " + time + " and endtime > " + time + ";" ;
                     //alert("SQL: " + sql);
                     tx.executeSql(sql, [], renderTime, errorCB);
                 }
@@ -846,7 +846,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             function renderDay(tx, results) {
                 //alert('render day');
                 if (results.rows.length > 0) {
-                    $('#dayPageOutput').html("" + results.rows.item(0).day + "" + '<hr/>');
+                    $('#dayPageOutput').html("" + results.rows.item(0).day + "");
                 }
                 else {
                     //alert('No results found');
@@ -898,6 +898,14 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
             function calculateTime() {
                 database.transaction(getTime, errorCB);
+            }
+            
+            function resetDateAndTime(){
+                var today = new Date();
+                setDate(today);
+                calculateDay();
+                setTime(today);
+                calculateTime();
             }
 
             function newUser() {
