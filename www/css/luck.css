@@ -33,6 +33,88 @@ input[type="select"] {
     max-width: 280px;
 }
 
+
+h1{
+     font-size:250%;
+    text-align:center;
+    padding-top:0px;
+    padding-bottom:0px;
+    margin:0px;
+    font-family:Helvetica, Arial, sans-serif !important; 
+}
+h2{
+    font-size:170%;
+    text-align:center;
+    padding-bottom:0.0em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+    -webkit-margin-before: 0.0em;
+    -webkit-margin-after: 0.0em;
+}
+h3{
+    font-size:115%;
+    text-align:center;
+    padding-bottom:0.0em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+}
+h4{
+     font-size:150%;
+    text-align:center;
+    padding-bottom:0.0em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+}
+h6{
+    font-size:175%;
+    float:left;
+    padding-bottom:0.0em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+}
+.textinput {
+    margin-top:0 !important;
+    font-size:115% !important;
+    text-align:center !important;
+    min-height:50% !important;
+    line-height:75% !important;
+    padding:0 !important;
+}
+.appimage {
+    margin:auto; 
+    padding-bottom:0.5%; 
+    width:80%;
+}
+.appimagesub {
+    margin:auto; 
+    padding-bottom:0.5%; 
+    width:60%;
+}
+
+
+div.ui-datepicker {
+    font-size:90%;
+}
+.ui-header .ui-title {
+    font-size:50%;
+}
+
+.ui-select {
+    margin-top: 0px !important;
+}
+
+.ui-input-text {
+    margin-top: 0px !important;
+}
+
+.ui-content {
+    padding-top: 0px !important;
+}
+
 /*iphone 5, 5s*/
 @media only screen 
 and (min-device-width : 320px)
@@ -313,85 +395,4 @@ and (-webkit-min-device-pixel-ratio: 2) {
 div.ui-datepicker {
     font-size:1.70em;
 }
-}
-
-h1{
-     font-size:250%;
-    text-align:center;
-    padding-top:0px;
-    padding-bottom:0px;
-    margin:0px;
-    font-family:Helvetica, Arial, sans-serif !important; 
-}
-h2{
-    font-size:170%;
-    text-align:center;
-    padding-bottom:0.0em;
-    margin:0px;
-    font-weight:bold;
-    font-family:Helvetica, Arial, sans-serif !important;
-    -webkit-margin-before: 0.0em;
-    -webkit-margin-after: 0.0em;
-}
-h3{
-    font-size:115%;
-    text-align:center;
-    padding-bottom:0.0em;
-    margin:0px;
-    font-weight:bold;
-    font-family:Helvetica, Arial, sans-serif !important;
-}
-h4{
-     font-size:150%;
-    text-align:center;
-    padding-bottom:0.0em;
-    margin:0px;
-    font-weight:bold;
-    font-family:Helvetica, Arial, sans-serif !important;
-}
-h6{
-    font-size:175%;
-    float:left;
-    padding-bottom:0.0em;
-    margin:0px;
-    font-weight:bold;
-    font-family:Helvetica, Arial, sans-serif !important;
-}
-.textinput {
-    margin-top:0 !important;
-    font-size:115% !important;
-    text-align:center !important;
-    min-height:50% !important;
-    line-height:75% !important;
-    padding:0 !important;
-}
-.appimage {
-    margin:auto; 
-    padding-bottom:0.5%; 
-    width:80%;
-}
-.appimagesub {
-    margin:auto; 
-    padding-bottom:0.5%; 
-    width:60%;
-}
-
-
-div.ui-datepicker {
-    font-size:90%;
-}
-.ui-header .ui-title {
-    font-size:50%;
-}
-
-.ui-select {
-    margin-top: 0px !important;
-}
-
-.ui-input-text {
-    margin-top: 0px !important;
-}
-
-.ui-content {
-    padding-top: 0px !important;
 }
