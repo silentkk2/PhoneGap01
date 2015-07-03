@@ -1,0 +1,316 @@
+﻿/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    font-family:Helvetica, Arial, sans-serif !important;
+    
+}
+.ui-mobile .ui-page {
+    background: #d8e0de;
+    background: -moz-linear-gradient(top,  #d8e0de 0%, #aebfbc 22%, #99afab 33%, #8ea6a2 50%, #829d98 67%, #4e5c5a 82%, #0e0e0e 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d8e0de), color-stop(22%,#aebfbc), color-stop(33%,#99afab), color-stop(50%,#8ea6a2), color-stop(67%,#829d98), color-stop(82%,#4e5c5a), color-stop(100%,#0e0e0e));
+    background: -webkit-linear-gradient(top,  #d8e0de 0%,#aebfbc 22%,#99afab 33%,#8ea6a2 50%,#829d98 67%,#4e5c5a 82%,#0e0e0e 100%);
+    background: -o-linear-gradient(top,  #d8e0de 0%,#aebfbc 22%,#99afab 33%,#8ea6a2 50%,#829d98 67%,#4e5c5a 82%,#0e0e0e 100%);
+    background: -ms-linear-gradient(top,  #d8e0de 0%,#aebfbc 22%,#99afab 33%,#8ea6a2 50%,#829d98 67%,#4e5c5a 82%,#0e0e0e 100%);
+    background: linear-gradient(to bottom,  #d8e0de 0%,#aebfbc 22%,#99afab 33%,#8ea6a2 50%,#829d98 67%,#4e5c5a 82%,#0e0e0e 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d8e0de', endColorstr='#0e0e0e',GradientType=0 );
+    text-shadow:none !important;
+}
+
+.ui-page-theme-a .ui-bar-inherit{
+    background:none !important;
+    border-color:none !important;
+    text-shadow:none !important;
+}
+
+.ui-header, .ui-footer{
+    border-width:0 !important;
+}
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="select"] {
+    max-width: 280px;
+}
+
+/*iphone 5, 5s*/
+@media only screen 
+and (min-device-width : 320px)
+and (max-device-width : 568px) {
+h1{
+     font-size:3.0em;
+    text-align:center;
+    padding-top:1px;
+    padding-bottom:1px;
+    margin:0px;
+    font-family:Helvetica, Arial, sans-serif !important; 
+}
+h2{
+    font-size:1.75em;
+    text-align:center;
+    padding-bottom:0.0em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+    -webkit-margin-before: 0.0em;
+    -webkit-margin-after: 0.0em;
+}
+h3{
+    font-size:1.125em;
+    text-align:center;
+    padding-bottom:0.0em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+}
+h4{
+     font-size:1.5em;
+    text-align:center;
+    padding-bottom:0.0em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+}
+h6{
+    font-size:1.75em;
+    float:left;
+    padding-bottom:0.0em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+}
+.textinput {
+    margin-top:0 !important;
+    font-size:1.125em !important;
+    text-align:center !important;
+    min-height:.5em !important;
+    line-height:.75em !important;
+    padding:0 !important;
+}
+.appimage {
+    margin:auto; 
+    padding-bottom:1px; 
+    width:85%;
+}
+.appimagesub {
+    margin:auto; 
+    padding-bottom:1px; 
+    width:75%;
+}
+
+
+div.ui-datepicker {
+    font-size:.90em;
+}
+.ui-header .ui-title {
+    font-size:0.5em;
+}
+}
+/*iphone6*/
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 667px) {
+.textinput {
+    min-height:1.5em !important;
+    line-height:.8em !important;
+    margin-top:.5em !important;
+    font-size:1.25em !important;
+    text-align:center !important;
+}
+.appimage {
+    margin:auto; 
+    padding-bottom:0.5em; 
+    width:101%;
+}
+.appimagesub {
+    margin:auto; 
+    padding-bottom:0.5em; 
+    width:90%;
+}
+div.ui-datepicker {
+    font-size:1.1em;
+}
+}
+/*iphone 6 plus*/
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 736px) {
+
+h1{
+     font-size:4.0em;
+    text-align:center;
+    padding-top:1px;
+    padding-bottom:1px;
+    margin:0px;
+    font-family:Helvetica, Arial, sans-serif !important; 
+}
+h3{
+     font-size:1.5em;
+    text-align:center;
+    padding-bottom:0.0em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+}
+.ui-btn {
+font-size:.90em !important;
+}
+.textinput {
+    min-height:1.5em !important;
+    line-height:1em !important;
+    margin-top:.5em !important;
+    font-size:1.25em !important;
+    text-align:center !important;
+}
+.appimage {
+    margin:auto; 
+    padding-bottom:0.5em; 
+    width:95%;
+}
+
+div.ui-datepicker {
+    font-size:1.3em;
+}
+}
+/*iPad 1,2, mini*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)
+and (-webkit-min-device-pixel-ratio: 1)  {
+    h1 {
+        font-size:5.0em;
+    text-align:center;
+    padding-bottom:1px;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+    }
+    h2 {
+        font-size:3.0em;
+    text-align:center;
+    padding-bottom:0.02em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+    }
+    h3 {
+        font-size:2.5em;
+    text-align:center;
+    padding-bottom:0.2em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+    }
+    h4 {
+    font-size:2.0em;
+    text-align:center;
+    padding-bottom:0.2em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+    }
+    h6 {
+        font-size:1.75em;
+    text-align:left;
+    padding-bottom:0.02em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+    }
+.ui-btn {
+    font-size:1.25em !important;
+}
+.textinput {
+    min-height:1.5em !important;
+    line-height:1em !important;
+    margin-top:.5em !important;
+    font-size:1.25em !important;
+    text-align:center !important;
+}
+.appimage {
+    margin:auto; 
+    padding-bottom:0.5em; 
+    width:80%;
+}
+.appimagesub {
+    margin:auto; 
+    padding-bottom:0.5em; 
+    width:70%;
+}
+.cell {
+    width:70%
+}
+div.ui-datepicker {
+    font-size:1.70em;
+}
+}
+/*iPad 3,4*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)
+and (-webkit-min-device-pixel-ratio: 2) { 
+  h1 {
+        font-size:5.0em;
+    text-align:center;
+    padding-bottom:1px;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+    }
+    h2 {
+        font-size:3.0em;
+    text-align:center;
+    padding-bottom:0.02em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+    }
+    h3 {
+    font-size:2.5em;
+    text-align:center;
+    padding-bottom:0.2em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+    }
+    h4 {
+    font-size:3.0em;
+    text-align:center;
+    padding-bottom:0.2em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+    }
+    h6 {
+        font-size:1.75em;
+    text-align:left;
+    padding-bottom:0.02em;
+    margin:0px;
+    font-weight:bold;
+    font-family:Helvetica, Arial, sans-serif !important;
+    }
+.ui-btn {
+    font-size:1.25em !important;
+}
+.calendar {
+    width:100% !important;
+}
+.textinput {
+    min-height:1.5em !important;
+    line-height:1em !important;
+    margin-top:.5em !important;
+    font-size:1.25em !important;
+    text-align:center !important;
+}
+.appimage {
+    margin:auto; 
+    padding-bottom:0.5em; 
+    width:90%;
+}
+.cell {
+    width:60%
+}
+div.ui-datepicker {
+    font-size:1.70em;
+}
+}
