@@ -1,5 +1,5 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.davidcho.whattheluck" version="1.0.0">
-  <name>What The Luck</name>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.primedynamics.testgap" version="1.0.0">
+  <name>Test Gap</name>
   <description>Hello World sample application that responds to Tito.</description>
   <author href="" email="tito@tito.com">Tito Team</author>
   <content src="index.html"/>
