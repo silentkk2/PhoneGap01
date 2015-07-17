@@ -11,7 +11,6 @@ Copyright (c) 2012-2014 Aminur Rahman-->
         <!--<link rel="stylesheet" type="text/css" href="css/index.css" />-->
         <!--<script type="text/javascript" src="js/index.js"></script>-->
         <!--<script type="text/javascript" src="js/flashlight.js"></script>-->
-        <!--<script type="text/javascript" src="js/jquery-transform.js"></script>-->
         
         <!--<link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />-->
         <!--<script src="js/jquery-1.9.1.min.js"></script>-->
@@ -24,15 +23,9 @@ Copyright (c) 2012-2014 Aminur Rahman-->
         <script src="js/jquery-1.11.1.min.js"></script>
         <script src="js/jquery.mobile-1.4.5.min.js"></script>
         
+        <script type="text/javascript" src="js/jquery-transform.js"></script>
         <link rel="stylesheet" type="text/css" href="css/luck.css">
-        
-        
-        
-        <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />-->
-        <!--<script src="js/jquery-ui-datepicker.js"></script>-->
-    <!--<link rel="stylesheet" type="text/css" href="css/jquery-ui.datepicker.css" />-->
-    <!--<link rel="stylesheet" type="text/css" href="css/jquery-ui.structure.css" />-->
-    <!--<link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.css" />-->
+       
         
         
         <style type="text/css">
@@ -135,85 +128,15 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 </div>
             </div>
             <div data-role="footer" id ="mapFooter" data-position="fixed">
-                <button type="button" onclick="rotateMapLeft10()" value="10 Left"></button>
-                <button type="button" onclick="rotateMapLeft5()" value="5 Left"></button>
-                <button type="button" onclick="lockMap()" value="Lock"></button>
-                <button type="button" onclick="rotateMapRight5()" value="5 Right"></button>
-                <button type="button" onclick="rotateMapRight10()" value="10 Right"></button>
+                               <a href="#" data-role="button" onclick="rotateMapLeft10();" data-inline="true">10 Left</a>
+                <a href="#" data-role="button" onclick="rotateMapLeft5();" data-inline="true">5 Left</a>
+                <a href="#" data-role="button" onclick="lockMap();" data-inline="true">Lock</a>
+                <a href="#" data-role="button" onclick="rotateMapRight5();" data-inline="true">5 Right</a>
+                <a href="#" data-role="button" onclick="rotateMapRight10();" data-inline="true">10 Right</a>
             </div>
         </div>
 
-        <div data-role="page" id="registerPage" >
-            <div data-role="header" data-position="fixed">
-            </div>
-            <div data-role="content">
-                <center>
-                    <form method="POST" onsubmit="return register()" data-ajax="false">
-                        <center>
-                            <img src="img/LucyGrl_V2_R1.png" alt="whattheluck" class="appimage"/>
-                            <h1>What the Luck?</h1>
-                            <h4>Enter your date of birth<br />to know the stength of <br />your luck FOREVER!</h4>
-                            <input type="date" name="bday" id="bday" required>
-                        </center>
-                        <br/>
-                        <input type="submit" data-inline="true" value="Continue">
-                    </form>
-                </center>
-            </div>
-        </div>
         
-        
-        
-        <div data-role="page" id="dayPage" >
-            <div data-role="content"  id="dayPageContent">
-                <center>
-                    <img src="img/LucyGrl_V2_R2.png" alt='appimagesub' class="appimagesub"/>
-                    <div id="dayPageUserOutput">
-                    </div>
-                    <div id="timeofday">
-                        <h3> LUCK of this HOUR is</h3>
-                        <div id="timeOutput">
-                        </div>
-                        <select id="timePicker" name="timePicker" size="1">
-                            <option value="000">12:00 AM</option>
-                            <option value="100">1:00 AM</option>
-                            <option value="200">2:00 AM</option>
-                            <option value="300">3:00 AM</option>
-                            <option value="400">4:00 AM</option>
-                            <option value="500">5:00 AM</option>
-                            <option value="600">6:00 AM</option>
-                            <option value="700">7:00 AM</option>
-                            <option value="800">8:00 AM</option>
-                            <option value="900">9:00 AM</option>
-                            <option value="1000">10:00 AM</option>
-                            <option value="1100">11:00 AM</option>
-                            <option value="1200">12:00 PM</option>
-                            <option value="1300">1:00 PM</option>
-                            <option value="1400">2:00 PM</option>
-                            <option value="1500">3:00 PM</option>
-                            <option value="1600">4:00 PM</option>
-                            <option value="1700">5:00 PM</option>
-                            <option value="1800">6:00 PM</option>
-                            <option value="1900">7:00 PM</option>
-                            <option value="2000">8:00 PM</option>
-                            <option value="2100">9:00 PM</option>
-                            <option value="2200">10:00 PM</option>
-                            <option value="2300">11:00 PM</option>
-                        </select>
-                    </div>
-                     <h3>LUCK of this DAY is</h3>
-                    <div id="dayPageOutput"></div>
-                    <input type="date" name="dayPagePicker" id="dayPagePicker">
-                </center>
-            </div>
-            <div data-role="footer" id ="dayPageFooter" data-position="fixed">
-                <center>
-                    <a href="#" data-role="button" onclick="newUser();" data-inline="true">Back</a>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                    <a href="#" data-role="button" onclick="resetDateAndTime();" data-inline="true">Reset</a>
-                </center>
-            </div>
-        </div>
 
         <script type="text/javascript">
 
@@ -350,7 +273,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 $('#map').animate({
                     rotate: mapOrientation
                 }, 0);
-                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+                //window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
             }
 
             function rotateMapRight10() {
@@ -358,7 +281,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 $('#map').animate({
                     rotate: mapOrientation
                 }, 0);
-                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+                //window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
             }
 
             function rotateMapLeft5() {
@@ -366,7 +289,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 $('#map').animate({
                     rotate: mapOrientation
                 }, 0);
-                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+                //window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
             }
 
             function rotateMapLeft10() {
@@ -374,7 +297,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 $('#map').animate({
                     rotate: mapOrientation
                 }, 0);
-                window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
+                //window.plugins.toast.show('Current Map Orientation: ' + mapOrientation, 'short', 'center', false);
             }
 
             function getXml() {
@@ -395,7 +318,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             }
 
             var database;
-            document.addEventListener("deviceready", onDeviceReady, false);
+            //document.addEventListener("deviceready", onDeviceReady, false);
 
             function onDeviceReady() {
                 document.addEventListener("backbutton", onBackKeyDown, false);
