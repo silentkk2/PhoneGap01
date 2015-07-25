@@ -78,11 +78,81 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 <br>
                 <a href="#googlePage" data-transition="slide"> Google </a>
                 <a href="#dayPage" data-transition="slide"> Day </a>
+                <center>
+                    <img src="img/LucyGrl_V2_R1.png" alt="whattheluck" class="appimage"/>
+                    <h4 style="text-align: left;">David Cho's Guide to</h4>
+                    <h1 style="text-align: left;">Smarter Kids</h1>
+                    <h4 style="text-align: left;">Help your child do better at school by exposing him/her to the smart energy in your home.</h4>
+                    <br/>
+                    <input type="submit" data-inline="true" value="Next" onclick="homeInformationPage()">
+                </center>
+            </div>
+        </div>
+        
+        <div data-role="page" id="homeInformationPage" >
+            <div data-role="content">
+                <center>                      
+                    <h2 style="text-align: left;">Enter your information.</h2>
+                    <br/>
+                    <h4 style="text-align: left;">What's your address?</h4>
+                    <input type="text" name="address" id="address" data-clear-btn="true">  
+                    <h4 style="text-align: left;">When was your home built?</h4>
+                    <input type="text" name="yearBuilt" id="yearBuilt" data-clear-btn="true">  
+                    <br/>
+                    <br/>
+                    If you don't know the year then try finding it on the Internet. Type your <strong>address</strong> and the words <strong>"year built."</strong> <br/> Search through the results. 
+                    <br/>
+                    <br/>
+                    Other Options: Look for it in your [Something] documents, ask a realtor, or go to your building department. 
+                    <br/>
+                    <br/>
+                    <input type="submit" data-inline="true" value="Next" onclick="homeDrawingPage()">
+                </center>
             </div>
         </div>
 
+        <div data-role="page" id="homeDrawingPage" >
+            <div data-role="content">
+                <center>                      
+                    <h2 style="text-align: left;">Use this drawing to represent your home.</h2>
+                    <br/>
+                    <img src="img/TopViewHouse.png" alt="topviewhouse" class="appimage"/>
+                    <br/>
+                    <h4 style="text-align: left;">Know which side of your home has the most window space.</h4>
+                    <br/>
+                    <input type="submit" data-inline="true" value="Next" onclick="homeMapPage()">
+                </center>
+            </div>
+        </div>
         
+        <div data-role="page" id="homeMapPage" >
+            <div data-role="content">
+                <center>                      
+                    <h2 style="text-align: left;">Use our map to get a compass direction.</h2>
+                    <br/>
+                    <img src="img/GoogleMap.png" alt="googlemap" class="appimage"/>
+                    <br/>
+                    Center and align your home to the crosshairs. <br/> Be sure that its side with the most window space is the top side on your phone screen.
+                    <br/>
+                    <input type="submit" data-inline="true" value="Next" onclick="homeResultPage()">
+                </center>
+            </div>
+        </div>
 
+        <div data-role="page" id="homeResultPage" >
+            <div data-role="content">
+                <center>                      
+                    <h2 style="text-align: left;">Have your children spend time in the "Energy Zone"</h2>
+                    <br/>
+                    <img src="img/result01.png" alt="googlemap" class="appimage" style="width:initial; margin-left: -50%;"/>
+                    <br/>
+                </center>
+            </div>
+        </div>
+
+
+        
+        
         <div data-role="page" id="resultPage" data-theme="b">
             <div data-role="header"  id="resultPageHeader" data-position="fixed">
                 <a href="#index" data-transition="slide" data-direction="reverse" data-icon="home"> Home </a>
@@ -423,8 +493,25 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
 
 
+            function homeInformationPage(){
+                
+                $.mobile.changePage("#homeInformationPage", {reverse: false, transition: "slide"});
+            }
 
+            function homeDrawingPage(){
+                
+                $.mobile.changePage("#homeDrawingPage", {reverse: false, transition: "slide"});
+            }
 
+            function homeMapPage(){
+                
+                $.mobile.changePage("#homeMapPage", {reverse: false, transition: "slide"});
+            }
+
+            function homeResultPage(){
+                
+                $.mobile.changePage("#homeResultPage", {reverse: false, transition: "slide"});
+            }
 
 
             function goToMapPage() {
