@@ -97,7 +97,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     <h4 style="text-align: left;">What's your address?</h4>
                     <input type="text" name="address" id="address" data-clear-btn="true">  
                     <h4 style="text-align: left;">When was your home built?</h4>
-                    <input type="text" name="yearBuilt" id="yearBuilt" data-clear-btn="true">  
+                    <input type="text" name="yearBuilt" id="yearBuilt" >  
                     <br/>
                     <br/>
                     If you don't know the year then try finding it on the Internet. Type your <strong>address</strong> and the words <strong>"year built."</strong> <br/> Search through the results. 
@@ -134,6 +134,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     <br/>
                     Center and align your home to the crosshairs. <br/> Be sure that its side with the most window space is the top side on your phone screen.
                     <br/>
+                    <input type="text" name="homeDegree" id="homeDegree" >  
                     <input type="submit" data-inline="true" value="Next" onclick="homeResultPage()">
                 </center>
             </div>
@@ -147,12 +148,10 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     <img src="img/result01.png" alt="googlemap" class="appimage" style="width:initial; margin-left: -50%;"/>
                     <br/>
                 </center>
+                <a href="#" onclick="determineSquare()"> Calculate </a>
             </div>
         </div>
 
-
-        
-        
         <div data-role="page" id="resultPage" data-theme="b">
             <div data-role="header"  id="resultPageHeader" data-position="fixed">
                 <a href="#index" data-transition="slide" data-direction="reverse" data-icon="home"> Home </a>
@@ -234,6 +233,12 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             var mapOrientation = 0;
             var magneticDeclination;
             var lightstate = false;
+            
+            var homeYear;
+            var homeDec;
+            var homeSquare;
+            
+            
             var userName;
             var userDOB;
             var userSign;
@@ -499,7 +504,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             }
 
             function homeDrawingPage(){
-                
+                homeYear = $('#yearBuilt').val();
                 $.mobile.changePage("#homeDrawingPage", {reverse: false, transition: "slide"});
             }
 
@@ -509,7 +514,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             }
 
             function homeResultPage(){
-                
+                homeDec = $('#homeDegree').val();
                 $.mobile.changePage("#homeResultPage", {reverse: false, transition: "slide"});
             }
 
@@ -653,277 +658,347 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             }
 
             function createDB(tx) {
-                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='USERS'", [], usersExists, errorCB);
-                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='SIGNS'", [], signsExists, errorCB);
-                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DOBTOSIGN'", [], dobtosignExists, errorCB);
-                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DAY'", [], dayExists, errorCB);
-                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='SIGNTIME'", [], signtimeExists, errorCB);
+//                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='USERS'", [], usersExists, errorCB);
+//                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='SIGNS'", [], signsExists, errorCB);
+//                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DOBTOSIGN'", [], dobtosignExists, errorCB);
+//                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='DAY'", [], dayExists, errorCB);
+//                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='SIGNTIME'", [], signtimeExists, errorCB);
+                tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' and name='SMARTER'", [], smarterExists, errorCB);
             }
 
-            function usersExists(tx, results) {
+            function smarterExists(tx, results) {
                 if (results.rows.length > 0) {
-                    //alert('Found USERS');
+                    //alert('Found Smarter');
                 }
                 else {
                     //alert('USERS not found... Creating new table');
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id unique, name, birthday, email, gender, signid)');
-                }
-
-            }
-
-
-            function signsExists(tx, results) {
-                if (results.rows.length > 0) {
-                    //alert('Found SIGNS');
-                }
-                else {
-                    //alert('SIGNS not found... Creating new table');
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS SIGNS (signid, signgroupid, sign)');
-
-                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (1, 2, 'Rooster')");
-                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (2, 3, 'Dog')");
-                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (3, 4, 'Pig')");
-                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (4, 1, 'Rat')");
-                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (5, 2, 'Ox')");
-                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (6, 3, 'Tiger')");
-                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (7, 4, 'Rabbit')");
-                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (8, 1, 'Dragon')");
-                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (9, 2, 'Snake')");
-                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (10, 3, 'Horse')");
-                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (11, 4, 'Goat')");
-                    tx.executeSql("INSERT INTO SIGNS (signid, signgroupid, sign) values (12, 1, 'Monkey')");
-                }
-
-            }
-
-            function dobtosignExists(tx, results) {
-                if (results.rows.length > 0) {
-                    //alert('Found dobtosign');
-                }
-                else {
-                    //alert('dobtosign not found... Creating new table');
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS DOBTOSIGN (datestart, dateend, signid)');
-
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19210208,19220127,1)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19220128,19240204,2)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19240205,19250124,4)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19250125,19260212,5)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19260213,19270201,6)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19270202,19280122,7)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19280123,19299218,8)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19299219,19300129,9)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19300130,19310216,10)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19310217,19320205,11)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19320206,19330125,12)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19330126,19340213,1)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19340214,19350203,2)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19350204,19360123,3)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19360124,19370210,4)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19370211,19380130,5)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19380131,19390218,6)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19390219,19400207,7)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19400208,19410126,8)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19410127,19420214,9)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19420215,19430204,10)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19430205,19440124,11)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19440125,19450212,12)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19450213,19460201,1)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19460202,19470121,2)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19470122,19480209,4)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19480210,19490128,4)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19490129,19500216,5)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19500217,19510205,6)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19510206,19520126,7)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19520127,19530213,8)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19530214,19540202,9)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19540203,19550123,10)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19550124,19560211,11)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19560212,19570130,12)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19570131,19580217,1)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19580218,19590207,2)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19590208,19600127,3)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19600128,19610214,4)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19610215,19620204,5)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19620205,19630124,6)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19630125,19640212,7)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19640213,19650201,8)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19650202,19660120,9)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19660121,19670208,10)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19670209,19680129,11)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19680130,19690216,12)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19690217,19700205,1)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19700206,19710126,2)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19710127,19720214,3)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19720215,19730202,4)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19730203,19740122,5)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19740123,19750210,6)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19750211,19760130,7)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19760131,19770217,8)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19770218,19780206,9)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19780207,19790127,10)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19790128,19800215,11)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19800216,19810204,12)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19810205,19820124,1)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19820125,19830112,2)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19830113,19840201,3)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19840202,19850219,4)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19850220,19860208,5)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19860209,19870128,6)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19870129,19880216,7)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19880217,19890205,8)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19890206,19900126,9)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19900127,19910214,10)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19910215,19920203,11)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19920204,19930122,12)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19930123,19940209,1)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19940210,19950130,2)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19950131,19960218,3)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19960219,19970206,4)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19970207,19980127,5)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19980128,19990215,6)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (19990216,20000204,7)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20000205,20010123,8)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20010124,20020211,9)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20020212,20030131,10)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20030201,20040121,11)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20040122,20050208,12)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20050209,20060128,1)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20060129,20070217,2)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20070218,20080206,3)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20080207,20090125,4)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20090126,20100213,5)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20100214,20110202,6)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20110203,20120122,7)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20120123,20130209,8)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20130210,20140130,9)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20140131,20150218,10)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20150219,20160207,11)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20160208,20170127,12)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20170128,20180215,1)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20180216,20190204,2)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20190205,20200124,3)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20200125,20210211,4)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20210212,20200131,5)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20220201,20210211,6)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20210212,20220131,7)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20220201,20230121,6)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20230122,20240209,7)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20240210,20250128,8)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20250129,20260216,9)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20260217,20270205,10)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20270206,20280125,11)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20280126,20290212,12)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20290213,20300201,1)");
-                    tx.executeSql("INSERT INTO DOBTOSIGN (datestart, dateend, signid) values (20300202,20310122,2)");
-                }
-
-            }
-
-            function dayExists(tx, results) {
-                if (results.rows.length > 0) {
-                    //alert('Found DAY');
-                }
-                else {
-                    //alert('DAY not found... Creating new table');
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS DAY (id, number, day)');
-
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,0,'Monday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,1,'Tuesday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,2,'Wednesday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (1,3,'Thursday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,0,'Tuesday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,1,'Wednesday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,2,'Thursday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (2,3,'Monday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,0,'Wednesday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,1,'Thursday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,2,'Monday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (3,3,'Tuesday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (4,0,'Thursday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (4,1,'Monday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (4,2,'Tuesday')");
-                    tx.executeSql("INSERT INTO DAY (id,number,day) VALUES (4,3,'Wednesday')");
-                }
-
-            }
-            
-            function signtimeExists(tx, results) {
-                if (results.rows.length > 0) {
-                    //alert('Found Sign Time');
-                }
-                else {
-                    //alert('DAY not found... Creating new table');
-                    tx.executeSql("CREATE TABLE IF NOT EXISTS SIGNTIME (signgroupid, starttime, endtime, status);");
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS SMARTER (erastart, eraend, degreelow, degreehigh, square)');
                     
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,300,500,'Wednesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,1100,1300,'Wednesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,1900,2100,'Wednesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,100,300,'Tuesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,900,1100,'Tuesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,1700,1900,'Tuesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,500,700,'Thursday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,1300,1500,'Thursday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,2100,2300,'Thursday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,700,900,'Monday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,1500,1700,'Monday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (3,2300,100,'Monday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,500,700,'Wednesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,1300,1500,'Wednesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,2100,2300,'Wednesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,300,500,'Tuesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,1100,1300,'Tuesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,1900,2100,'Tuesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,2300,100,'Thursday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,700,900,'Thursday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,1500,1700,'Thursday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,100,300,'Monday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,900,1100,'Monday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (4,1700,1900,'Monday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,2300,100,'Wednesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,700,900,'Wednesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,1500,1700,'Wednesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,500,700,'Tuesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,1300,1500,'Tuesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,2100,2300,'Tuesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,100,300,'Thursday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,900,1100,'Thursday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,1700,1900,'Thursday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,300,500,'Monday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,1100,1300,'Monday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (1,1900,2100,'Monday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,100,300,'Wednesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,900,1100,'Wednesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,1700,1900,'Wednesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,2300,100,'Tuesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,700,900,'Tuesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,1500,1700,'Tuesday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,300,500,'Thursday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,1100,1300,'Thursday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,1900,2100,'Thursday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,500,700,'Monday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,1300,1500,'Monday');");
-                    tx.executeSql("Insert into signtime (signgroupid, starttime, endtime, status) VALUES (2,2100,2300,'Monday');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 338, 352, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 353, 359, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 0, 22, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 23, 37, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 38, 67, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 68, 82, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 83, 112, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 113, 127, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 128, 157, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 158, 172, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 173, 202, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 203, 217, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 218, 247, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 248, 262, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 263, 292, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 293, 307, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 308, 337, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 338, 352, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 353, 359, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 0, 22, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 23, 37, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 38, 67, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 68, 82, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 83, 112, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 113, 127, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 128, 157, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 158, 172, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 173, 202, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 203, 217, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 218, 247, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 248, 262, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 263, 292, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 293, 307, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1844, 1863, 308, 337, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 338, 352, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 353, 359, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 0, 22, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 23, 37, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 38, 67, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 68, 82, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 83, 112, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 113, 127, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 128, 157, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 158, 172, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 173, 202, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 203, 217, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 218, 247, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 248, 262, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 263, 292, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 293, 307, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1684, 1703, 308, 337, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 338, 352, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 353, 359, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 0, 22, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 23, 37, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 38, 67, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 68, 82, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 83, 112, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 113, 127, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 128, 157, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 158, 172, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 173, 202, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 203, 217, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 218, 247, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 248, 262, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 263, 292, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 293, 307, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1864, 1883, 308, 337, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 338, 352, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 353, 359, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 0, 22, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 23, 37, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 38, 67, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 68, 82, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 83, 112, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 113, 127, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 128, 157, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 158, 172, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 173, 202, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 203, 217, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 218, 247, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 248, 262, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 263, 292, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 293, 307, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1704, 1723, 308, 337, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 338, 352, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 353, 359, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 0, 22, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 23, 37, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 38, 67, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 68, 82, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 83, 112, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 113, 127, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 128, 157, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 158, 172, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 173, 202, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 203, 217, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 218, 247, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 248, 262, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 263, 292, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 293, 307, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1884, 1903, 308, 337, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 338, 352, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 353, 359, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 0, 22, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 23, 37, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 38, 67, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 68, 82, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 83, 112, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 113, 127, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 128, 157, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 158, 172, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 173, 202, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 203, 217, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 218, 247, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 248, 262, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 263, 292, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 293, 307, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1724, 1743, 308, 337, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 338, 352, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 353, 359, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 0, 22, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 23, 37, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 38, 67, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 68, 82, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 83, 112, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 113, 127, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 128, 157, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 158, 172, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 173, 202, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 203, 217, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 218, 247, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 248, 262, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 263, 292, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 293, 307, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1904, 1923, 308, 337, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 338, 352, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 353, 359, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 0, 22, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 23, 37, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 38, 67, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 68, 82, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 83, 112, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 113, 127, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 128, 157, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 158, 172, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 173, 202, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 203, 217, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 218, 247, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 248, 262, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 263, 292, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 293, 307, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1744, 1763, 308, 337, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 338, 352, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 353, 359, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 0, 22, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 23, 37, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 38, 67, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 68, 82, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 83, 112, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 113, 127, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 128, 157, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 158, 172, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 173, 202, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 203, 217, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 218, 247, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 248, 262, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 263, 292, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 293, 307, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1924, 1943, 308, 337, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 338, 352, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 353, 359, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 0, 22, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 23, 37, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 38, 67, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 68, 82, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 83, 112, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 113, 127, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 128, 157, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 158, 172, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 173, 202, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 203, 217, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 218, 247, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 248, 262, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 263, 292, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 293, 307, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1764, 1783, 308, 337, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 338, 352, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 353, 359, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 0, 22, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 23, 37, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 38, 67, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 68, 82, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 83, 112, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 113, 127, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 128, 157, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 158, 172, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 173, 202, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 203, 217, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 218, 247, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 248, 262, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 263, 292, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 293, 307, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1944, 1963, 308, 337, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 338, 352, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 353, 359, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 0, 22, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 23, 37, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 38, 67, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 68, 82, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 83, 112, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 113, 127, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 128, 157, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 158, 172, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 173, 202, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 203, 217, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 218, 247, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 248, 262, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 263, 292, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 293, 307, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1784, 1803, 308, 337, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 338, 352, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 353, 359, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 0, 22, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 23, 37, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 38, 67, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 68, 82, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 83, 112, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 113, 127, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 128, 157, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 158, 172, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 173, 202, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 203, 217, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 218, 247, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 248, 262, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 263, 292, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 293, 307, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1964, 1983, 308, 337, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 338, 352, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 353, 359, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 0, 22, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 23, 37, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 38, 67, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 68, 82, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 83, 112, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 113, 127, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 128, 157, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 158, 172, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 173, 202, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 203, 217, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 218, 247, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 248, 262, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 263, 292, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 293, 307, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1804, 1823, 308, 337, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 338, 352, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 353, 359, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 0, 22, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 23, 37, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 38, 67, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 68, 82, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 83, 112, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 113, 127, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 128, 157, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 158, 172, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 173, 202, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 203, 217, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 218, 247, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 248, 262, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 263, 292, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 293, 307, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1984, 2003, 308, 337, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 338, 352, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 353, 359, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 0, 22, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 23, 37, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 38, 67, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 68, 82, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 83, 112, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 113, 127, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 128, 157, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 158, 172, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 173, 202, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 203, 217, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 218, 247, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 248, 262, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 263, 292, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 293, 307, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1824, 1843, 308, 337, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 338, 352, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 353, 359, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 0, 22, 'e');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 23, 37, 'c');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 38, 67, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 68, 82, 'h');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 83, 112, 'b');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 113, 127, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 128, 157, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 158, 172, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 173, 202, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 203, 217, 'f');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 218, 247, 'd');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 248, 262, 'i');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 263, 292, 'a');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 293, 307, 'g');");
+                    tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (2004, 2023, 308, 337, 'c');");
                 }
-
             }
 
-            function loadUserProfile(tx) {
-                //alert('Load user profile:');
-                tx.executeSql("SELECT * FROM USERS", [], loadProfile, errorCB);
+            function getSquare(tx) {
+                var sql = "SELECT * FROM SMARTER where ( " + homeYear + " between erastart and eraend) and ( " + homeDec + " between degreelow and degreehigh)";
+                alert('Smarter Sql:' + sql);
+                tx.executeSql(sql, [], renderSquare, errorCB);
             }
 
 
-            function loadProfile(tx, results) {
+            function renderSquare(tx, results) {
                 //alert('Loading Profile');
                 if (results.rows.length > 0) {
                     //User Exists $('#resultPageOutput').html(htmlString);
-                    userName = results.rows.item(0).name;
-                    userDOB = results.rows.item(0).birthday;
-                    database.transaction(getSign, errorCB);
+                    homeSquare = results.rows.item(0).square;
+                    alert("home square: " + homeSquare);
                 }
                 else {
-                    //alert('No user found');
-                    $.mobile.changePage("#registerPage", {reverse: true, transition: "slide"});
+                    alert('No data found: Square');
                 }
             }
 
@@ -1141,6 +1216,11 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
             function successCB() {
                 console.log("Database Successfully Created");
+            }
+
+
+            function determineSquare(){
+                database.transaction(getSquare, errorCB);
             }
 
             function determineSign() {
