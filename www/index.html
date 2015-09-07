@@ -71,16 +71,16 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
         <div data-role="page" id="index" >
             <div data-role="header" data-position="fixed">
-                <h1>Tito Was Here</h1>
+                <!--<h1>Tito Was Here</h1>-->
             </div>
             <div data-role="content">
-                Welcome
+<!--                Welcome
                 <a href="#" onclick="getXml()">Get NOAA XML</a>
                 <a href="#" onclick="getNumberOfDays()">Number Of Days</a>
                 <a href="#" onclick="getAllTables()">All Tables</a>
                 <br>
                 <a href="#googlePage" data-transition="slide"> Google </a>
-                <a href="#dayPage" data-transition="slide"> Day </a>
+                <a href="#dayPage" data-transition="slide"> Day </a>-->
                 <center>
                     <img src="img/LucyGrl_V2_R1.png" alt="whattheluck" class="appimage"/>
                     <h4 style="text-align: left;">David Cho's Guide to</h4>
@@ -95,11 +95,11 @@ Copyright (c) 2012-2014 Aminur Rahman-->
         <div data-role="page" id="homeInformationPage" >
             <div data-role="content">
                 <center>                      
-                    <h2 style="text-align: left;">Enter your information.</h2>
+                    <h4 style="text-align: left;">Enter your information.</h4>
                     <br/>
-                    <h4 style="text-align: left;">What's your address?</h4>
+                    <h3 style="text-align: left;">What's your address?</h3>
                     <input type="text" name="address" id="address" data-clear-btn="true">  
-                    <h4 style="text-align: left;">When was your home built?</h4>
+                    <h3 style="text-align: left;">When was your home built?</h3>
                     <input type="text" name="yearBuilt" id="yearBuilt" >  
                     <br/>
                     <br/>
@@ -252,27 +252,10 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
             var date01 = "1900-01-01";
             
-//            $("#datepicker").datepicker({
-//                onSelect: function(dateText, inst) { 
-//                   setDate($(this).datepicker( 'getDate' ));
-//                   calculateDay();
-//                }
-//             });
-            
-            $("#dayPagePicker").change(function(event){
-                if($('#dayPagePicker').val() == ""){
-                    setDate(new Date());
-                }
-//                updateCalendar();
-                calculateDay();
-            });
-            
             $("#timePicker").change(function(event){
-              calculateTime();
+
             });
             
-            
-
             function getNumberOfDays() {
                 alert(daydiff(parseDate($('#bday').val()), parseDate(date01)));
 
