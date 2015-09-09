@@ -89,7 +89,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 </center>
                 <h5 style="text-align: left;">David Cho's Guide to Your</h5>
                 <h1 style="text-align: left; padding-top: 2%; padding-bottom: 2%;">Money Corner</h1>
-                <h3 style="text-align: left;">Get a new job or promotion, or <br/> close a deal by spending time <br/> in your home's Money Corner. </h3>
+                <h3 style="text-align: left;">Get a new job or promotion, or close a deal by spending time in your home's Money Corner. </h3>
                 <br/>
                 <h3 style="text-align: left;">Fire it up to get quick results!</h3>
                 <br/>
@@ -130,7 +130,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 <br/>
                 <br/>
                 <div style="font-size: 110%;">
-                    If you don't know the year then try finding it on the Internet. Type your <strong>address</strong> and the words <strong>"year built."</strong> <br/> Search through the results. 
+                    If you don't know the year then try finding it on the Internet. Type your <strong>address</strong> and the words <strong>"year built."</strong>  Search through the results. 
                 </div>
                 <br/>
                 <br/>
@@ -213,15 +213,15 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 <center>  
                     <br/>
                     <div id='homeResultOutput'></div>
-<!--                    <div style="background-image: url(img/moneya.png); background-size: 100%; background-position-x: center; padding-bottom: 100%; background-repeat: no-repeat; background-position-y: 100%;">
-                        <h3 style="text-align: left; margin-left: 2%; margin-right: 2%; color: black; border: 2px solid black; background-color: white;">This is the Side of your home with the most window space.</h3>
-                        <h3 style="text-align: left; margin-left: 2%; margin-right: 7%; color: black; border: 2px solid black; background-color: white; position: absolute; bottom: 13%;">Burn 3 candles, 8 hours a day to close that deal or get a new job.</h3>
-                    </div>-->
-                    <br/>
+<!--                    <table style="border-collapse: collapse;">
+                        <tr><td><h3 style="margin-left: 2%; margin-right: 2%; color: black; border: 2px solid black; background-color: white;">This is the Side of your home with the most window space.</h3></td></tr>
+                        <tr><td><div style="background-image: url(img/moneya.png); background-size: 100%; background-position-x: center; padding-bottom: 100%; background-repeat: no-repeat;"></div></td></tr>
+                        <tr><td><h3 style="margin-left: -3%; margin-right: -3%; color: black; border: 2px solid black; background-color: white;">Burn 3 candles, 8 hours a day to close that deal or get a new job.</h3></td></tr>
+                    </table>-->
+                    
                 </center>
+                <br/>
                 <!--<a href="#" onclick="determineSquare()"> Calculate </a>-->
-                <br/>
-                <br/>
                 <center>
                     <a href="#index" data-role="button" data-inline="true" data-transition="slide" data-direction="reverse" > Start Over </a>
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -1137,10 +1137,16 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     //User Exists $('#resultPageOutput').html(htmlString);
                     homeSquare = results.rows.item(0).square;
 //                    alert("home square: " + homeSquare);
-                    var html = "<div style='background-image: url(img/money" + homeSquare + ".png); background-size: 100%; background-position-x: center; padding-bottom: 100%; background-repeat: no-repeat; background-position-y: 100%;'>" +
-                        "<h3 style='text-align: left; margin-left: 2%; margin-right: 2%; color: black; border: 2px solid black; background-color: white;'>This is the Side of your home with the most window space.</h3>" +
-                        "<h3 style='text-align: left; margin-left: 2%; margin-right: 7%; color: black; border: 2px solid black; background-color: white; position: absolute; bottom: 13%;'>Burn 3 candles, 8 hours a day to close that deal or get a new job.</h3>" +
-                    "</div>";
+//                    var html = "<div style='background-image: url(img/money" + homeSquare + ".png); background-size: 100%; background-position-x: center; padding-bottom: 100%; background-repeat: no-repeat; background-position-y: 100%;'>" +
+//                        "<h3 style='text-align: left; margin-left: 2%; margin-right: 2%; color: black; border: 2px solid black; background-color: white;'>This is the Side of your home with the most window space.</h3>" +
+//                        "<h3 style='text-align: left; margin-left: 2%; margin-right: 7%; color: black; border: 2px solid black; background-color: white; position: absolute; bottom: 13%;'>Burn 3 candles, 8 hours a day to close that deal or get a new job.</h3>" +
+//                    "</div>";
+
+                    var html = "<table style='border-collapse: collapse;'>" +
+                                    "<tr><td><h3 style='margin-left: 2%; margin-right: 2%; color: black; border: 2px solid black; background-color: white;'>This is the Side of your home with the most window space.</h3></td></tr>" +
+                                    "<tr><td><div style='background-image: url(img/money" + homeSquare + ".png); background-size: 100%; background-position-x: center; padding-bottom: 100%; background-repeat: no-repeat;'></div></td></tr>" +
+                                    "<tr><td><h3 style='margin-left: -3%; margin-right: -3%; color: black; border: 2px solid black; background-color: white;'>Burn 3 candles, 8 hours a day to close that deal or get a new job.</h3></td></tr>" +
+                                "</table>";
                     $('#homeResultOutput').html(html);
                 }
                 else {
