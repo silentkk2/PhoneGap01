@@ -156,7 +156,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             <div data-role="content">
                 <h2 style="text-align: left;">Visualize this as your actual home.</h2>
                 <center>                      
-                    <div style="background-image: url(img/TopViewHouse.png); background-size: 100%; background-position: center; padding-bottom: 40%; background-repeat: no-repeat;">
+                    <div style="background-image: url(img/TopViewHouse.png); background-size: 100%; background-position: center; padding-bottom: 45%; background-repeat: no-repeat;">
                         <br/>
                         <div style="padding-top: 30%; width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 100px solid black;">&nbsp;</div>
                         <h5 style="text-align: left; margin-left: 15%; margin-right: 15%; color: black; border: 2px solid black;">Note which side of it has the most window space.</h5>
@@ -209,16 +209,98 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
         <div data-role="page" id="homeResultPage" >
             <div data-role="content">
-                <center>                      
-                    <h2 style="text-align: left;">Have your children spend time in the "Energy Zone"</h2>
+                <h6 style="text-align: left;">Spend time here in your Money Corner</h6>
+                <center>  
                     <br/>
-                    <img src="img/result01.png" alt="googlemap" class="appimage" style="width:initial; margin-left: -50%;"/>
+                    <div id='homeResultOutput'></div>
+<!--                    <div style="background-image: url(img/moneya.png); background-size: 100%; background-position-x: center; padding-bottom: 100%; background-repeat: no-repeat; background-position-y: 100%;">
+                        <h3 style="text-align: left; margin-left: 2%; margin-right: 2%; color: black; border: 2px solid black; background-color: white;">This is the Side of your home with the most window space.</h3>
+                        <h3 style="text-align: left; margin-left: 2%; margin-right: 7%; color: black; border: 2px solid black; background-color: white; position: absolute; bottom: 13%;">Burn 3 candles, 8 hours a day to close that deal or get a new job.</h3>
+                    </div>-->
                     <br/>
                 </center>
-                <a href="#" onclick="determineSquare()"> Calculate </a>
+                <!--<a href="#" onclick="determineSquare()"> Calculate </a>-->
+                <br/>
+                <br/>
+                <center>
+                    <a href="#index" data-role="button" data-inline="true" data-transition="slide" data-direction="reverse" > Start Over </a>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <a href="#" onclick="moreInfo();" data-role="button" data-inline="true"  style="">More Apps</a>
+                </center>
             </div>
         </div>
-
+        <div data-role="page" id="moreinfo" >
+            <div data-role="header" data-position="fixed">
+            </div>
+            <div data-role="content">
+                <center>
+                    <h5 style="padding-top: 5%;">More Apps by David Cho</h5>
+                    <table style="border-collapse: collapse;">
+                        <tr>
+                            <td style="width: 40%;padding-top: .5em;padding-bottom: .5em;"><img src="img/WaterscapeForWealthCover.png" style="width:100%; border:solid 1px;" /></td>
+                            <td valign="top" style="padding-top: 5%;">
+                                <div style="font-size: 95%; padding-left: 5%;font-weight: bold;">Waterscape for Wealth</div>
+                                <div style="font-size: 75%; padding-left: 5%; ">
+                                    Attract new opportunities to your home by adding water features in your yard.
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%;padding-top: .5em;padding-bottom: .5em;"><img src="img/moneycornercover.png" style="width:100%; border:solid 1px;" /></td>
+                            <td valign="top" style="padding-top: 5%;">
+                                <div style="font-size: 95%; padding-left: 5%;font-weight: bold;">Money Corner</div>
+                                <div style="font-size: 75%; padding-left: 5%; ">
+                                    Get a new job or close a deal by activating and living in your home's Money Corner.
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%;padding-top: .5em;padding-bottom: .5em;"><img src="img/healthcover.png" style="width:100%; border:solid 1px;" /></td>
+                            <td valign="top" style="padding-top: 5%;">
+                                <div style="font-size: 95%; padding-left: 5%;font-weight: bold;">Health and Harmony</div>
+                                <div style="font-size: 75%; padding-left: 5%; ">
+                                    Get well or fix a relationship, by activating and living in your home's Healing Zone.
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%;padding-top: .5em;padding-bottom: .5em;"><img src="img/inspirationcover.png" style="width:100%; border:solid 1px;" /></td>
+                            <td valign="top" style="padding-top: 5%;">
+                                <div style="font-size: 95%; padding-left: 5%;font-weight: bold;">Inspiration</div>
+                                <div style="font-size: 75%; padding-left: 5%; ">
+                                    Think more out-of-the-box, by activating and living in your home's Creative Corner.
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%;padding-top: .5em;padding-bottom: .5em;"><img src="img/matecover.png" style="width:100%; border:solid 1px;" /></td>
+                            <td valign="top" style="padding-top: 5%;">
+                                <div style="font-size: 95%; padding-left: 5%;font-weight: bold;">Love</div>
+                                <div style="font-size: 75%; padding-left: 5%; ">
+                                    Make yourself irresistible, by activating and living in your home's Love Zone.
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%;padding-top: .5em;padding-bottom: .5em;"><img src="img/smarterkidcover.png" style="width:100%; border:solid 1px;" /></td>
+                            <td valign="top" style="padding-top: 5%;">
+                                <div style="font-size: 95%; padding-left: 5%;font-weight: bold;">Smarter Kids</div>
+                                <div style="font-size: 75%; padding-left: 5%; ">
+                                    Help your kids do better in school, by placing them in your home's Smart Zone. 
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+                <center>
+                    <a href="#index" data-role="button" data-inline="true" data-transition="slide" data-direction="reverse" > Start Over </a>
+                </center>
+            </div>
+            <!-- <div data-role="footer" id ="moreInfoFooter"  style="padding-left: 5%;">
+                <a href="#dayPage" data-role="button" data-inline="true" data-transition="slide" data-direction="reverse" > Back </a>
+            </div> -->
+        </div>
+        
         <div data-role="page" id="resultPage" data-theme="b">
             <div data-role="header"  id="resultPageHeader" data-position="fixed">
                 <a href="#index" data-transition="slide" data-direction="reverse" data-icon="home"> Home </a>
@@ -571,9 +653,13 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
             function homeResultPage(){
                 //homeDec = $('#homeDegree').val();
+                determineSquare();
                 $.mobile.changePage("#homeResultPage", {reverse: false, transition: "slide"});
             }
 
+            function moreInfo(){
+                $.mobile.changePage("#moreinfo", {reverse: false, transition: "slide"});
+            }
 
             function goToMapPage() {
                 initializeMap(lat, long);
@@ -608,7 +694,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 //						//alert("before");
                         lat = results[0].geometry.location.lat();
                         long = results[0].geometry.location.lng();
-						alert ("lat: " + lat + " Long: " + long);
+//						alert ("lat: " + lat + " Long: " + long);
                         //goToMapPage();
                         getMagXml(lat, long);
                     } else {
@@ -1040,7 +1126,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
             function getSquare(tx) {
                 var sql = "SELECT * FROM SMARTER where ( " + homeYear + " between erastart and eraend) and ( " + $("#homeDegree").val() + " between degreelow and degreehigh)";
-                alert('Smarter Sql:' + sql);
+//                alert('Smarter Sql:' + sql);
                 tx.executeSql(sql, [], renderSquare, errorCB);
             }
 
@@ -1050,7 +1136,12 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 if (results.rows.length > 0) {
                     //User Exists $('#resultPageOutput').html(htmlString);
                     homeSquare = results.rows.item(0).square;
-                    alert("home square: " + homeSquare);
+//                    alert("home square: " + homeSquare);
+                    var html = "<div style='background-image: url(img/money" + homeSquare + ".png); background-size: 100%; background-position-x: center; padding-bottom: 100%; background-repeat: no-repeat; background-position-y: 100%;'>" +
+                        "<h3 style='text-align: left; margin-left: 2%; margin-right: 2%; color: black; border: 2px solid black; background-color: white;'>This is the Side of your home with the most window space.</h3>" +
+                        "<h3 style='text-align: left; margin-left: 2%; margin-right: 7%; color: black; border: 2px solid black; background-color: white; position: absolute; bottom: 13%;'>Burn 3 candles, 8 hours a day to close that deal or get a new job.</h3>" +
+                    "</div>";
+                    $('#homeResultOutput').html(html);
                 }
                 else {
                     alert('No data found: Square');
@@ -1275,7 +1366,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
 
             function determineSquare(){
-                alert("determine square");
+//                alert("determine square");
                 database.transaction(getSquare, errorCB);
             }
 

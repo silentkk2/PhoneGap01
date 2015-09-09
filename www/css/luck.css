@@ -144,7 +144,7 @@ h5{
 }
 h6{
     font-size:175%;
-    float:left;
+    /*float:left;*/
     padding-bottom:0.0em;
     margin:0px;
     font-weight:bold;
