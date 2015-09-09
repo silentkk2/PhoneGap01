@@ -82,35 +82,71 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 <a href="#googlePage" data-transition="slide"> Google </a>
                 <a href="#dayPage" data-transition="slide"> Day </a>-->
                 
-                <a href="#googlePage" data-transition="slide"> Google </a>
+                <!--<a href="#googlePage" data-transition="slide"> Google </a>-->
                 <center>
-                    <img src="img/LucyGrl_V2_R1.png" alt="whattheluck" class="appimage"/>
-                    <h4 style="text-align: left;">David Cho's Guide to</h4>
-                    <h1 style="text-align: left;">Smarter Kids</h1>
-                    <h4 style="text-align: left;">Help your child do better at school by exposing him/her to the smart energy in your home.</h4>
-                    <br/>
-                    <input type="submit" data-inline="true" value="Next" onclick="homeInformationPage()">
+                    <h5 style="padding-top: 10%;">&nbsp;</h5>
+                    <img src="img/moneycornercover.png" alt="whattheluck" class="appimage"/>
+                </center>
+                <h5 style="text-align: left;">David Cho's Guide to Your</h5>
+                <h1 style="text-align: left; padding-top: 2%; padding-bottom: 2%;">Money Corner</h1>
+                <h3 style="text-align: left;">Get a new job or promotion, or <br/> close a deal by spending time <br/> in your home's Money Corner. </h3>
+                <br/>
+                <h3 style="text-align: left;">Fire it up to get quick results!</h3>
+                <br/>
+                <center>
+                    <input type="submit" data-inline="true" value="Start" onclick="homeInformationPage()">
                 </center>
             </div>
         </div>
         
         <div data-role="page" id="homeInformationPage" >
             <div data-role="content">
-                <center>                      
-                    <h4 style="text-align: left;">Enter your information.</h4>
-                    <br/>
-                    <h3 style="text-align: left;">What's your address?</h3>
-                    <input type="text" name="address" id="address" data-clear-btn="true">  
-                    <h3 style="text-align: left;">When was your home built?</h3>
-                    <input type="text" name="yearBuilt" id="yearBuilt" >  
-                    <br/>
-                    <br/>
+                <h4 style="text-align: left; padding-top: 5%;">Enter your information.</h4>
+                <br/>
+                <h3 style="text-align: left;">What's your address?</h3>
+                <input type="text" name="address" id="address" data-clear-btn="true">  
+                <h3 style="text-align: left;">When was your home built?</h3>
+                <!--<input type="text" name="yearBuilt" id="yearBuilt" >--> 
+                <select id="yearBuilt" name="yearBuilt" size="1">
+                    <option value="1674"> 1664 - 1683 </option>
+                    <option value="1694"> 1684 - 1703 </option>
+                    <option value="1714"> 1704 - 1723 </option>
+                    <option value="1734"> 1724 - 1743 </option>
+                    <option value="1754"> 1744 - 1763 </option>
+                    <option value="1774"> 1764 - 1783 </option>
+                    <option value="1794"> 1784 - 1803 </option>
+                    <option value="1814"> 1804 - 1823 </option>
+                    <option value="1834"> 1824 - 1843 </option>
+                    <option value="1854"> 1844 - 1863 </option>
+                    <option value="1874"> 1864 - 1883 </option>
+                    <option value="1894"> 1884 - 1903 </option>
+                    <option value="1914"> 1904 - 1923 </option>
+                    <option value="1934"> 1924 - 1943 </option>
+                    <option value="1954"> 1944 - 1963 </option>
+                    <option value="1974"> 1964 - 1983 </option>
+                    <option value="1994"> 1984 - 2003 </option>
+                    <option value="2014"> 2004 - 2023 </option>
+                </select>
+                <br/>
+                <br/>
+                <div style="font-size: 110%;">
                     If you don't know the year then try finding it on the Internet. Type your <strong>address</strong> and the words <strong>"year built."</strong> <br/> Search through the results. 
-                    <br/>
-                    <br/>
-                    Other Options: Look for it in your [Something] documents, ask a realtor, or go to your building department. 
-                    <br/>
-                    <br/>
+                </div>
+                <br/>
+                <br/>
+                <div style="font-size: 110%;">
+                    Other Options: Look for it in your title documents, ask a realtor, or go to your building department. 
+                </div>
+                <br/>
+                <br/>
+                <center>    
+<!--                    <a href="#index" class="ui-btn ui-btn-inline ui-corner-all">Back</a>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>-->
                     <input type="submit" data-inline="true" value="Next" onclick="homeDrawingPage()">
                 </center>
             </div>
@@ -118,13 +154,21 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
         <div data-role="page" id="homeDrawingPage" >
             <div data-role="content">
+                <h2 style="text-align: left;">Visualize this as your actual home.</h2>
                 <center>                      
-                    <h2 style="text-align: left;">Use this drawing to represent your home.</h2>
-                    <br/>
-                    <img src="img/TopViewHouse.png" alt="topviewhouse" class="appimage"/>
-                    <br/>
-                    <h4 style="text-align: left;">Know which side of your home has the most window space.</h4>
-                    <br/>
+                    <div style="background-image: url(img/TopViewHouse.png); background-size: 100%; background-position: center; padding-bottom: 40%; background-repeat: no-repeat;">
+                        <br/>
+                        <div style="padding-top: 30%; width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 100px solid black;">&nbsp;</div>
+                        <h5 style="text-align: left; margin-left: 15%; margin-right: 15%; color: black; border: 2px solid black;">Note which side of it has the most window space.</h5>
+                    </div>
+                    <!--<img src="img/TopViewHouse.png" alt="topviewhouse" class="appimage"/>-->
+                    <a href="#homeInformationPage" class="ui-btn ui-btn-inline ui-corner-all">Back</a>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
                     <input type="submit" data-inline="true" value="Next" onclick="homeMapPage()">
                 </center>
             </div>
@@ -135,13 +179,30 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                 <center>                      
                     <h2 style="text-align: left;">Use our map to get a compass direction.</h2>
                     <div id='homeMapPageOutput'></div>
+                    <div style="display: none;">
+                        <input type="text" name="homeDegree" id="homeDegree" >
+                    </div>
                     <br/>
                     <img src="img/GoogleMap.png" alt="googlemap" class="appimage"/>
                     <br/>
-                    Center and align your home to the crosshairs. <br/> Be sure that its side with the most window space is the top side on your phone screen.
+                    
+                    <!--<input type="text" name="homeDegree" id="homeDegree" >-->  
+                    <a href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">Help</a>
                     <br/>
-                    <input type="text" name="homeDegree" id="homeDegree" >  
+                    
+                    <a href="#homeDrawingPage" class="ui-btn ui-btn-inline ui-corner-all">Back</a>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
                     <input type="submit" data-inline="true" value="Next" onclick="homeResultPage()">
+                    <div data-role="popup" id="myPopup">
+                        <h5 style="text-align: left;">Center and align your home to the crosshairs.</h5>
+                        <h5 style="text-align: left;">Be sure that its side with the most window space is the top side on your phone screen.</h5>
+                        <center><a href="#" class="ui-btn ui-btn-inline ui-corner-all" data-rel="back">Close</a></center>
+                    </div>
                 </center>
             </div>
         </div>
@@ -509,7 +570,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             }
 
             function homeResultPage(){
-                homeDec = $('#homeDegree').val();
+                //homeDec = $('#homeDegree').val();
                 $.mobile.changePage("#homeResultPage", {reverse: false, transition: "slide"});
             }
 
@@ -567,22 +628,21 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     },
                     dataType: "xml",
                     success: function(xml) {
-                        magneticDeclination = $(xml).find('declination').first().text();
-
+                        $("#homeDegree").val($(xml).find('declination').first().text());
 //						//alert("Magnetic "  + Magnetic);
                         $('#homeMapPageOutput').html("Lat: " + lat + "<br>" +
                                 "Long: " + long + "<br>" +
-                                "Magnetic North: " + magneticDeclination + "<br>");
+                                "Magnetic North: " + $("#homeDegree").val() + "<br>");
                     }
                 });
             }
 
             function getMagnaticNorth() {
-                //var street = $('[name="street"]').val();
-                //var city = $('[name="city"]').val();
-                //var state = $('[name="state"]').val();
-                //var zip = $('[name="zip"]').val();
-                var address = street + zip;
+                var street = $('[name="street"]').val();
+                var city = $('[name="city"]').val();
+                var state = $('[name="state"]').val();
+                var zip = $('[name="zip"]').val();
+                var address = street + city + state + zip;
 
                 getLatLong(address);
 
@@ -663,10 +723,10 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
             function smarterExists(tx, results) {
                 if (results.rows.length > 0) {
-                    alert('Found Smarter');
+//                    alert('Found Smarter');
                 }
                 else {
-                    alert('Smarter not found... Creating new table');
+//                    alert('Smarter not found... Creating new table');
                     tx.executeSql('CREATE TABLE IF NOT EXISTS SMARTER (erastart, eraend, degreelow, degreehigh, square)');
                     
                     tx.executeSql("INSERT INTO SMARTER (erastart, eraend, degreelow, degreehigh, square) values (1664, 1683, 338, 352, 'i');");
@@ -979,7 +1039,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             }
 
             function getSquare(tx) {
-                var sql = "SELECT * FROM SMARTER where ( " + homeYear + " between erastart and eraend) and ( " + homeDec + " between degreelow and degreehigh)";
+                var sql = "SELECT * FROM SMARTER where ( " + homeYear + " between erastart and eraend) and ( " + $("#homeDegree").val() + " between degreelow and degreehigh)";
                 alert('Smarter Sql:' + sql);
                 tx.executeSql(sql, [], renderSquare, errorCB);
             }
