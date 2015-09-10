@@ -1,4 +1,4 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.primedynamics.testgap" version="1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.primedynamics.testgap" version="1.0.0">
   <name>Test Gap</name>
   <description>Inner config file is the root.</description>
   <author href="" email="tito@tito.com">Tito Team</author>
@@ -40,6 +40,17 @@
   <gap:plugin name="org.apache.cordova.device-orientation" />
   <gap:plugin name="nl.x-services.plugins.flashlight" version="1.4" />
   <gap:plugin name="nl.x-services.plugins.toast" version="1.0" />
+  <gap:plugin name="com.phonegap.plugin.statusbar" />
+  <gap:plugin name="com.plugin.datepicker" version="0.4.0" />
+  <gap:config-file platform="ios" parent="UIStatusBarHidden">
+    <true/>
+  </gap:config-file>
+  <gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
+    <false/>
+  </gap:config-file>
+  <gap:config-file platform="android" parent="/manifest">
+       <application android:hardwareAccelerated="true" />
+  </gap:config-file>
   <icon src="icon.png"/>
   <icon src="www/res/icon/android/icon-36-ldpi.png" gap:platform="android" gap:qualifier="ldpi"/>
   <icon src="www/res/icon/android/icon-48-mdpi.png" gap:platform="android" gap:qualifier="mdpi"/>
