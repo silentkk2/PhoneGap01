@@ -230,6 +230,8 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                             <!--<div >-->
                                 <div id="homeMap" class="touch-box" data-rotate="true"></div>
                             <!--</div>-->
+                                <div style="background: red; position: absolute; top: 0; left: 50%; z-index: 9999;  padding-bottom: 100%; width: 3px;">&nbsp;</div>
+                                <div style="background: green; position: absolute; top: 50%; left: 0%; z-index: 9999; padding-right: 100%;     height: 3px;">&nbsp;</div>
                         </div>
                         
                     </div>
@@ -756,7 +758,8 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     position: map.getCenter(),
                     icon: circle,
                     map: map
-                  });
+                });
+                // lockMap();
             }
 
 
