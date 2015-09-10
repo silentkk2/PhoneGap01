@@ -29,12 +29,33 @@ Copyright (c) 2012-2014 Aminur Rahman-->
         <script type="text/javascript" src="js/jquery-transform.js"></script>
         <link rel="stylesheet" type="text/css" href="css/luck.css">
        
-        
-        
+ 
         <style type="text/css">
             .calendar {
                 width:100% !important;
             }
+            
+            #homeMap{ 
+                width: 200%;
+                /*height: 576px;*/
+                padding-bottom: 165%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -85%;
+                margin-left: -100%;
+            }
+
+            #homeMapPageContent{
+                width: 100%;
+                padding-bottom: 100%;
+                /*height: 0;*/
+                background: #eee;
+                position: relative;
+                overflow: hidden;
+                /*float: left;*/
+            }
+            
             
             #map{ 
                 width: 700px;
@@ -155,12 +176,30 @@ Copyright (c) 2012-2014 Aminur Rahman-->
         <div data-role="page" id="homeDrawingPage" >
             <div data-role="content">
                 <h2 style="text-align: left;">Visualize this as your actual home.</h2>
-                <center>                      
-                    <div style="background-image: url(img/TopViewHouse.png); background-size: 100%; background-position: center; padding-bottom: 45%; background-repeat: no-repeat;">
-                        <br/>
+                <center>  
+                    <table style="border-collapse: collapse;">
+                        <tr>
+                            <td>
+                                <span>&nbsp;&nbsp;&nbsp;</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 3%;">
+                                <div style="background-image: url(img/TopViewHouse.png); background-size: 100%; background-position-x: center; padding-bottom: 130%; background-repeat: no-repeat;"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>&nbsp;&nbsp;&nbsp;</span>
+                                <!--<h3 style="margin-left: -3%; margin-right: -3%; color: black; border: 2px solid black; background-color: white;">Burn 3 candles, 8 hours a day to close that deal or get a new job.</h3>-->
+                            </td>
+                        </tr>
+                    </table>
+                    <!--<div style="background-image: url(img/TopViewHouse.png); background-size: 100%; background-position: center; padding-bottom: 45%; background-repeat: no-repeat;">-->
+<!--                        <br/>
                         <div style="padding-top: 30%; width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 100px solid black;">&nbsp;</div>
-                        <h5 style="text-align: left; margin-left: 15%; margin-right: 15%; color: black; border: 2px solid black;">Note which side of it has the most window space.</h5>
-                    </div>
+                        <h5 style="text-align: left; margin-left: 15%; margin-right: 15%; color: black; border: 2px solid black;">Note which side of it has the most window space.</h5>-->
+                    <!--</div>-->
                     <!--<img src="img/TopViewHouse.png" alt="topviewhouse" class="appimage"/>-->
                     <a href="#homeInformationPage" class="ui-btn ui-btn-inline ui-corner-all">Back</a>
                     <span>&nbsp;&nbsp;&nbsp;</span>
@@ -178,12 +217,18 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             <div data-role="content">
                 <center>                      
                     <h2 style="text-align: left;">Use our map to get a compass direction.</h2>
-                    <div id='homeMapPageOutput'></div>
+                    <div id='homeMapPageOutput' style="display: none;"></div>
+                    <h3 style="margin-left: 2%; margin-right: 2%; color: black; border: 2px solid black; background-color: white;">This is the Side of your home with the most window space.</h3>
                     <div style="display: none;">
                         <input type="text" name="homeDegree" id="homeDegree" >
                     </div>
-                    <br/>
-                    <img src="img/GoogleMap.png" alt="googlemap" class="appimage"/>
+                    <!--<img src="img/GoogleMap.png" alt="googlemap" class="appimage"/>-->
+                    <div class="" data-rotate="true">
+                        <div  style="" id="homeMapPageContent">
+                            <div id="homeMap" ></div>
+                        </div>
+                        
+                    </div>
                     <br/>
                     
                     <!--<input type="text" name="homeDegree" id="homeDegree" >-->  
@@ -425,7 +470,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
 
 
-/*
+///*
 	;(function ($) { 
 		"use strict";
 		
@@ -627,7 +672,6 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 	})(jQuery);
 
 
-*/
 
 
 
@@ -647,7 +691,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             }
 
             function homeMapPage(){
-                
+                initializeMap(lat, long);
                 $.mobile.changePage("#homeMapPage", {reverse: false, transition: "slide"});
             }
 
@@ -680,9 +724,24 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     center: latlong,
                     mapTypeId: google.maps.MapTypeId.HYBRID
                 };
+                
 
-                map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                map = new google.maps.Map(document.getElementById("homeMap"), mapOptions);
 
+                var circle ={
+                    path: google.maps.SymbolPath.CIRCLE,
+                    fillColor: 'red',
+                    fillOpacity: .8,
+                    scale: 12,
+                    strokeColor: 'white',
+                    strokeWeight: 1
+                };
+                
+                var marker = new google.maps.Marker({
+                    position: map.getCenter(),
+                    icon: circle,
+                    map: map
+                  });
             }
 
 
