@@ -224,11 +224,9 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     </div>
                     <div style="    display: inline-flex;"> current
                         <input type="text" name="homeRotation" id="homeRotation" >
-                    </div>
-                    <div style="    display: inline-flex;"> last
+                     last
                         <input type="text" name="lastDegree" id="lastDegree" >    
-                    </div>
-                    <div style="    display: inline-flex;"> total
+                     total
                         <input type="text" name="homeTotal" id="homeTotal" >
                     </div>
                     <!--<img src="img/GoogleMap.png" alt="googlemap" class="appimage"/>-->
@@ -687,7 +685,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                            $("#homeRotation").val(degrees);        
                            $("#lastDegree").val(lastDegrees);        
                                                         
-                            var total = (360 - ( -1 * (Number($("#homeRotation").val()) + Number($("#homeDegree").val())))) % 360;
+                            var total = (360 - (Number($("#homeRotation").val()) + Number($("#homeDegree").val()))) % 360;
                             
                             
 
@@ -1300,7 +1298,7 @@ $(document).ready(function () {
             }
 
             function getSquare(tx) {
-                var sql = "SELECT * FROM SMARTER where ( " + homeYear + " between erastart and eraend) and ( " + $("#homeDegree").val() + " between degreelow and degreehigh)";
+                var sql = "SELECT * FROM SMARTER where ( " + homeYear + " between erastart and eraend) and ( " + Math.floor(Number($("#homeDegree").val())) + " between degreelow and degreehigh)";
 //                alert('Smarter Sql:' + sql);
                 tx.executeSql(sql, [], renderSquare, errorCB);
             }
