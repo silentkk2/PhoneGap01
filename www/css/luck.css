@@ -96,6 +96,10 @@ input[type="select"] {
     max-width: 280px;
 }
 
+.ui-popup-container {
+    z-index: 5000;
+}
+
 .ui-page .ui-footer-fixed.ui-fixed-hidden {
     display: none;
 }
