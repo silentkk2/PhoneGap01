@@ -222,8 +222,15 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                     <div style="display: none;">
                         <input type="text" name="homeDegree" id="homeDegree" >
                     </div>
-                    <input type="text" name="homeRotation" id="homeRotation" >
-                    <input type="text" name="homeTotal" id="homeTotal" >
+                    <div style="    display: inline-flex;"> current
+                        <input type="text" name="homeRotation" id="homeRotation" >
+                    </div>
+                    <div style="    display: inline-flex;"> last
+                        <input type="text" name="lastDegree" id="lastDegree" >    
+                    </div>
+                    <div style="    display: inline-flex;"> total
+                        <input type="text" name="homeTotal" id="homeTotal" >
+                    </div>
                     <!--<img src="img/GoogleMap.png" alt="googlemap" class="appimage"/>-->
                     <div class="" >
                         <div  style="" id="homeMapPageContent">
@@ -679,9 +686,11 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                         
                            $("#homeRotation").val(degrees);        
                                                         
-                                                var total = Number($("#homeDegree").val()) + degrees;
+                            var total = (360 - ( -1 * (Number($("#homeRotation").val()) + Number($("#homeDegree").val())))) % 360;
+                            
+                            
 
-                                                $("#homeTotal").val(Number($("#homeDegree").val()) + Number($("#homeRotation").val()));
+                            $("#homeTotal").val(total);
 
 
                         $.data($thiz[0], 'currDegree', degrees);
