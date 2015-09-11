@@ -926,6 +926,9 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                         'rotate': false,
                         'grid_drag': 1
                     },
+                    callback_degree_change: function (lastDegree, newDegree) {
+                        lockMap();
+                    },
                     resize = $this.attr('data-resize'),
                     drag = $this.attr('data-drag'),
                     rotate = $this.attr('data-rotate'),
@@ -937,7 +940,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 
                 if(rotate != undef && rotate == 'true') options['rotate'] = true;
 
-                 if(grid != undef) options['grid_drag'] = grid;
+                if(grid != undef) options['grid_drag'] = grid;
                 
                 $this.TouchBox(options);
             });
@@ -946,7 +949,31 @@ Copyright (c) 2012-2014 Aminur Rahman-->
 })(jQuery);
 
 
+/*
 
+//more complex 
+
+$(document).ready(function () {
+   $('.box').TouchBox({
+       resize: true,
+       drag: true,
+       rotate: true,
+       grid_drag: 1,
+       callback_touches: function (touches) {
+           //Touch added or removed from touches. Parameter is given with current touches
+           //this is DOM element, so using $(this) wil give you an jQuery element
+       },
+       callback_size_change: function (newWidth, newHeight) {
+           //User changed the size of the DOM element - this is DOM element, so using $(this) wil give you an jQuery element.
+       },
+       callback_position_change: function (newLeft, newTop) {
+           //User changed the position of the DOM element - this is DOM element, so using $(this) wil give you an jQuery element.
+       },
+       callback_degree_change: function (lastDegree, newDegree) {
+           //User changed the degrees of the DOM element - this is DOM element, so using $(this) wil give you an jQuery element.
+       }
+   });
+});*/
 
 
 
@@ -986,6 +1013,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
             }
 
             function lockMap() {
+                alert("map locked");
                 map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
             }
 
