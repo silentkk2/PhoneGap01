@@ -926,9 +926,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                         'rotate': false,
                         'grid_drag': 1,
                         callback_degree_change: function (lastDegree, newDegree) {
-                            if(mapLocked == false){
-                                lockMap();
-                            }
+                            lockMap();
                         }  
                     },
                     resize = $this.attr('data-resize'),
@@ -1014,12 +1012,14 @@ $(document).ready(function () {
 
             }
 
-            var mapLocked;
+            var mapLocked = false;
 
             function lockMap() {
-                alert("map locked");
-                map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
-                mapLocked = true;
+                if(mapLocked == false){
+                    alert("map locked");
+                    map.setOptions({draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true});
+                    mapLocked = true;
+                }
             }
 
             function initializeMap(lat, long) {
