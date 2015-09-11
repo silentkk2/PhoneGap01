@@ -685,6 +685,7 @@ Copyright (c) 2012-2014 Aminur Rahman-->
                         degrees = (($.data($thiz[0], 'startDegree') - getRotationAngle(e.originalEvent.touches[0].pageX, e.originalEvent.touches[0].pageY, e.originalEvent.touches[1].pageX, e.originalEvent.touches[1].pageY) - $.data($thiz[0], '_startDegree')) * -1);
                         
                            $("#homeRotation").val(degrees);        
+                           $("#lastDegree").val(lastDegrees);        
                                                         
                             var total = (360 - ( -1 * (Number($("#homeRotation").val()) + Number($("#homeDegree").val())))) % 360;
                             
